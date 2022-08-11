@@ -22,4 +22,9 @@ class Gallery extends Model {
     public static function whereId($value) {
         return Gallery::find($value);
     }
+
+    public function scopeImp($query)
+    {
+        return $query->where('is_imp', true)->where('visibility', true);
+    }
 }

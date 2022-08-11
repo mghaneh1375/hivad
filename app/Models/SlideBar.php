@@ -20,4 +20,9 @@ class SlideBar extends Model
     public static function whereId($value) {
         return SlideBar::find($value);
     }
+
+    public function scopeVisible($query)
+    {
+        return $query->where('visibility', true);
+    }
 }

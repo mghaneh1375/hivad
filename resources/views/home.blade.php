@@ -32,7 +32,26 @@
     <link href="{{ asset('assets/css/css_underDesign.css') }}" rel="stylesheet" />
     
     <meta name="enamad" content="360329"/>
+    <style>
 
+.wrapper_Col > #newsWidget {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+        .wrapper_Col > #newsWidget > div {
+            position: relative !important;
+            right: unset !important;
+            top: unset !important;
+            display: flex !important;
+            flex-direction: column;
+            height: 400px;
+        }
+
+        .wrapper_Col > #newsWidget > div img {
+            height: 200px !important;
+        }
+    </style>
 
 </head>
 
@@ -59,7 +78,16 @@
 
                 <div><div><a class="header-opener"><span><span></span></span></a>
 
-<div class="top_header1"><div class="nav_1"><div class="right_nav1"><div class="social_net"><ul><li class="each_net"><a href="#" title="" style="background-image: url(/Content/base/dynamic/shopping572/img/91327.jpg);"></a></li><li class="each_net"><a href="#" title="" style="background-image: url(/Content/base/dynamic/shopping572/img/91330.jpg);"></a></li><li class="each_net"><a href="https://www.instagram.com/ajoudanieh/" style="background-image:url(/Content/base/dynamic/shopping572/img/91329.jpg);" target="_blank"></a></li></ul></div></div></div></div></div></div>
+<div class="top_header1"><div class="nav_1"><div class="right_nav1"><div class="social_net"><ul><li class="each_net">
+    {{-- <a href="#" title="" style="background-image: url(/Content/base/dynamic/shopping572/img/91327.jpg);"></a> --}}
+    <a href="#" title="" style=""></a>
+</li><li class="each_net">
+    {{-- <a href="#" title="" style="background-image: url(/Content/base/dynamic/shopping572/img/91330.jpg);"></a> --}}
+<a href="#" title="" style=""></a>
+</li><li class="each_net">
+    {{-- <a href="https://www.instagram.com/ajoudanieh/" style="background-image:url(/Content/base/dynamic/shopping572/img/91329.jpg);" target="_blank"></a> --}}
+    <a href="https://www.instagram.com/ajoudanieh/" style="" target="_blank"></a>
+</li></ul></div></div></div></div></div></div>
         </div>
         <div id="headerContainer" >
 
@@ -131,7 +159,8 @@
         <div>
     
 
-<div class="contactInfoContainer"><h3>راه های ارتباطی با ما</h3><h4>Contact Us</h4><div class="footer_address"><img src="/Content/base/dynamic/shopping742/img/92634.jpg">
+<div class="contactInfoContainer"><h3>راه های ارتباطی با ما</h3><h4>Contact Us</h4><div class="footer_address">
+    {{-- <img src="/Content/base/dynamic/shopping742/img/92634.jpg"> --}}
     <p>نیاوران - خیابان اقدسیه - خیابان آجودانیه - باشگاه آجودانیه</p><p>Ajodanieh Club,Ajodanieh St , Aghdasieh St, Niavaran, Tehran, Iran</p>
 </div>
 
@@ -160,10 +189,7 @@
     <div class="footer-bottom-wrapper">
     <div>  <div class="haftsetare_copyRight ">
             <span class="footer_logo"></span>
-            <a target="_blank" href="https://haftsetare.com" title="طراحی سایت">طراحی سایت</a>
-            و
-            <a target="_blank" href="https://haftsetare.com/33211" title="بهینه سازی">بهینه سازی</a> توسط هفت ستاره</div>
-
+            
       <span>Copyright © 2018 refahiajoudanieh.com, Inc. All Rights Reserved.</span></div></div><div id="scroll_diamond" class="up sdFooter" data-index="2"><svg class="blurp--top" width="192" height="61" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 160.7 61.5" enable-background="new 0 0 160.7 61.5" xml:space="preserve" style=""><path fill="#FFFFFF" d="M80.3,61.5c0,0,22.1-2.7,43.1-5.4s41-5.4,36.6-5.4c-21.7,0-34.1-12.7-44.9-25.4S95.3,0,80.3,0c-15,0-24.1,12.7-34.9,25.4S22.3,50.8,0.6,50.8c-4.3,0-6.5,0,3.5,1.3S36.2,56.1,80.3,61.5z"></path></svg><span class="scrollTitle">استخر</span><div class="inner_scroll_1"></div><div class="inner_scroll_2"></div><div class="inner_scroll_3"></div> </div></footer></div>
 
 
@@ -289,7 +315,7 @@
 
             bascketData: '', PhoneNumberRegistration: 'False', IsPlatform7 : 'False',
                 WebsiteID:762, menuID: '-1', menuName: 'خانه',
-                userID: '', haspageContent: '', adminHaspageContent: '', hasFooterContent: '', SeoLinkList: '[]', BaseMenuID: '-1', IsProfileMenu: 'False', DigitalShopping: 'False', jsonContentList:{"madules":[{"BoxID":38886,"MenuID":-1,"BoxTitle":"صفحه ی اصلی","BoxDescription":null,"Priority":1,"Width":null,"Height":250,"BoxCount":1,"MaduleID":null,"SubBoxHeight":null,"BoxCountPerRow":1,"FormID":null,"FormReportID":null,"BoxGroupID":2,"BoxGroupName":"slideshow","BoxPersianName":"اسلاید شو تصاویر","Pagination":1,"SortType":1,"Content":null,"MediaID":null,"HasProductTabs":null,"ProductSlides":null,"RowIDList":",10118","BoxStyle":"","PopupStyle":false,"BoxTemp":null,"ShowMoreLink":null,"ContainerTabs":null,"WebsiteDisplay":true,"MobileDisplay":true,"Background":null,"ParallaxStyle":null,"DisableBoxBack":null,"BackTitleColor":null,"DisableBoxBackgroundColor":null,"BoxBackgroundColor":null,"BlurEffectBack":null,"BlackEffectBack":null,"ButtonList":[],"Platform7Maduleid":null,"GroupMaduleBox":null,"IsAmazzingoffer":false},{"BoxID":38865,"MenuID":-1,"BoxTitle":"خدمات آجودانیه","BoxDescription":null,"Priority":2,"Width":null,"Height":180,"BoxCount":9,"MaduleID":null,"SubBoxHeight":null,"BoxCountPerRow":3,"FormID":null,"FormReportID":null,"BoxGroupID":1,"BoxGroupName":"tabs","BoxPersianName":"تب های میانبر","Pagination":2,"SortType":1,"Content":null,"MediaID":null,"HasProductTabs":null,"ProductSlides":null,"RowIDList":null,"BoxStyle":"services","PopupStyle":false,"BoxTemp":null,"ShowMoreLink":null,"ContainerTabs":null,"WebsiteDisplay":true,"MobileDisplay":true,"Background":null,"ParallaxStyle":null,"DisableBoxBack":null,"BackTitleColor":null,"DisableBoxBackgroundColor":null,"BoxBackgroundColor":null,"BlurEffectBack":null,"BlackEffectBack":null,"ButtonList":[],"Platform7Maduleid":null,"GroupMaduleBox":null,"IsAmazzingoffer":false},{"BoxID":38887,"MenuID":-1,"BoxTitle":"مجموعه ورزشی باشگاه آجودانیه","BoxDescription":"استخر،سونا، جکوزی و باشگاه بدنسازی","Priority":3,"Width":null,"Height":250,"BoxCount":1,"MaduleID":null,"SubBoxHeight":null,"BoxCountPerRow":1,"FormID":null,"FormReportID":null,"BoxGroupID":7,"BoxGroupName":"singleImage","BoxPersianName":"تصویر","Pagination":2,"SortType":1,"Content":null,"MediaID":null,"HasProductTabs":null,"ProductSlides":null,"RowIDList":null,"BoxStyle":"aboutAjodanie","PopupStyle":false,"BoxTemp":null,"ShowMoreLink":null,"ContainerTabs":null,"WebsiteDisplay":true,"MobileDisplay":true,"Background":null,"ParallaxStyle":null,"DisableBoxBack":null,"BackTitleColor":null,"DisableBoxBackgroundColor":null,"BoxBackgroundColor":null,"BlurEffectBack":null,"BlackEffectBack":null,"ButtonList":[{"Text":"شارژ کارت","LinkUrl":"http://213.217.43.109","MenuID":null,"TempName":null,"IsProfileMenu":false},{"Text":"رزرو سانس","LinkUrl":"http://213.217.43.109","MenuID":null,"TempName":null,"IsProfileMenu":false}],"Platform7Maduleid":null,"GroupMaduleBox":null,"IsAmazzingoffer":false}],"jsonContentList":[{"BoxID":38886,"Content":{"SlideList":[{"SliderID":14906,"AlbumID":10118,"LinkUrl":"","TempName":null,"MenuID":null,"PicAlt":null,"Picture":"d0a05e7a-e6cf-48fe-be32-de11bb715791","Content":"باغ رستوران باشگاه آجودانیه","BaseWebsiteID":null,"Priority":9,"SlideDescription":null},{"SliderID":6834,"AlbumID":10118,"LinkUrl":"","TempName":null,"MenuID":null,"PicAlt":null,"Picture":"32c448fe-55d3-4df0-9396-ff7055bbd4b5","Content":null,"BaseWebsiteID":null,"Priority":39,"SlideDescription":null},{"SliderID":7514,"AlbumID":10118,"LinkUrl":"","TempName":null,"MenuID":null,"PicAlt":null,"Picture":"dbc98aa9-71b0-48ed-ba71-0d0825744506","Content":null,"BaseWebsiteID":null,"Priority":42,"SlideDescription":null},{"SliderID":7549,"AlbumID":10118,"LinkUrl":"","TempName":null,"MenuID":null,"PicAlt":null,"Picture":"f2da7780-a503-4110-ac40-db16a881f52b","Content":null,"BaseWebsiteID":null,"Priority":43,"SlideDescription":null},{"SliderID":7551,"AlbumID":10118,"LinkUrl":"","TempName":null,"MenuID":null,"PicAlt":null,"Picture":"7a4239d1-9d04-4c72-abb4-b4ac5e1bfc14","Content":null,"BaseWebsiteID":null,"Priority":44,"SlideDescription":null},{"SliderID":6833,"AlbumID":10118,"LinkUrl":"","TempName":null,"MenuID":null,"PicAlt":null,"Picture":"10d1d984-fbe3-40c0-839d-ca993f7960e2","Content":null,"BaseWebsiteID":null,"Priority":47,"SlideDescription":null}],"PopupStyle":false}},{"BoxID":38865,"Content":{"TabRepository":[{"TabID":5960,"BoxID":38865,"LinkUrl":"/Home/Page?menuID=29264&pN=تالار-پذیرایی-زمرد","TempName":"PageContent","MenuID":29264,"Title":"تالار پذیرایی زمرد","Titr":"با ظرفیت 500 نفر","Picture":"6a1f33b9-364a-45a3-b32a-cf7ce17e242f","Priority":0,"Icon":null,"BaseWebsiteID":null},{"TabID":5961,"BoxID":38865,"LinkUrl":"/Home/Page?menuID=29265&pN=-تالار-بزرگ-یاقوت-","TempName":"PageContent","MenuID":29265,"Title":"تالار بزرگ یاقوت","Titr":"با ظرفیت 500 نفر","Picture":"efb1fed4-641b-4a23-94b6-1917d97a5008","Priority":1,"Icon":null,"BaseWebsiteID":null},{"TabID":5962,"BoxID":38865,"LinkUrl":"/Home/Page?menuID=29266&pN=رستوران-فیروزه","TempName":"PageContent","MenuID":29266,"Title":"رستوران فیروزه","Titr":null,"Picture":"78920ca8-44f4-43a8-91c4-1dab9ef172ef","Priority":2,"Icon":null,"BaseWebsiteID":null},{"TabID":5963,"BoxID":38865,"LinkUrl":"/Home/Page?menuID=29409&pN=آلاچیق","TempName":"PageContent","MenuID":29409,"Title":"رستوران آلاچیق","Titr":null,"Picture":"1dba0889-6b82-4ff2-ab05-1c79feac2710","Priority":3,"Icon":null,"BaseWebsiteID":null},{"TabID":5964,"BoxID":38865,"LinkUrl":"/Home/Page?menuID=29410&pN=-باغ-رستوران","TempName":"PageContent","MenuID":29410,"Title":"باغ رستوران","Titr":null,"Picture":"62614847-c3bf-4071-adf9-94428d0a7f58","Priority":4,"Icon":null,"BaseWebsiteID":null},{"TabID":5965,"BoxID":38865,"LinkUrl":"/Home/Page?menuID=29411&pN=-زمین-تنیس","TempName":"PageContent","MenuID":29411,"Title":"زمین تنیس","Titr":null,"Picture":"44715755-4d20-4332-9688-a7b1a4158472","Priority":5,"Icon":null,"BaseWebsiteID":null},{"TabID":5966,"BoxID":38865,"LinkUrl":"/Home/Page?menuID=29412&pN=-کافی-شاپ","TempName":"PageContent","MenuID":29412,"Title":"کافی شاپ","Titr":null,"Picture":"4a94b94c-5fb8-4f5f-912a-ff6ed425a182","Priority":6,"Icon":null,"BaseWebsiteID":null},{"TabID":5967,"BoxID":38865,"LinkUrl":"/Home/Page?menuID=29413&pN=-استخر-سر-پوشیده","TempName":"PageContent","MenuID":29413,"Title":"استخر سر پوشیده","Titr":null,"Picture":"ad9884b8-b94f-431c-adb9-07bf07d71f3f","Priority":7,"Icon":null,"BaseWebsiteID":null}],"boxCount":9,"PopupStyle":false,"boxTitle":"خدمات آجودانیه","BoxCountPerRow":3}},{"BoxID":38887,"Content":{"boxTitle":"مجموعه ورزشی باشگاه آجودانیه","boxDescription":"استخر،سونا، جکوزی و باشگاه بدنسازی","MediaID":25389}}]} , footerjsonContentList:[]}; var ie = (function () { var undef, v = 3, div = document.createElement('div'), all = div.getElementsByTagName('i'); while (div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->', all[0]); return v > 4 ? v : undef }()); if (ie != null && ie < 9)
+                userID: '', haspageContent: '', adminHaspageContent: '', hasFooterContent: '', SeoLinkList: '[]', BaseMenuID: '-1', IsProfileMenu: 'False', DigitalShopping: 'False' , footerjsonContentList:[]}; var ie = (function () { var undef, v = 3, div = document.createElement('div'), all = div.getElementsByTagName('i'); while (div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->', all[0]); return v > 4 ? v : undef }()); if (ie != null && ie < 9)
 {document.body.removeChild(document.getElementsByTagName('script')[0]);document.getElementById('loading-img').outerHTML=''
 document.getElementById('wrapper-main-page').outerHTML='<div style="text-align: center;margin: 30px auto; font-size: 20px;width: 630px;direction: rtl;"><div>We dont support this version of your browser</div><img src="/Content/img/browserSupport.png"></div>'}</script>
 

@@ -311,18 +311,18 @@ function AfterMadulesLoad() {
 
     $('.resizable[data-tmplname="slideshow"]').each(function () {
         if ($(this).find("#scroll_diamond").length == 0)
-            $(this).append(scroll_diamond("down", 1, "قسمت پایین 1"));
+            $(this).append(scroll_diamond("down", 1, "گالری"));
     });
     $('.resizable[data-boxstyle="services"]').each(function () {
         if ($(this).find("#scroll_diamond").length == 0) {
-            $(this).append(scroll_diamond("up", 0, "قسمت بالا 1"));
-            $(this).append(scroll_diamond("down", 2, "قسمت پایین 2"));
+            $(this).append(scroll_diamond("up", 0, "صفحه اصلی"));
+            $(this).append(scroll_diamond("down", 2, "نامشخص پایین"));
         }
     });
     $('.resizable[data-boxstyle="aboutAjodanie"]').each(function () {
         if ($(this).find("#scroll_diamond").length == 0) {
             $(this).append(scroll_diamond("up", 1, "قسمت بالا 2"));
-            $(this).append(scroll_diamond("down", 3, "ببین"));
+            $(this).append(scroll_diamond("down", 3, "اطلاعات تماس"));
         }
     });
 
@@ -395,7 +395,7 @@ function setServiceBoxHieght() {
         );
         $("#page_wrap > span:first").addClass("active");
         $("#page_wrap").append(
-            '<span id="footer_page"><label>Ø§Ø·Ù„Ø§Ø¹Ø§Øª ØªÙ…Ø§Ø³</label></span>'
+            '<span id="footer_page"><label>اطلاعات تماس</label></span>'
         );
         $("#page_wrap").append('<div id="next_page"></div>');
     }

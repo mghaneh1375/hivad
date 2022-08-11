@@ -230,7 +230,7 @@ div#dialogAh7Box-wrapper {
 }
 
 #close-dialogAh7Box, .close-dialogAh7Box, button#btnCloseOnlineFoodShopping_wrapper {
-    background: url(/Content/base/dynamic/shopping632/ui-sprite.png) -150px -205px no-repeat;
+    /* background: url(/Content/base/dynamic/shopping632/ui-sprite.png) -150px -205px no-repeat; */
     height: 50px;
     position: absolute;
     left: -21px;
@@ -653,7 +653,7 @@ footer > div h3 {
 
 ul#contactInfo li:before {
     content: '';
-    background: url(/Content/base/dynamic/shopping742/img/92632.jpg);
+    /* background: url(/Content/base/dynamic/shopping742/img/92632.jpg); */
     width: 26px;
     height: 26px;
     position: absolute;
@@ -723,7 +723,7 @@ ul#footer_social {
     }
 
         ul#footer_social li a {
-            background: url(/Content/base/dynamic/shopping742/img/92633.jpg) no-repeat;
+            /* background: url(/Content/base/dynamic/shopping742/img/92633.jpg) no-repeat; */
             background-size: 195px;
             height: 39px;
             width: 39px;
@@ -3981,7 +3981,7 @@ ul#mainNavigation {
 
         ul#mainNavigation > li:first-child > a:before {
             content: '';
-            background: url(/Content/base/dynamic/shopping632/img/92397.jpg) no-repeat right;
+            /* background: url(/Content/base/dynamic/shopping632/img/92397.jpg) no-repeat right; */
             background-size: 20px;
             position: absolute;
             width: 23px;

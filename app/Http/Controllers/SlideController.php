@@ -22,7 +22,7 @@ class SlideController extends Controller {
 
             $file = Input::file('pic');
             $Image = time() . '_' . $file->getClientOriginalName();
-            $destenationpath = __DIR__ . '/../../../public/slidebar';
+            $destenationpath = __DIR__ . '/../../../public/Content/images/GalleryPictures/crop';
             $file->move($destenationpath, $Image);
 
             $slide->pic = $Image;
@@ -31,7 +31,7 @@ class SlideController extends Controller {
 
         elseif ($_POST['kind'] == 'delete' && $_POST['id'] != '') {
             $slide = SlideBar::whereId($_POST['id']);
-            File::delete('slidebar/' . $slide->pic);
+            File::delete('Content/images/GalleryPictures/crop/' . $slide->pic);
             $slide->delete();
         }
 

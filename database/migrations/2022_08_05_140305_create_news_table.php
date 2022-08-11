@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
             $table->string('image');
-            $table->string('tags');
+            $table->string('tags')->nullable();
             $table->string('title');
             $table->string('digest');
-            $table->string('alt_img')->nullable();
-            $table->boolean('visibility');
+            $table->string('alt')->nullable();
+            $table->boolean('visibility')->default(true);
+            $table->integer('priority');
             $table->string('keywords')->nullable();
             $table->boolean('is_imp')->default(false);
             $table->longText('description')->nullable();

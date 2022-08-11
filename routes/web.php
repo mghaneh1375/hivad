@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('get_json_file', [HomeController::class, 'get_json_file'])->name('get_json_file');
 
 Route::get('galleries', ['as' => 'gallery', 'uses' => 'GalleryController@gallery']);
 

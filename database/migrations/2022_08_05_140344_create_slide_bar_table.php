@@ -17,7 +17,8 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('priority');
             $table->string('image');
-            $table->boolean('visibility');
+            $table->boolean('visibility')->default(true);
+            $table->string('alt')->nullable();
             $table->string('header')->nullable();
             $table->string('description')->nullable();
         });

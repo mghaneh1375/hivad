@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('gallery', function (Blueprint $table) {
             $table->increments('id');
             $table->string('image');
-            $table->string('tags');
-            $table->string('title');
-            $table->boolean('visibility');
+            $table->string('alt')->nullable();
+            $table->string('tags')->nullable();
+            $table->string('title')->nullable();
+            $table->boolean('visibility')->default(true);
             $table->boolean('is_imp')->default(false);
+            $table->integer('priority');
             $table->string('description')->nullable();
             $table->timestamps();
         });
