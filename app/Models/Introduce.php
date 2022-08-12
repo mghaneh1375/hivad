@@ -9,6 +9,12 @@ class Introduce extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'image',
+        'alt',
+        'priority'
+    ];
+
     protected $table = 'introduce';
     public $timestamps = false;
 

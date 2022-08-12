@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IntroduceController;
 use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,8 +30,11 @@ Route::post('fetchGallery', ['as' => 'fetchGallery', 'uses' => 'GalleryControlle
 
 Route::get('manageSlideShow', [SlideController::class, 'manageSlideShow'])->name('manageSlideShow');
 
+Route::get('manageIntroduce', [IntroduceController::class, 'manageIntroduce'])->name('manageIntroduce');
+
 Route::post('saveSlideShow', ['as' => 'saveSlideShow', 'uses' => 'SlideController@saveSlideShow']);
 
+Route::get('panel', [HomeController::class, 'panel'])->name('panel');
 
 Route::get('/', function () {
     return view('home');

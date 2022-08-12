@@ -1,0 +1,139 @@
+{
+    "madules": [
+        {
+            "BoxID": 38865,
+            "MenuID": -1,
+            "BoxTitle": "تست 2",
+            "BoxDescription": null,
+            "Priority": 2,
+            "Width": null,
+            "Height": 180,
+            "BoxCount": 9,
+            "MaduleID": null,
+            "SubBoxHeight": null,
+            "BoxCountPerRow": 3,
+            "FormID": null,
+            "FormReportID": null,
+            "BoxGroupID": 1,
+            "BoxGroupName": "tabs",
+            "BoxPersianName": "تب ها",
+            "Pagination": 2,
+            "SortType": 1,
+            "Content": null,
+            "MediaID": null,
+            "HasProductTabs": null,
+            "ProductSlides": null,
+            "RowIDList": null,
+            "BoxStyle": "services",
+            "PopupStyle": false,
+            "BoxTemp": null,
+            "ShowMoreLink": null,
+            "ContainerTabs": null,
+            "WebsiteDisplay": true,
+            "MobileDisplay": true,
+            "Background": null,
+            "ParallaxStyle": null,
+            "DisableBoxBack": null,
+            "BackTitleColor": null,
+            "DisableBoxBackgroundColor": null,
+            "BoxBackgroundColor": null,
+            "BlurEffectBack": null,
+            "BlackEffectBack": null,
+            "ButtonList": [],
+            "Platform7Maduleid": null,
+            "GroupMaduleBox": null,
+            "IsAmazzingoffer": false
+        }
+    ],
+    "jsonContentList": [
+        {
+            "BoxID": 38865,
+            "Content": {
+                "TabRepository": [
+                    {
+                        "TabID": 5960,
+                        "BoxID": 38865,
+                        "LinkUrl": "/Home/Page?menuID=29264&pN=ØªØ§Ù„Ø§Ø±-Ù¾Ø°ÛŒØ±Ø§ÛŒÛŒ-Ø²Ù…Ø±Ø¯",
+                        "TempName": "PageContent",
+                        "MenuID": 29264,
+                        "Title": "سلام1",
+                        "Titr": "تیتر سلام 1",
+                        "Picture": "service1",
+                        "Priority": 0,
+                        "Icon": null,
+                        "BaseWebsiteID": null
+                    },
+                    {
+                        "TabID": 5961,
+                        "BoxID": 38865,
+                        "LinkUrl": "/Home/Page?menuID=29265&pN=-ØªØ§Ù„Ø§Ø±-Ø¨Ø²Ø±Ú¯-ÛŒØ§Ù‚ÙˆØª-",
+                        "TempName": "PageContent",
+                        "MenuID": 29265,
+                        "Title": "سلام2",
+                        "Titr": "تیتر سلام 2",
+                        "Picture": "service2",
+                        "Priority": 1,
+                        "Icon": null,
+                        "BaseWebsiteID": null
+                    },
+                    {
+                        "TabID": 5962,
+                        "BoxID": 38865,
+                        "LinkUrl": "/Home/Page?menuID=29266&pN=Ø±Ø³ØªÙˆØ±Ø§Ù†-ÙÛŒØ±ÙˆØ²Ù‡",
+                        "TempName": "PageContent",
+                        "MenuID": 29266,
+                        "Title": "سلام3",
+                        "Titr": null,
+                        "Picture": "service3",
+                        "Priority": 2,
+                        "Icon": null,
+                        "BaseWebsiteID": null
+                    },
+                    {
+                        "TabID": 5963,
+                        "BoxID": 38865,
+                        "LinkUrl": "/Home/Page?menuID=29409&pN=Ø¢Ù„Ø§Ú†ÛŒÙ‚",
+                        "TempName": "PageContent",
+                        "MenuID": 29409,
+                        "Title": "سلام4",
+                        "Titr": "تیتر سلام 4",
+                        "Picture": "service4",
+                        "Priority": 3,
+                        "Icon": null,
+                        "BaseWebsiteID": null
+                    },
+                    {
+                        "TabID": 5964,
+                        "BoxID": 38865,
+                        "LinkUrl": "/Home/Page?menuID=29410&pN=-Ø¨Ø§Øº-Ø±Ø³ØªÙˆØ±Ø§Ù†",
+                        "TempName": "PageContent",
+                        "MenuID": 29410,
+                        "Title": "سلام5",
+                        "Titr": null,
+                        "Picture": "service5",
+                        "Priority": 4,
+                        "Icon": null,
+                        "BaseWebsiteID": null
+                    },
+                    {
+                        "TabID": 5965,
+                        "BoxID": 38865,
+                        "LinkUrl": "/Home/Page?menuID=29411&pN=-Ø²Ù…ÛŒÙ†-ØªÙ†ÛŒØ³",
+                        "TempName": "PageContent",
+                        "MenuID": 29411,
+                        "Title": "سلام6",
+                        "Titr": null,
+                        "Picture": "service6",
+                        "Priority": 5,
+                        "Icon": null,
+                        "BaseWebsiteID": null
+                    }
+                ],
+                "boxCount": 9,
+                "PopupStyle": false,
+                "boxTitle": "باکس تایتل 2",
+                "BoxCountPerRow": 3
+            }
+        }
+    ]
+}

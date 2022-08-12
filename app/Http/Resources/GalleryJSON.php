@@ -15,16 +15,16 @@ class GalleryJSON extends JsonResource
     public function toArray($request)
     {
         return [
-            "SliderID" => $this->id,
-            "AlbumID" => 10218,
+            "TabID" => 5959 + $this->id,
+            "BoxID" => 38865,
             "LinkUrl" => "",
-            "TempName" => null,
-            "MenuID" => null,
-            "PicAlt" => $this->alt,
+            "TempName" => "PageContent",
+            "MenuID" => 29263 + $this->id,
+            "Title" => $this->title,
+            "Titr" => $this->tags,
             "Picture" => $this->image,
-            "Content" => null,
             "Priority" => $this->priority,
-            "SlideDescription" => null
+            "Icon" => null,
         ];
     }
 }

@@ -25,6 +25,6 @@ class IntroduceJSON extends JsonResource
             "Content" =>  null,
             "Priority" =>  $this->priority,
             "SlideDescription" =>  null
-        ]
+        ];
     }
 }

@@ -68,6 +68,173 @@
         <script src="{{URL::asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
         <script src="{{URL::asset('js/jquery.min.js')}}"></script>
 
+        
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            padding: 5px;
+            height: 200px;
+            max-height: 300px;
+
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #008CBA;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            -webkit-transform: scale(0);
+            -ms-transform: scale(0);
+            transform: scale(0);
+            -webkit-transition: .3s ease;
+            transition: .3s ease;
+            display: flex;
+            justify-content: center;
+        }
+
+        .myContainer:hover .overlay .infoBox {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .myContainer:hover .overlay .opBox {
+            display: flex;
+            flex-direction: row;
+            align-self: center;
+            gap: 20px;
+        }
+        
+        .myContainer:hover .overlay .infoBox .op {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 15px;
+        }
+
+        .myContainer:hover .overlay .infoBox label {
+            display: inline-block;
+            width: 75px;
+        }
+        
+        .myContainer:hover .overlay .infoBox input {
+            display: inline-block;
+            width: calc(100% - 110px);
+        }
+
+        .myContainer:hover .overlay p {
+            direction: rtl;
+            color: white;
+            font-size: 16px;
+        }
+
+        .myContainer:hover .overlay .remove {
+            color: white; 
+            background-color: rgb(153, 51, 51);
+        }
+
+        .myContainer:hover .overlay {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .center {
+            align-self: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gap10 {
+            gap: 10px;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .modal {
+            display: block; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            padding: 15px !important;
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 30%;
+            direction: rtl;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+        .cke_chrome {
+            margin-top: 20px;
+            border: none !important;
+        }
+    </style>
+
+
         <style>
 
             .alarm1 {
@@ -180,10 +347,10 @@
 
                                 <li class="nav-item"><a data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i></i> <span class="mini-dn">تنظیمات سیستمی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                     <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('manageIntroduce')}}" class="dropdown-item">معرفی مجموعه</a>
                                         <a href="{{route('manageSlideShow')}}" class="dropdown-item">مدیریت اسلایدبار</a>
-                                        {{-- <a href="{{route('gallery')}}" class="dropdown-item">مدیریت گالری</a>
-                                        <a href="{{route('category')}}" class="dropdown-item">مدیریت دسته ها</a>
-                                        <a href="{{route('manageArticles')}}" class="dropdown-item">مدیریت مقالات</a>
+                                        <a href="{{route('gallery')}}" class="dropdown-item">مدیریت گالری</a>
+                                        {{-- <a href="{{route('manageArticles')}}" class="dropdown-item">مدیریت مقالات</a>
                                         <a href="{{route('manageNews')}}" class="dropdown-item">مدیریت اخبار</a> --}}
                                     </div>
                                 </li>
@@ -210,6 +377,19 @@
         <div class="content-inner-all-fa">
             @yield('content')
         </div>
+
+        <div id="myModal" class="modal hidden">
+            <div class="modal-content">
+                <input type="hidden" value="" id="slideId" name="id">
+                <input type="hidden" value="delete" name="kind">
+                <h2 style="padding-right: 5%;">ایا اطیمنان دارید؟</h2>
+                <div class="flex center gap10">
+                    <input type="submit" value="بله" class="btn green"  style="margin-right: 5px; margin-bottom: 3%" onclick="remove()">
+                    <input type="button" value="انصراف" class="btn green"  style="margin-bottom: 3%; margin-left: 5px;" onclick="$('#myModal').addClass('hidden')">
+                </div>
+            </div>
+        </div>
+
 
 
         @section('reminder')
@@ -292,7 +472,38 @@
                     return true;
                 }
 
+                let removeURL;
+                let itemID;
+                let item;
+
+                function remmoveModal(node, id, url, ) {
+                    $("#myModal").removeClass('hidden');
+                    removeURL = url;
+                    itemID = id;
+                    item = node;
+                }
+
+                function remove() {
+
+                    $.ajax({
+                        type: 'delete',
+                        url: removeURL,
+                        headers: {
+                            "Accept": "application/json"
+                        },
+                        success: function(res) {
+                            if(res.status === "ok") {
+                                $("#myModal").addClass('hidden');
+                                alert("عملیات موردنظر با موفقیت انجام شد.");
+                                $("#" + item + "_" + itemID).remove();
+                            }
+                        }
+                    })
+
+                }
+
             </script>
+            
         @show
     </div>
 </body>

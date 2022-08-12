@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IntroduceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::put('setAboutUs', [IntroduceController::class, 'setAboutUs'])->name('api.setAboutUs');
+
+Route::put('updateIntroduce/{introduce?}', [IntroduceController::class, 'update'])->name('api.updateIntroduce');
+
+Route::post('addIntroduce', [IntroduceController::class, 'store'])->name('api.addIntroduce');
+
+Route::delete('removeIntroduce/{introduce?}', [IntroduceController::class, 'remove'])->name('api.removeIntroduce');

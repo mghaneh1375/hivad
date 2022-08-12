@@ -183,7 +183,7 @@ function AfterMadulesLoad() {
     ).each(function () {
         if ($(this).find(".btn-expand").length == 0) {
             $(this).append(
-                '<a data-text="Ø¨Ø²Ø±Ú¯Ù†Ù…Ø§Ø¦ÛŒ" class="btn btn-expand" ><span>Ø¨Ø²Ø±Ú¯Ù†Ù…Ø§Ø¦ÛŒ</span><i></i></a> <a data-text="Ú©ÙˆÚ†Ú© Ù†Ù…Ø§Ø¦ÛŒ" class="btn btn-reduce " ><span>Ú©ÙˆÚ†Ú© Ù†Ù…Ø§Ø¦ÛŒ</span><i></i></a>'
+                '<a data-text="بزرگ نمایی" class="btn btn-expand" ><span>بزرگ نمایی</span><i></i></a> <a data-text="کوچک نمایی" class="btn btn-reduce " ><span>کوچک نمایی</span><i></i></a>'
             );
         }
         $(this)
