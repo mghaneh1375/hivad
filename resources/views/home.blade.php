@@ -34,23 +34,39 @@
     <meta name="enamad" content="360329"/>
     <style>
 
-.wrapper_Col > #newsWidget {
-    display: flex !important;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
+        .wrapper_Col > #newsWidget {
+            display: flex !important;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
         .wrapper_Col > #newsWidget > div {
             position: relative !important;
             right: unset !important;
             top: unset !important;
             display: flex !important;
             flex-direction: column;
-            height: 400px;
+            height: 300px;
+            width: 300px;
+            padding: 0 !important;
         }
 
         .wrapper_Col > #newsWidget > div img {
-            height: 200px !important;
+            max-height: 130px !important;
+            width: 100%;
         }
+        .wrapper_Col > #newsWidget #newsInfo {
+            padding: 10px;
+            padding-top: 20px;
+        }
+        .wrapper_Col > #newsWidget #newsInfo .info_wrapper_wrapper {
+            left: 0;
+            top: -11px !important;
+        }
+        .wrapper_Col > #newsWidget #newsInfo .span_loaddingImg {
+            display: none;
+        }
+        
+        
     </style>
 
 </head>

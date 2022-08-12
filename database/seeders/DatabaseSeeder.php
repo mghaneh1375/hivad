@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
           $this->call([
             SliderSeeder::class,
             GallerySeeder::class,
-            NewsSeeder::class
+            NewsSeeder::class,
+            IntroduceSeeder::class,
         ]);
     }
 }

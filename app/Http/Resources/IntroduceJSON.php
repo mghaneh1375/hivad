@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GalleryJSON extends JsonResource
+class IntroduceJSON extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,15 +16,15 @@ class GalleryJSON extends JsonResource
     {
         return [
             "SliderID" => $this->id,
-            "AlbumID" => 10218,
-            "LinkUrl" => "",
-            "TempName" => null,
-            "MenuID" => null,
-            "PicAlt" => $this->alt,
-            "Picture" => $this->image,
-            "Content" => null,
-            "Priority" => $this->priority,
-            "SlideDescription" => null
-        ];
+            "AlbumID" =>  10218,
+            "LinkUrl" =>  "",
+            "TempName" =>  null,
+            "MenuID" =>  null,
+            "PicAlt" =>  $this->alt,
+            "Picture" =>  $this->image,
+            "Content" =>  null,
+            "Priority" =>  $this->priority,
+            "SlideDescription" =>  null
+        ]
     }
 }

@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('config', function (Blueprint $table) {
+        Schema::create('introduce', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('about');
+            $table->string('image');
+            $table->string('alt')->nullable();
+            $table->boolean('visibility')->default(true);
+            $table->integer('priority');
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('config');
+        Schema::dropIfExists('introduce');
     }
 };
