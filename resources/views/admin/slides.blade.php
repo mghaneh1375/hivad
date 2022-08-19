@@ -6,9 +6,9 @@
 
 @section('content')
 
-    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
 
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div class="sparkline8-list shadow-reset mg-tb-30">
             <div class="sparkline8-hd">
                 <div class="main-sparkline8-hd">
@@ -22,34 +22,94 @@
 
                     <div class="row">
 
-                        @for($i = 0; $i < count($slide); $i++)
-                            <div class="column col-xs-4 myContainer">
-                                <img src="{{URL::asset('slidebar/'.$slide[$i]->pic)}}" alt="Snow" style="width:100%; height: 100%">
-                                <div class="overlay">
-{{--                                    <input class="text" value="" id="editurl{{$slide[$i]->id}}" style="display: none; color: black" onchange="editUrl({{$slide[$i]->id}})">--}}
-                                    <center>
-                                        <input type="submit" value="حذف" class="btn green" onclick="deleteSlideQuest({{$slide[$i]->id}})" style="margin-top: 130px; color: white; background-color: rebeccapurple">
-                                    </center>
-                                </div>
-                            </div>
-                        @endfor
+                        <div class="col-xs-12">
+                            @foreach($slides as $slide)
+                                <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer">
+                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/'.$slide->image . '.jpg')}}" alt="{{ $slide->alt }}" style="width:100%; height: 100%">
+                                    <div class="overlay">
+                                        <div class="opBox" id="opBox_{{ $slide->id }}">
+                                            <button class="btn btn-primary" onclick="$('#opBox_{{ $slide->id }}').addClass('hidden'); $('#infoBox_{{ $slide->id }}').removeClass('hidden')">مشاهده اطلاعات</button>
+                                            <button class="btn btn-danger" onclick="remmoveModal('item', {{$slide->id}}, '{{ route('api.removeSlide', ['slidebar' => $slide->id]) }}')">حذف</button>
+                                        </div>
+                                        <div id="infoBox_{{ $slide->id }}" class="hidden infoBox">
+                                                <div>
+                                                    <label for="alt">تگ alt</label>
+                                                    <input type="text" id="alt_{{ $slide->id }}" value="{{ $slide->alt }}" />
+                                                </div>
+                                                <div>
+                                                    <label for="priority">اولویت</label>
+                                                    <input type="number" id="priority_{{ $slide->id }}" value="{{ $slide->priority }}" />
+                                                </div>
 
-                        <div class="column" style="border: solid;">
-                            <div>
-                                <center>
-                                    <img id="blah" src="{{URL::asset('img/12.svg')}}"  alt="your image" style="width:100%; height: 165px;">
-                                </center>
-                            </div>
-                            <div style="margin-top: 5%;">
-                                <form id="add_slide_show" action="{{route('saveSlideShow')}}" method="post"
+                                                <div>
+                                                    <label for="header">عنوان</label>
+                                                    <input type="text" id="header_{{ $slide->id }}" value="{{ $slide->header }}" />
+                                                </div>
+                                                
+                                                <div>
+                                                    <label for="description">توضیح</label>
+                                                    <textarea type="text" id="description_{{ $slide->id }}">{{ $slide->description }}</textarea>
+                                                </div>
+
+                                                <div>
+                                                    <label for="visibility">وضعیت نمایش</label>
+                                                    <select id="visibility_{{ $slide->id }}">
+                                                        @if($slide->visibility == 1)
+                                                            <option value="0">مخفی</option>
+                                                            <option selected value="1">نمایش</option>
+                                                        @else
+                                                            <option selected value="0">مخفی</option>
+                                                            <option value="1">نمایش</option>
+                                                        @endif
+                                                    </select>
+                                                </div>
+
+                                                <div class="op">
+                                                    <button onclick="$('#opBox_{{ $slide->id }}').removeClass('hidden'); $('#infoBox_{{ $slide->id }}').addClass('hidden')" class="btn btn-danger">بازگشت</button>
+                                                    <button onclick="editItem({{ $slide->id }})" class="btn btn-success">اعمال تغییرات</button>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="col-xs-12" style="border: solid;">
+                            
+                            <div style="margin-top: 10px;">
+                                <form id="add_slide_show" action="{{route('api.addSlide')}}" method="post"
                                       enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="kind" value="save">
-                                    <input type="file" name="pic" id="imgInp">
 
-                                    <center>
+                                    <div class="flex flex-col center gap10" style="margin: 10px">
+                                        <input type="file" name="image" required id="imgInp">
+                                        <div>
+                                            <label for="priority">اولویت</label>
+                                            <input type="number" required name="priority" id="priority" />
+                                        </div>
+                                        <div>
+                                            <label for="alt">تگ alt</label>
+                                            <input type="text" placeholder="این فیلد اختیاری است" name="alt" id="alt" />
+                                        </div>
+                                            
+                                        <div>
+                                            <label for="header">عنوان</label>
+                                            <input type="text" name="header" />
+                                        </div>
+                                        
+                                        <div>
+                                            <label for="description">توضیح</label>
+                                            <textarea type="text" name="description"></textarea>
+                                        </div>
+                                    </div>
+                        
+
+                                    <div class="flex center gap10">
+                                        <span onclick="$('#itemsContainer').removeClass('hidden'); $('#addContainer').addClass('hidden')" class="btn btn-danger">بازگشت</span>
                                         <input type="submit" value="ذخیره" class="btn green">
-                                    </center>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
@@ -59,78 +119,35 @@
         </div>
     </div>
 
-    <div class="col-md-2"></div>
-    <script>
-        var modal = document.getElementById('myModal');
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    <div class="col-md-1"></div>
 
     <script>
-        $.ajaxSetup(
-            {
-                headers:
-                    {
-                        'X-CSRF-Token': $('input[name="_token"]').val()
+        
+        function editItem(id) {
+
+            $.ajax({
+                type: 'put',
+                url: '{{ route('api.updateSlide') }}' + '/' + id,
+                data: {
+                    'priority': $("#priority_" + id).val(),
+                    'alt': $("#alt_" + id).val(),
+                    'header': $("#header_" + id).val(),
+                    'visibility': $('#visibility_' + id).val(),
+                    'description': $('#description_' + id).val()
+                },
+                headers: {
+                    "accept": "application/json"
+                },
+                success: function(res) {
+                    if(res.status === "ok") {
+                        alert('عملیات موردنظر با موفقیت انجام شد.');
+                        $('#opBox_' + id).removeClass('hidden'); 
+                        $('#infoBox_' + id).addClass('hidden');
                     }
-            });
-    </script>
-
-    <script>
-        function readURL(input) {
-
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('#blah').attr('src', e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#imgInp").change(function() {
-            readURL(this);
-        });
-    </script>
-
-    <script>
-        function editUrl(id) {
-            if(document.getElementById('url'+id).style.display == 'inline-block'){
-                document.getElementById('url'+id).style.display = 'none';
-                document.getElementById('editurl'+id).style.display = 'inline-block';
-                document.getElementById('editurl'+id).value = document.getElementById('url'+id).innerText;
-            }
-            else{
-                var url = document.getElementById('editurl'+id).value;
-                if(url !== '') {
-                    $.ajax({
-                        type: 'post',
-                        url: '{{url("saveSlideShow")}}',
-                        data:{
-                            'id': id,
-                            'url': url,
-                            'kind': 'edit'
-                        },
-                        success: function (response) {
-                            if (response === 'ok') {
-                                document.getElementById('editurl' + id).style.display = 'none';
-                                document.getElementById('url' + id).innerText = url;
-                                document.getElementById('url' + id).style.display = 'inline-block';
-                            }
-                        }
-                    });
                 }
-            }
+            });
+
         }
 
-        function deleteSlideQuest(id) {
-            document.getElementById('myModal').style.display = 'block';
-            document.getElementById('slideId').value = id;
-        }
     </script>
 @stop

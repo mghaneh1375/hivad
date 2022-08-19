@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IntroduceController;
+use App\Http\Controllers\SlideController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,10 @@ Route::put('updateIntroduce/{introduce?}', [IntroduceController::class, 'update'
 Route::post('addIntroduce', [IntroduceController::class, 'store'])->name('api.addIntroduce');
 
 Route::delete('removeIntroduce/{introduce?}', [IntroduceController::class, 'remove'])->name('api.removeIntroduce');
+
+
+Route::post('addSlide', [SlideController::class, 'store'])->name('api.addSlide');
+
+Route::delete('removeSlide/{slidebar?}', [SlideController::class, 'remove'])->name('api.removeSlide');
+
+Route::put('updateSlider/{slidebar?}', [SlideController::class, 'update'])->name('api.updateSlide');

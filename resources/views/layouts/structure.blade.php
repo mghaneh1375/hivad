@@ -111,6 +111,9 @@
             flex-direction: column;
             gap: 10px;
             margin-top: 10px;
+            overflow: auto;
+            width: 100%;
+            padding: 5px;
         }
         
         .myContainer:hover .overlay .opBox {
@@ -132,7 +135,9 @@
             width: 75px;
         }
         
-        .myContainer:hover .overlay .infoBox input {
+        .myContainer:hover .overlay .infoBox input,
+        .myContainer:hover .overlay .infoBox select,
+        .myContainer:hover .overlay .infoBox textarea {
             display: inline-block;
             width: calc(100% - 110px);
         }
