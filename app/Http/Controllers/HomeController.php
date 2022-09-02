@@ -2,14 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\Request;
+
 class HomeController extends RenderController {
 
     public function get_json_file() {   
         return json_encode($this->json_file());
     }
 
+    public function news_get_json_file() {
+        return json_encode($this->news_json_file());
+    }
+
+    public function galleries_get_json_file() {
+        return json_encode($this->galleries_json_file());
+    }
+
     public function panel() {
         return view('admin.panel');
+    }
+
+    public function uploadImg(Request $request) {
+
+        $request->validate([
+            'upload' => 'required|image'
+        ]);
+
+        $image       = $request->file('upload');
+        $filename    = time() . '.jpg';
+        
+        $image_resize = Image::make($image->getRealPath());
+        $image_resize->save(public_path('Content/images/tmp/' . $filename));
+
+        return response()->json(['status' => 'ok', 'url' => asset('Content/images/tmp/' . $filename)]);
     }
 
     // public function login() {

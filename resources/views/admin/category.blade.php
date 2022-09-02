@@ -12,7 +12,7 @@
         <div class="sparkline8-list shadow-reset mg-tb-30">
             <div class="sparkline8-hd">
                 <div class="main-sparkline8-hd">
-                    <h1>مدیریت اسلایدبار</h1>
+                    <h1>مدیریت دسته ها</h1>
                 </div>
             </div>
 
@@ -23,38 +23,33 @@
                     <div class="row">
 
                         <div class="col-xs-12">
-                            @foreach($slides as $slide)
-                                <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $slide->id }}">
-                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/'.$slide->image . '.jpg')}}" alt="{{ $slide->alt }}" style="width:100%; height: 100%">
+                            @foreach($categories as $category)
+                                <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $category->id }}">
+                                    <img src="{{asset('Content/images/GalleryPictures/crop/'.$category->image)}}" alt="{{ $category->alt }}" style="width:100%; height: 100%">
                                     <div class="overlay">
-                                        <div class="opBox" id="opBox_{{ $slide->id }}">
-                                            <button class="btn btn-primary" onclick="$('#opBox_{{ $slide->id }}').addClass('hidden'); $('#infoBox_{{ $slide->id }}').removeClass('hidden')">مشاهده اطلاعات</button>
-                                            <button class="btn btn-danger" onclick="remmoveModal('item', {{$slide->id}}, '{{ route('api.removeSlide', ['slidebar' => $slide->id]) }}')">حذف</button>
+                                        <div class="opBox" id="opBox_{{ $category->id }}">
+                                            <button class="btn btn-primary" onclick="$('#opBox_{{ $category->id }}').addClass('hidden'); $('#infoBox_{{ $category->id }}').removeClass('hidden')">مشاهده اطلاعات</button>
+                                            <button class="btn btn-danger" onclick="remmoveModal('item', {{$category->id}}, '{{ route('api.removeCategory', ['category' => $category->id]) }}')">حذف</button>
                                         </div>
-                                        <div id="infoBox_{{ $slide->id }}" class="hidden infoBox">
+                                        <div id="infoBox_{{ $category->id }}" class="hidden infoBox">
                                                 <div>
-                                                    <label for="alt">تگ alt</label>
-                                                    <input type="text" id="alt_{{ $slide->id }}" value="{{ $slide->alt }}" />
+                                                    <label for="alt_{{ $category->id }}">تگ alt</label>
+                                                    <input type="text" id="alt_{{ $category->id }}" value="{{ $category->alt }}" />
                                                 </div>
                                                 <div>
-                                                    <label for="priority">اولویت</label>
-                                                    <input type="number" id="priority_{{ $slide->id }}" value="{{ $slide->priority }}" />
-                                                </div>
-
-                                                <div>
-                                                    <label for="header">عنوان</label>
-                                                    <input type="text" id="header_{{ $slide->id }}" value="{{ $slide->header }}" />
-                                                </div>
-                                                
-                                                <div>
-                                                    <label for="description">توضیح</label>
-                                                    <textarea type="text" id="description_{{ $slide->id }}">{{ $slide->description }}</textarea>
+                                                    <label for="priority_{{ $category->id }}">اولویت</label>
+                                                    <input type="number" id="priority_{{ $category->id }}" value="{{ $category->priority }}" />
                                                 </div>
 
                                                 <div>
-                                                    <label for="visibility">وضعیت نمایش</label>
-                                                    <select id="visibility_{{ $slide->id }}">
-                                                        @if($slide->visibility == 1)
+                                                    <label for="title_{{ $category->id }}">عنوان</label>
+                                                    <input type="text" id="title_{{ $category->id }}" value="{{ $category->title }}" />
+                                                </div>
+
+                                                <div>
+                                                    <label for="visibility_{{ $category->id }}">وضعیت نمایش</label>
+                                                    <select id="visibility_{{ $category->id }}">
+                                                        @if($category->visibility == 1)
                                                             <option value="0">مخفی</option>
                                                             <option selected value="1">نمایش</option>
                                                         @else
@@ -65,8 +60,8 @@
                                                 </div>
 
                                                 <div class="op">
-                                                    <button onclick="$('#opBox_{{ $slide->id }}').removeClass('hidden'); $('#infoBox_{{ $slide->id }}').addClass('hidden')" class="btn btn-danger">بازگشت</button>
-                                                    <button onclick="editItem({{ $slide->id }})" class="btn btn-success">اعمال تغییرات</button>
+                                                    <button onclick="$('#opBox_{{ $category->id }}').removeClass('hidden'); $('#infoBox_{{ $category->id }}').addClass('hidden')" class="btn btn-danger">بازگشت</button>
+                                                    <button onclick="editItem({{ $category->id }})" class="btn btn-success">اعمال تغییرات</button>
                                                 </div>
                                             </div>
                                     </div>
@@ -77,9 +72,10 @@
                         <div class="col-xs-12" style="border: solid;">
                             
                             <div style="margin-top: 10px;">
-                                <form action="{{route('api.addSlide')}}" method="post"
-                                      enctype="multipart/form-data">
+                                <form action="{{route('api.addCategory')}}" method="post" 
+                                 enctype="multipart/form-data">
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="kind" value="save">
 
                                     <div class="flex flex-col center gap10" style="margin: 10px">
                                         <input type="file" name="image" required id="imgInp">
@@ -93,14 +89,17 @@
                                         </div>
                                             
                                         <div>
-                                            <label for="header">عنوان</label>
-                                            <input type="text" name="header" id="header" />
+                                            <label for="section">بخش</label>
+                                            <select name="section" id="section">
+                                                <option value="gallery">گالری</option>
+                                            </select>
                                         </div>
-                                        
+
                                         <div>
-                                            <label for="description">توضیح</label>
-                                            <textarea type="text" name="description"></textarea>
+                                            <label for="title">عنوان</label>
+                                            <input type="text" name="title" id="title"/>
                                         </div>
+
                                     </div>
                         
 
@@ -126,15 +125,14 @@
 
             $.ajax({
                 type: 'put',
-                url: '{{ route('api.updateSlide') }}' + '/' + id,
+                url: '{{ route('api.updateCategory') }}' + '/' + id,
                 data: {
                     'priority': $("#priority_" + id).val(),
                     'alt': $("#alt_" + id).val(),
-                    'header': $("#header_" + id).val(),
-                    'visibility': $('#visibility_' + id).val(),
-                    'description': $('#description_' + id).val()
+                    'title': $("#title_" + id).val(),
+                    'visibility': $('#visibility_' + id).val()
                 },
-                headers: {
+                titles: {
                     "accept": "application/json"
                 },
                 success: function(res) {

@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Article;
 use App\models\Category;
-use App\models\Gallery;
 use App\models\News;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class NewsController extends Controller {
 
@@ -56,58 +54,102 @@ class NewsController extends Controller {
             'categories' => Category::all()]);
     }
 
-    public function show(News $news) {
+    public function manageNews() {
+        return view('admin.News.list', ['allNews' => News::all()]);
+    }
+
+    public function editNews(News $news) {
+        return view('admin.News.create', ['news' => $news]);
+    }
+
+    public function remove(News $news) {
+
+        if(file_exists(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image . '.jpg'))
+            unlink(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image . '.jpg');
+
+        $news->delete();
+        return response()->json(["status" => "ok"]);
 
     }
 
     public function store(Request $request) {
-
+        
         $request->validate([
-            'title' => 'required',
-            'description' => 'required'
+            'image' => 'required|image',
+            'priority' => 'required|int|min:1',
+            'alt' => 'nullable|string|min:1',
+            'title' => 'required|string|min:1',
+            'digest' => 'required|string|min:1',
+            'tags' => 'nullable|string|min:1',
+            'description' => 'nullable|string|min:1',
+            'is_imp' => 'required|boolean'
         ]);
 
-        $news = new News();
-        $news->title = $request["title"];
+        $image       = $request->file('image');
+        $filename    = time() . '.jpg';
+        
+        $image_resize = Image::make($image->getRealPath());
+        $image_resize->save(public_path('Content/images/news/crop/' . $filename));
 
-        if(isset($_FILES["img"]) && !empty($_FILES["img"]["name"])) {
-            $file = Input::file('img');
-            $Image = time() . '_' . $file->getClientOriginalName();
-
-            $destenationpath = __DIR__ . '/../../../public/news';
-            $file->move($destenationpath, $Image);
-
-            $news->img = $Image;
-        }
-
-        $news->description = $_POST["description"];
-
-        if($_POST["category"] != -1)
-            $news->category = $_POST["category"];
-
-        $news->save();
+        News::create([
+            'digest' => $request->digest,
+            'image' => $filename,
+            'alt' => $request->has('alt') ? $request['alt'] : null,
+            'description' => $request->has('description') ? $request['description'] : null,
+            'tags' => $request->has('tags') ? $request['tags'] : null,
+            'priority' => $request['priority'],
+            'title' => $request['title'],
+            'is_imp' => $request['is_imp'],
+        ]);
 
         return Redirect::route('manageNews');
     }
 
-    public function delete() {
+    
+    public function update(News $news = null, Request $request) {
 
-        if(myPostIsset(["id"])) {
+        if($news == null)
+            return response()->json(["status" => "nok"]);
 
-            $news = News::whereId(makeValidInput($_POST["id"]));
+        $request->validate([
+            'image' => 'nullable|image',
+            'priority' => 'required|int|min:1',
+            'alt' => 'nullable|string|min:1',
+            'title' => 'required|string|min:1',
+            'digest' => 'required|string|min:1',
+            'tags' => 'nullable|string|min:1',
+            'description' => 'nullable|string|min:1',
+            'is_imp' => 'required|boolean',
+            'visibility' => 'required|boolean',
+        ]);
 
-            if($news != null) {
+        $news->priority = $request->priority;
+        $news->digest = $request->digest;
+        $news->visibility = $request->visibility;
+        $news->alt = $request->has('alt') ? $request->alt : $news->alt;
+        $news->tags = $request->has('tags') ? $request->tags : $news->tags;
+        $news->description = $request->has('description') ? $request->description : $news->description;
+        $news->title = $request->title;
+        $news->is_imp = $request->is_imp;
 
-                if ($news->img != null && !empty($news->img) &&
-                    file_exists(__DIR__ . '/../../../public/news/' . $news->img))
-                    unlink(__DIR__ . '/../../../public/news/' . $news->img);
-
-                $news->delete();
+        if($request->has('image')) {
+            $image       = $request->file('image');
+            if($image != null) {
+                $filename    = time() . '.jpg';
+                
+                $image_resize = Image::make($image->getRealPath());
+                $image_resize->save(public_path('Content/images/news/crop/' . $filename));
+                
+                if(file_exists(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image . '.jpg'))
+                    unlink(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image . '.jpg');
+                    
+                $news->image = $filename;
             }
         }
 
+        $news->save();
         return Redirect::route('manageNews');
-
     }
+
 
 }

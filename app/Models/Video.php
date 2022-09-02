@@ -1,27 +1,19 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * An Eloquent Model: 'Gallery'
- *
- * @property integer $id
- * @property string $name
- * @property string $title
- * @property integer $cat_Id
- * @method static \Illuminate\Database\Query\Builder|\App\models\Gallery whereCatId($value)
- */
-
-class Gallery extends Model
+class Video extends Model
 {
-
-    protected $table = 'gallery';
+    use HasFactory;
+    protected $table = 'video';
     public $timestamps = false;
 
     protected $fillable = [
         'image',
+        'file',
         'alt',
         'priority',
         'visibility',
@@ -32,7 +24,7 @@ class Gallery extends Model
 
     public static function whereId($value)
     {
-        return Gallery::find($value);
+        return Video::find($value);
     }
 
     public function scopeImp($query)

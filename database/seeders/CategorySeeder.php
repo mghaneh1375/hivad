@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\models\News;
+use App\models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class NewsSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,16 +15,14 @@ class NewsSeeder extends Seeder
      */
     public function run()
     {
-         for($i = 1; $i < 7; $i++) {
-            News::create([
+        
+        for($i = 1; $i <= 3; $i++) {
+            Category::create([
                 "image" => "service" . $i . '.jpg',
                 "alt" => "sample" . $i,
                 "title" => "title" . $i,
-                "digest" => "digest" . $i,
-                "tags" => "#tag" . $i,
-                "description" => "desc" . $i,
                 "priority" => $i,
-                "is_imp" => true
+                "section" => "gallery"
             ]);
         }
     }

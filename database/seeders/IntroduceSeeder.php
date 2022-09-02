@@ -17,7 +17,7 @@ class IntroduceSeeder extends Seeder
     {
         for($i = 1; $i < 7; $i++) {
             Introduce::create([
-                "image" => "service" . $i,
+                "image" => "service" . $i . '.jpg',
                 "alt" => "sample" . $i,
                 "priority" => $i
             ]);

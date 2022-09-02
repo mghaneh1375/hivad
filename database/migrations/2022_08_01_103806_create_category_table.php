@@ -13,19 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gallery', function (Blueprint $table) {
+        Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('section');
+            $table->string('title');
+            $table->integer('priority');
             $table->string('image');
             $table->string('alt')->nullable();
-            $table->unsignedInteger('cat_id');
-            $table->string('tags')->nullable();
-            $table->string('title')->nullable();
             $table->boolean('visibility')->default(true);
-            $table->boolean('is_imp')->default(false);
-            $table->integer('priority');
-            $table->string('description')->nullable();
-            $table->timestamps();
-            $table->foreign('cat_id')->references('id')->on('category')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -36,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gallery');
+        Schema::dropIfExists('category');
     }
 };

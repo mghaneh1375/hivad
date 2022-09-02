@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gallery', function (Blueprint $table) {
+        Schema::create('video', function (Blueprint $table) {
             $table->increments('id');
             $table->string('image');
+            $table->string('file');
             $table->string('alt')->nullable();
             $table->unsignedInteger('cat_id');
             $table->string('tags')->nullable();
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
             $table->foreign('cat_id')->references('id')->on('category')->onUpdate('restrict')->onDelete('restrict');
+        
         });
     }
 
@@ -36,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gallery');
+        Schema::dropIfExists('video');
     }
 };
