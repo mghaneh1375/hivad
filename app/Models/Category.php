@@ -26,4 +26,9 @@ class Category extends Model
         return $query->where('visibility', true);
     }
 
+    public function videos()
+    {
+        $this->hasMany(Video::class);
+    }
+
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IntroduceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 use App\Models\News;
 
@@ -26,6 +27,8 @@ Route::get('news-get_json_file', [HomeController::class, 'news_get_json_file'])-
 
 Route::get('galleries-get_json_file', [HomeController::class, 'galleries_get_json_file'])->name('galleries_get_json_file');
 
+Route::get('videos-get_json_file', [HomeController::class, 'videos_get_json_file'])->name('videos_get_json_file');
+
 Route::get('showGallery', ['as' => 'showGallery', 'uses' => 'GalleryController@showGallery']);
 
 Route::post('fetchGallery', ['as' => 'fetchGallery', 'uses' => 'GalleryController@fetchGallery']);
@@ -34,7 +37,7 @@ Route::get('manageCategory', [CategoryController::class, 'manageCategory'])->nam
 
 Route::get('manageGallery', [GalleryController::class, 'manageGallery'])->name('manageGallery');
 
-Route::get('manageVideo', [GalleryController::class, 'manageVideo'])->name('manageVideo');
+Route::get('manageVideo', [VideoController::class, 'manageVideo'])->name('manageVideo');
 
 Route::get('manageNews', [NewsController::class, 'manageNews'])->name('manageNews');
 
@@ -58,5 +61,7 @@ Route::get('News/{news}/{title}', function (News $news, $title) {
 });
 
 Route::view('galleries', 'galleries');
+
+Route::view('videos', 'videos');
 
 Route::get('/Home/GetGalleryList', [GalleryController::class, 'list']);

@@ -18,6 +18,10 @@ class HomeController extends RenderController {
     public function galleries_get_json_file() {
         return json_encode($this->galleries_json_file());
     }
+    
+    public function videos_get_json_file() {
+        return json_encode($this->videos_json_file());
+    }
 
     public function panel() {
         return view('admin.panel');

@@ -17,6 +17,7 @@ class Video extends Model
         'alt',
         'priority',
         'visibility',
+        'description',
         'title',
         'is_imp',
         'cat_id'
@@ -30,5 +31,10 @@ class Video extends Model
     public function scopeImp($query)
     {
         return $query->where('is_imp', true)->where('visibility', true);
+    }
+
+    public function category()
+    {
+        $this->hasOne(Category::class);
     }
 }

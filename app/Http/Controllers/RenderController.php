@@ -53,6 +53,17 @@ class RenderController extends Controller
 
         return [CategoryJSON::collection($cats), $ids];
     }
+    
+    public function get_video_categories()
+    {
+        $cats = Category::visible()->has('videos')->orderBy('priority', 'asc')->get();
+        $ids = "";
+        foreach ($cats as $cat) {
+            $ids .= "," . $cat->id;
+        }
+
+        return [CategoryJSON::collection($cats), $ids];
+    }
 
 
     public function render_sliders()
@@ -468,6 +479,79 @@ class RenderController extends Controller
         ];
     }
 
+    
+    public function render_total_videos()
+    {
+
+        $cats = $this->get_video_categories();
+        // dd($cats);
+
+        return [
+            [
+                "BoxID" => 38888,
+                "MenuID" => 29271,
+                "BoxTitle" => "گالری فیلم",
+                "BoxDescription" => "",
+                "Priority" => 1,
+                "Height" => 280,
+                "BoxCount" => 100,
+                "MaduleID" => null,
+                "SubBoxHeight" => null,
+                "BoxCountPerRow" => 3,
+                "FormID" => null,
+                "FormReportID" => null,
+                "BoxGroupID" => 3,
+                "BoxGroupName" => "gallery",
+                "BoxPersianName" => "گالری فیلم",
+                "Pagination" => 3,
+                "SortType" => 1,
+                "Content" => null,
+                "MediaID" => null,
+                "HasProductTabs" => null,
+                "ProductSlides" => null,
+                "RowIDList" => $cats[1],
+                "BoxStyle" => "",
+                "PopupStyle" => false,
+                "BoxTemp" => null,
+                "ShowMoreLink" => null,
+                "ContainerTabs" => null,
+                "WebsiteDisplay" => true,
+                "MobileDisplay" => true,
+                "Background" => null,
+                "ParallaxStyle" => null,
+                "DisableBoxBack" => null,
+                "BackTitleColor" => null,
+                "DisableBoxBackgroundColor" => null,
+                "BoxBackgroundColor" => null,
+                "BlurEffectBack" => null,
+                "BlackEffectBack" => null,
+                "ButtonList" => [],
+                "Platform7Maduleid" => null,
+                "GroupMaduleBox" => null,
+                "IsAmazzingoffer" => false
+            ],
+            [
+                "BoxID" => 38888,
+                "Content" => [
+                    "boxID" => 38888,
+                    "isVideo" => false,
+                    "isFileGallery" => false,
+                    "model" => [
+                        "GalleryList" => null,
+                        "AlbumList" => $cats[0],
+                        "BoxCountPerRow" => 3,
+                        "SubBoxHeight" => 116,
+                        "paddingBottom" => 0,
+                        "boxID" => 38888
+                    ],
+                    "top" => 100,
+                    "Pagination" => 3,
+                    "ShowMoreLink" => null
+                ]
+            ],
+        ];
+    }
+
     public function json_file()
     {
 
@@ -492,5 +576,11 @@ class RenderController extends Controller
     {
         $galleries_section = $this->render_total_galleries();
         return ["madules" => [$galleries_section[0]], "jsonContentList" => [$galleries_section[1]]];
+    }
+    
+    public function videos_json_file()
+    {
+        $videos_section = $this->render_total_videos();
+        return ["madules" => [$videos_section[0]], "jsonContentList" => [$videos_section[1]]];
     }
 }

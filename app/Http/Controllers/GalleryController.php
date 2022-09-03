@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\GalleryJSON;
 use App\Http\Resources\SingleGalleryJSON;
 use App\models\Category;
 use App\models\Gallery;
