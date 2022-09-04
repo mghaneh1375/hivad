@@ -17,13 +17,14 @@ class GallerySeeder extends Seeder
     {
          for($i = 1; $i < 7; $i++) {
             Gallery::create([
-                "image" => "service" . $i,
+                "image" => "service" . $i . '.jpg',
                 "alt" => "sample" . $i,
                 "title" => "title" . $i,
                 "tags" => "#tag" . $i,
                 "description" => "desc" . $i,
                 "priority" => $i,
-                "is_imp" => true
+                "is_imp" => true,
+                "cat_id" => ((int)($i / 3)) + 1
             ]);
         }
     }

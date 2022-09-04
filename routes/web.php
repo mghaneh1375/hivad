@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IntroduceController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
+use App\Models\News;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +23,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('get_json_file', [HomeController::class, 'get_json_file'])->name('get_json_file');
 
-Route::get('galleries', ['as' => 'gallery', 'uses' => 'GalleryController@gallery']);
+Route::get('news-get_json_file', [HomeController::class, 'news_get_json_file'])->name('news_get_json_file');
 
-Route::post('addGallery', ['as' => 'addGallery', 'uses' => 'GalleryController@addGallery']);
+Route::get('galleries-get_json_file', [HomeController::class, 'galleries_get_json_file'])->name('galleries_get_json_file');
 
-Route::post('deleteGallery', ['as' => 'deleteGallery', 'uses' => 'GalleryController@deleteGallery']);
+Route::get('videos-get_json_file', [HomeController::class, 'videos_get_json_file'])->name('videos_get_json_file');
 
 Route::get('showGallery', ['as' => 'showGallery', 'uses' => 'GalleryController@showGallery']);
 
 Route::post('fetchGallery', ['as' => 'fetchGallery', 'uses' => 'GalleryController@fetchGallery']);
+
+Route::get('manageCategory', [CategoryController::class, 'manageCategory'])->name('manageCategory');
+
+Route::get('manageGallery', [GalleryController::class, 'manageGallery'])->name('manageGallery');
+
+Route::get('manageVideo', [VideoController::class, 'manageVideo'])->name('manageVideo');
+
+Route::get('manageNews', [NewsController::class, 'manageNews'])->name('manageNews');
+
+Route::get('editNews/{news}', [NewsController::class, 'editNews'])->name('editNews');
+
+Route::view('addNews', 'admin.News.create')->name('addNews');
 
 Route::get('manageSlideShow', [SlideController::class, 'manageSlideShow'])->name('manageSlideShow');
 
@@ -36,6 +53,15 @@ Route::post('saveSlideShow', ['as' => 'saveSlideShow', 'uses' => 'SlideControlle
 
 Route::get('panel', [HomeController::class, 'panel'])->name('panel');
 
-Route::get('/', function () {
-    return view('home');
+Route::view('/', 'home');
+Route::view('news', 'news');
+Route::get('News/{news}/{title}', function (News $news, $title) {
+    $d = date("Y-m-d H:i:s", strtotime($news->created_at));
+    return view('single-news', compact('news', 'd'));
 });
+
+Route::view('galleries', 'galleries');
+
+Route::view('videos', 'videos');
+
+Route::get('/Home/GetGalleryList', [GalleryController::class, 'list']);

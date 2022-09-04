@@ -17,7 +17,7 @@ class SliderSeeder extends Seeder
     {
         for($i = 1; $i < 6; $i++) {
             SlideBar::create([
-                "image" => "slider" . $i,
+                "image" => "slider" . $i . '.jpg',
                 "alt" => "sample" . $i,
                 "header" => "header" . $i,
                 "description" => "desc" . $i,

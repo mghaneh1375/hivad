@@ -24,7 +24,7 @@
 
                         <div class="col-xs-12">
                             @foreach($slides as $slide)
-                                <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer">
+                                <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $slide->id }}">
                                     <img src="{{URL::asset('Content/images/GalleryPictures/crop/'.$slide->image . '.jpg')}}" alt="{{ $slide->alt }}" style="width:100%; height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $slide->id }}">
@@ -77,10 +77,9 @@
                         <div class="col-xs-12" style="border: solid;">
                             
                             <div style="margin-top: 10px;">
-                                <form id="add_slide_show" action="{{route('api.addSlide')}}" method="post"
+                                <form action="{{route('api.addSlide')}}" method="post"
                                       enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                                    <input type="hidden" name="kind" value="save">
 
                                     <div class="flex flex-col center gap10" style="margin: 10px">
                                         <input type="file" name="image" required id="imgInp">
@@ -95,7 +94,7 @@
                                             
                                         <div>
                                             <label for="header">عنوان</label>
-                                            <input type="text" name="header" />
+                                            <input type="text" name="header" id="header" />
                                         </div>
                                         
                                         <div>

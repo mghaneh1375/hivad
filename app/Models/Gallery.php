@@ -10,16 +10,28 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $id
  * @property string $name
  * @property string $title
- * @property integer $category
- * @method static \Illuminate\Database\Query\Builder|\App\models\Gallery whereCategory($value)
+ * @property integer $cat_Id
+ * @method static \Illuminate\Database\Query\Builder|\App\models\Gallery whereCatId($value)
  */
 
-class Gallery extends Model {
+class Gallery extends Model
+{
 
     protected $table = 'gallery';
     public $timestamps = false;
 
-    public static function whereId($value) {
+    protected $fillable = [
+        'image',
+        'alt',
+        'priority',
+        'visibility',
+        'title',
+        'is_imp',
+        'cat_id'
+    ];
+
+    public static function whereId($value)
+    {
         return Gallery::find($value);
     }
 

@@ -17,7 +17,7 @@ class NewsSeeder extends Seeder
     {
          for($i = 1; $i < 7; $i++) {
             News::create([
-                "image" => "service" . $i,
+                "image" => "service" . $i . '.jpg',
                 "alt" => "sample" . $i,
                 "title" => "title" . $i,
                 "digest" => "digest" . $i,

@@ -122,7 +122,12 @@
             align-self: center;
             gap: 20px;
         }
-        
+
+        .editor {
+            width: calc(100% - 20px);
+            min-height: 300px;
+        }
+
         .myContainer:hover .overlay .infoBox .op {
             display: flex;
             flex-direction: row;
@@ -354,9 +359,10 @@
                                     <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                         <a href="{{route('manageIntroduce')}}" class="dropdown-item">معرفی مجموعه</a>
                                         <a href="{{route('manageSlideShow')}}" class="dropdown-item">مدیریت اسلایدبار</a>
-                                        <a href="{{route('gallery')}}" class="dropdown-item">مدیریت گالری</a>
-                                        {{-- <a href="{{route('manageArticles')}}" class="dropdown-item">مدیریت مقالات</a>
-                                        <a href="{{route('manageNews')}}" class="dropdown-item">مدیریت اخبار</a> --}}
+                                        <a href="{{route('manageGallery')}}" class="dropdown-item">مدیریت گالری</a>
+                                        {{-- <a href="{{route('manageArticles')}}" class="dropdown-item">مدیریت مقالات</a> --}}
+                                        <a href="{{route('manageNews')}}" class="dropdown-item">مدیریت اخبار</a>
+                                        <a href="{{route('manageCategory')}}" class="dropdown-item">مدیریت دسته ها</a>
                                     </div>
                                 </li>
 

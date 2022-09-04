@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('image');
             $table->string('alt')->nullable();
+            $table->unsignedInteger('cat_id');
             $table->string('tags')->nullable();
             $table->string('title')->nullable();
             $table->boolean('visibility')->default(true);
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->integer('priority');
             $table->string('description')->nullable();
             $table->timestamps();
+            $table->foreign('cat_id')->references('id')->on('category')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 

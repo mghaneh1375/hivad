@@ -57,7 +57,7 @@ class SlideController extends Controller {
     public function store(Request $request) {
         
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,jpg',
+            'image' => 'required|image',
             'priority' => 'required|int|min:1',
             'alt' => 'nullable|string|min:1',
             'header' => 'nullable|string|min:1',
@@ -71,8 +71,6 @@ class SlideController extends Controller {
         $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename));              
         $image_resize->resize(150, 150);
         $image_resize->save(public_path('Content/images/GalleryPictures/thumb/' . $filename));
-
-        $filename = str_replace('.jpg', '', $filename);
 
         SlideBar::create([
             'image' => $filename,
