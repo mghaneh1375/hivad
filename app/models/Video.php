@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +35,6 @@ class Video extends Model
 
     public function category()
     {
-        $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class, 'cat_id', 'id');
     }
 }

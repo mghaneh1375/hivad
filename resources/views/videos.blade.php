@@ -25,10 +25,58 @@
 
     <meta name="robots" content="index, follow">
     <meta name="language" content="fa">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <link href="{{ asset('assets/css/siteLayout95.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/css_underDesign.css') }}" rel="stylesheet" />
+
+
+    <style>
+        .hidden {
+            display: none !important;
+        }
+        .modal {
+            display: block;
+            position: fixed;
+            z-index: 100000;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            padding: 15px !important;
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 70%;
+            direction: rtl;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+        .gap10 {
+            gap: 10px;
+        }
+        .center {
+            align-self: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .flex {
+            display: flex;
+        }
+    </style>
 
     <script>
     
@@ -83,10 +131,37 @@
 
     @include('layouts.progress')
 
+
+   
+    <div id="playModal" class="modal hidden">
+        <div class="modal-content" style="width: 70%;">
+            <video id="myCurrentVideo" width="100%" controls>
+                
+                Your browser does not support the video tag.
+              </video> 
+            <div class="flex center gap10">
+                <input type="button" value="بازگشت" class="btn green"  style="margin-bottom: 3%; margin-left: 5px;" onclick="$('#playModal').addClass('hidden')">
+            </div>
+        </div>
+    </div>
+
 <script src="{{ asset('assets/js/siteLayout.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/isotope.pkgd.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/js_underDesign.js') }}" defer></script>
 <script src="{{ asset('assets/js/commonJS.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $(document).on("click", ".videoImg", function(){
+            var src = $(this).attr('src');
+            var base = '{{ asset('storage/videos') }}';
+            var videoFile = base + src.split(".")[0].split("/crop")[1] + ".mp4";
+            $("#myCurrentVideo").attr('src', videoFile);
+            $("#playModal").removeClass('hidden');
+        });
+
+    })
+</script>
 
 </body>
 </html>

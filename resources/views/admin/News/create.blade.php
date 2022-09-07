@@ -7,28 +7,7 @@
     </script>
     <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/decoupled-document/ckeditor.js"></script>
     <script src="{{asset('assets/js/ckeditor.js?v=2.2')}}"></script>
-
-    <style>
-
-        #myForm > div > div {
-            width: calc(100% - 20px);
-        }
-
-        #myForm > div > div:not(.editor) {
-            display: flex;
-        }
-
-        #myForm > div > div > label {
-            width: 150px;
-        }
-
-        #myForm > div > div > textarea,
-        #myForm > div > div > input,
-        #myForm > div > div > select {
-            width: calc(100% - 170px);
-        }
-
-    </style>
+    <link rel="stylesheet" href="{{asset('css/createStyle.css')}}" />
 
 @stop
 

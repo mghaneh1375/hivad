@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Config;
-use App\Models\Introduce;
+use App\models\Config;
+use App\models\Introduce;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;

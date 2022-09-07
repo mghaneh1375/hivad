@@ -7,10 +7,10 @@ use App\Http\Resources\IntroduceJSON;
 use App\Http\Resources\NewsJSON;
 use App\Http\Resources\SliderBarJSON;
 use App\Http\Resources\CategoryJSON;
-use App\Models\Config;
+use App\models\Config;
 use App\models\Gallery;
-use App\Models\Introduce;
-use App\Models\Category;
+use App\models\Introduce;
+use App\models\Category;
 use App\models\News;
 use App\models\SlideBar;
 

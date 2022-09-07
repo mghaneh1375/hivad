@@ -65,7 +65,7 @@
                     <a href='/galleries'>گالری تصاویر</a>
                 </li>
                 <li class='' data-menuID='29408'>
-                    <a class=' ' href='/vidoe-galleries' data-menuID='29408' data-isprofilemenu='False' data-temp='PageContent' data-hash='گالری-فیلم'>گالری فیلم</a>
+                    <a class=' ' href='/videos' data-menuID='29408' data-isprofilemenu='False' data-temp='PageContent' data-hash='گالری-فیلم'>گالری فیلم</a>
                 </li>
                 </ul>
             </li>

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Video;
+use App\Http\Resources\SingleGalleryJSON;
+use App\models\Category;
+use App\models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -13,28 +14,36 @@ class VideoController extends Controller
     
     public function manageVideo()
     {
-        return view('admin.video', ['videos' => Video::all(), 'categories' => Category::all()]);
+        $videos = Video::all();
+        foreach($videos as $video) {
+            $video->file = asset('storage/videos/' . $video->file);
+        }
+        return view('admin.Video.list', ['videos' => $videos, 'categories' => Category::all()]);
     }
 
     public function remove(Video $video)
     {
 
-        if (file_exists(__DIR__ . '/../../../public/Content/images/shortcutTab/' . $video->image))
-            unlink(__DIR__ . '/../../../public/Content/images/shortcutTab/' . $video->image);
+        if (file_exists(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $video->image))
+            unlink(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $video->image);
 
         if(file_exists(__DIR__ . '/../../../public/storage/videos/' . $video->file))
             unlink(__DIR__ . '/../../../public/storage/videos/' . $video->file);
 
         $video->delete();
         return response()->json(["status" => "ok"]);
+        
+    }
+
+    public function add() {
+        return view('admin.Video.create', ['categories' => Category::all()]);
     }
 
 
     public function store(Request $request)
     {
-
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,jpg',
+            'image' => 'required|image',
             'cat_id' => 'required|exists:category,id',
             'file' => 'required|file|mimes:mp4',
             'priority' => 'required|int|min:1',
@@ -45,18 +54,21 @@ class VideoController extends Controller
         ]);
 
         $image       = $request->file('image');
-        $filename    = time() . '.jpg';
+        
+        $filename    = time();
         
         $image_resize = Image::make($image->getRealPath());
-        $image_resize->save(public_path('Content/images/shortcutTab/' . $filename));
+        $img = $request->file('image')->getClientOriginalName();
+        $ext = explode('.', $img);
+        $ext = $ext[count($ext) - 1];
 
-        $filename = str_replace('.jpg', '', $filename);
+        $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename . '.' . $ext));
 
-        $video_filename = $request->file('file')->store('videos');
-        $video_filename = str_replace('videos/', '', $video_filename);
+        $video_filename = $request->file('file')->storeAs('public/videos', $filename . '.mp4');
+        $video_filename = str_replace('public/videos/', '', $video_filename);
 
         Video::create([
-            'image' => $filename,
+            'image' => $filename . '.' . $ext,
             'alt' => $request->has('alt') ? $request['alt'] : null,
             'priority' => $request['priority'],
             'title' => $request->has('title') ? $request['title'] : null,
@@ -67,6 +79,30 @@ class VideoController extends Controller
         ]);
 
         return Redirect::route('manageVideo');
+    }
+
+    public static function list(Request $request)
+    {
+        $category = Category::whereId($request->query('albumID'))->first();
+        $galleries = Video::whereCatId($category->id)->where('visibility', true)->get();
+        return json_encode(
+            [
+                "boxID" => 38888,
+                "isVideo" => false,
+                "isFileGallery" => false,
+                "model" => [
+                    "GalleryList" => SingleGalleryJSON::collection($galleries),
+                    "AlbumList" => null,
+                    "BoxCountPerRow" => 3,
+                    "SubBoxHeight" => 250,
+                    "paddingBottom" => 0,
+                    "boxID" => 38888
+                ],
+                "top" => 100,
+                "Pagination" => 3,
+                "ShowMoreLink" => null
+            ]
+        );
     }
 
 }

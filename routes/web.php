@@ -8,7 +8,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
-use App\Models\News;
+use App\models\News;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +38,11 @@ Route::get('manageCategory', [CategoryController::class, 'manageCategory'])->nam
 Route::get('manageGallery', [GalleryController::class, 'manageGallery'])->name('manageGallery');
 
 Route::get('manageVideo', [VideoController::class, 'manageVideo'])->name('manageVideo');
+
+Route::get('editVideo/{video}', [VideoController::class, 'editVideo'])->name('editVideo');
+
+Route::get('addVideo', [VideoController::class, 'add'])->name('addVideo');
+
 
 Route::get('manageNews', [NewsController::class, 'manageNews'])->name('manageNews');
 

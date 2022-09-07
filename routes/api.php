@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IntroduceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -63,3 +64,9 @@ Route::delete('removeCategory/{category?}', [CategoryController::class, 'remove'
 
 Route::post('updateCategory/{category?}', [CategoryController::class, 'update'])->name('api.updateCategory');
 
+
+Route::post('addVideo', [VideoController::class, 'store'])->name('api.addVideo');
+
+Route::delete('removeVideo/{video?}', [VideoController::class, 'remove'])->name('api.removeVideo');
+
+Route::post('updateVideo/{video?}', [VideoController::class, 'update'])->name('api.updateVideo');
