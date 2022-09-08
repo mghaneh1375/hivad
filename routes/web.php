@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IntroduceController;
 use App\Http\Controllers\NewsController;
@@ -36,6 +37,8 @@ Route::post('fetchGallery', ['as' => 'fetchGallery', 'uses' => 'GalleryControlle
 Route::get('manageCategory', [CategoryController::class, 'manageCategory'])->name('manageCategory');
 
 Route::get('manageGallery', [GalleryController::class, 'manageGallery'])->name('manageGallery');
+
+Route::get('manageConfig', [ConfigController::class, 'getConfigs'])->name('manageConfig');
 
 Route::get('manageVideo', [VideoController::class, 'manageVideo'])->name('manageVideo');
 

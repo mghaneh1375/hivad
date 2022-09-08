@@ -360,6 +360,7 @@
                                         <a href="{{route('manageIntroduce')}}" class="dropdown-item">معرفی مجموعه</a>
                                         <a href="{{route('manageSlideShow')}}" class="dropdown-item">مدیریت اسلایدبار</a>
                                         <a href="{{route('manageGallery')}}" class="dropdown-item">مدیریت گالری</a>
+                                        <a href="{{route('manageConfig')}}" class="dropdown-item">مدیریت صفحه نخست</a>
                                         {{-- <a href="{{route('manageArticles')}}" class="dropdown-item">مدیریت مقالات</a> --}}
                                         <a href="{{route('manageNews')}}" class="dropdown-item">مدیریت اخبار</a>
                                         <a href="{{route('manageCategory')}}" class="dropdown-item">مدیریت دسته ها</a>

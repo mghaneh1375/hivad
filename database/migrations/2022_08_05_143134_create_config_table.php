@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('config', function (Blueprint $table) {
             $table->increments('id');
             $table->string('about');
+            $table->boolean('show_about')->default(true);
+            $table->boolean('show_gallery')->default(true);
+            $table->boolean('show_videos')->default(true);
+            $table->boolean('show_news')->default(true);
+            $table->boolean('show_article')->default(true);
+            $table->boolean('show_insta')->default(true);
         });
     }
 

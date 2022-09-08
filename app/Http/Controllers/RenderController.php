@@ -555,13 +555,35 @@ class RenderController extends Controller
     public function json_file()
     {
 
-        $slider_section = $this->render_sliders();
-        $gallery_section = $this->render_galleries();
-        $news_section = $this->render_news();
-        $intro_section = $this->render_introduce();
+        $config = Config::first();
 
-        $modules = [$slider_section[0], $gallery_section[0], $news_section[0], $intro_section[0][0], $intro_section[0][1], $intro_section[0][2]];
-        $contents = [$slider_section[1], $gallery_section[1], $news_section[1], $intro_section[1][0], $intro_section[1][1], $intro_section[1][2]];
+        $slider_section = $this->render_sliders();
+        
+        $modules = [$slider_section[0]];
+        $contents = [$slider_section[1]];
+
+        if($config->show_gallery) {
+            $gallery_section = $this->render_galleries();
+            array_push($modules, $gallery_section[0]);
+            array_push($contents, $gallery_section[1]);
+        }
+        
+        if($config->show_news) {
+            $news_section = $this->render_news();
+            array_push($modules, $news_section[0]);
+            array_push($contents, $news_section[1]);
+        }
+
+        if($config->show_about) {
+            $intro_section = $this->render_introduce();
+            array_push($modules, $intro_section[0][0]);
+            array_push($modules, $intro_section[0][1]);
+            array_push($modules, $intro_section[0][2]);
+            
+            array_push($contents, $intro_section[1][0]);
+            array_push($contents, $intro_section[1][1]);
+            array_push($contents, $intro_section[1][2]);
+        }
 
         return ["madules" => $modules, "jsonContentList" => $contents];
     }

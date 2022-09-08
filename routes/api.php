@@ -6,6 +6,7 @@ use App\Http\Controllers\IntroduceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ConfigController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -63,3 +64,4 @@ Route::delete('removeCategory/{category?}', [CategoryController::class, 'remove'
 
 Route::post('updateCategory/{category?}', [CategoryController::class, 'update'])->name('api.updateCategory');
 
+Route::post('updateConfig', [ConfigController::class, 'save'])->name('api.updateConfig');
