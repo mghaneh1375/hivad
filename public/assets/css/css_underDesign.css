@@ -706,34 +706,35 @@ ul#footer_social {
     bottom: -60px;
     width: 100%;
     height: 66px;
-    padding: 17px 20px;
-    padding-;
-    padding-;
-    padding-;
-    padding-;
-    padding-;
+    padding: 2px 8px;
     padding-left: 0
 }
 
     ul#footer_social li {
         position: relative;
-        width: 75px;
-        float: left;
-        height: 41px
+        width: 50px;
+        float: right;
+        height: 50px
     }
 
         ul#footer_social li a {
-            /* background: url(/Content/base/dynamic/shopping742/img/92633.jpg) no-repeat; */
-            background-size: 195px;
-            height: 39px;
-            width: 39px;
+            background: url(./../images/92633.png) no-repeat;
+            background-size: 300px;
+            height: 50px;
+            width: 50px;
             position: absolute;
-            left: 0
+            left: 0;
+            cursor: pointer;
         }
 
         ul#footer_social li.s_instagram a {
+            background-position-x: 5px;
+            background-position-y: 0px;
         }
 
+        ul#footer_social li.s_whatsapp a {
+            background-position-x: -195px;
+        }
         ul#footer_social li.s_telegram a {
             background-position-x: 100%
         }
@@ -975,7 +976,7 @@ div#game_Wrapper {
 
 body[data-menuid="-1"] .resizable[data-tmplname="slideshow"] {
     padding-top: 32px;
-    margin-top: -32px
+    /* margin-top: -32px */
 }
 
     body[data-menuid="-1"] .resizable[data-tmplname="slideshow"] .frontpage-gallery {
@@ -3893,7 +3894,7 @@ div#headerContainer {
     width: 100%;
     z-index: 100;
     background: rgba(43,43,43,0.88) url(./../images/91456.jpg) right;
-    top: 32px;
+    top: 0;
     height: 60px;
 }
 
@@ -4390,6 +4391,25 @@ div#scroll_diamond > div {
     width: 445px
 }
 
+.contactInfoContainer h3, footer > div h3, .socialContainer h3 {
+    text-align: right;
+}
+
+.footer_address p {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.socialContainer {
+    height: 200px;
+}
+
+.socialContainer ul {
+    text-align: right;
+    direction: rtl !important;
+    margin-top: 20px;
+}
+
 div#serach_wrapper {
     position: absolute;
     top: -92px;
@@ -4753,7 +4773,7 @@ a.btn.btn-expand:hover:before, a.btn.btn-reduce:hover:before {
 
         div#layout-logo:after {
             content: '';
-            background: white url(./../images/92763.jpg) no-repeat;
+            background: white url(./../images/logo.png) no-repeat;
             width: 54px;
             height: 53px;
             background-size: cover;
@@ -4790,7 +4810,7 @@ a.btn.btn-expand:hover:before, a.btn.btn-reduce:hover:before {
 
         div#layout-logo:before {
             content: '';
-            background: url(./../images/92763.jpg) no-repeat;
+            background: url(./../images/logo.png) no-repeat;
             background-size: contain;
             width: 100%;
             height: 100%;
@@ -4931,7 +4951,6 @@ a.btn.btn-expand:hover:before, a.btn.btn-reduce:hover:before {
     }
 
     #headerContent #mainNavigation {
-        // width:260px !important;
         position: fixed;
         width: 265px;
         right: -264px;
@@ -4944,12 +4963,12 @@ a.btn.btn-expand:hover:before, a.btn.btn-reduce:hover:before {
         top: 0;
         z-index: 1001;
         padding-top: 128px;
-        padding-bottom: 60px
+        padding-bottom: 60px;
     }
 
         #headerContent #mainNavigation:before {
             content: '';
-            background: #ffffff url(./../images/92763.jpg) no-repeat;
+            background: #ffffff url(./../images/logo.png) no-repeat;
             background-position: center;
             background-size: 91px;
             position: absolute;

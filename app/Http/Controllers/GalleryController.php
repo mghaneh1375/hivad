@@ -31,26 +31,30 @@ class GalleryController extends RenderController
 
     public function list(Request $request)
     {
-        $category = Category::whereId($request->query('albumID'))->first();
-        $galleries = Gallery::whereCatId($category->id)->where('visibility', true)->get();
-        return json_encode(
-            [
-                "boxID" => 38888,
-                "isVideo" => false,
-                "isFileGallery" => false,
-                "model" => [
-                    "GalleryList" => SingleGalleryJSON::collection($galleries),
-                    "AlbumList" => null,
-                    "BoxCountPerRow" => 3,
-                    "SubBoxHeight" => 250,
-                    "paddingBottom" => 0,
-                    "boxID" => 38888
-                ],
-                "top" => 100,
-                "Pagination" => 3,
-                "ShowMoreLink" => null
-            ]
-        );
+        $isVideo = $request->query('isVideo');
+        if(!$isVideo) {
+            $category = Category::whereId($request->query('albumID'))->first();
+            $galleries = Gallery::whereCatId($category->id)->where('visibility', true)->get();
+            return json_encode(
+                [
+                    "boxID" => 38888,
+                    "isVideo" => false,
+                    "isFileGallery" => false,
+                    "model" => [
+                        "GalleryList" => SingleGalleryJSON::collection($galleries),
+                        "AlbumList" => null,
+                        "BoxCountPerRow" => 3,
+                        "SubBoxHeight" => 250,
+                        "paddingBottom" => 0,
+                        "boxID" => 38888
+                    ],
+                    "top" => 100,
+                    "Pagination" => 3,
+                    "ShowMoreLink" => null
+                ]
+            );
+        }
+        else return VideoController::list($request);
     }
 
     public function store(Request $request)

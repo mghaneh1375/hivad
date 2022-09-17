@@ -7,16 +7,23 @@ use App\Http\Resources\IntroduceJSON;
 use App\Http\Resources\NewsJSON;
 use App\Http\Resources\SliderBarJSON;
 use App\Http\Resources\CategoryJSON;
-use App\Models\Config;
+use App\Http\Resources\SliderCafe;
+use App\Models\Cafe;
+use App\models\Config;
 use App\models\Gallery;
-use App\Models\Introduce;
-use App\Models\Category;
+use App\models\Introduce;
+use App\models\Category;
 use App\models\News;
 use App\models\SlideBar;
+use App\models\Video;
 
 class RenderController extends Controller
 {
 
+    public function get_cafe_sliders()
+    {
+        return SliderCafe::collection(Cafe::visible()->orderBy('priority', 'asc')->get());
+    }
 
     public function get_sliders()
     {
@@ -26,6 +33,11 @@ class RenderController extends Controller
     public function get_galleries()
     {
         return GalleryJSON::collection(Gallery::imp()->orderBy('priority', 'asc')->get());
+    }
+    
+    public function get_videos()
+    {
+        return GalleryJSON::collection(Video::imp()->orderBy('priority', 'asc')->get());
     }
 
     public function get_news()
@@ -65,6 +77,210 @@ class RenderController extends Controller
         return [CategoryJSON::collection($cats), $ids];
     }
 
+    public function render_contact() {
+        return [
+            [
+                [
+                    "BoxID" => 39404,
+                    "MenuID" => 29267,
+                    "BoxTitle" => "تماس با ما",
+                    "BoxDescription" => "Contact Us",
+                    "Priority" => 1,
+                    "Width" => null,
+                    "Height" => 180,
+                    "BoxCount" => 20,
+                    "MaduleID" => null,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 2,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 1,
+                    "BoxGroupName" => "tabs",
+                    "BoxPersianName" => "ØªØ¨ Ù‡Ø§ÛŒ Ù…ÛŒØ§Ù†Ø¨Ø±",
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => "contactus",
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "Background" => null,
+                    "ParallaxStyle" => null,
+                    "DisableBoxBack" => null,
+                    "BackTitleColor" => null,
+                    "DisableBoxBackgroundColor" => null,
+                    "BoxBackgroundColor" => null,
+                    "BlurEffectBack" => null,
+                    "BlackEffectBack" => null,
+                    "ButtonList" => [],
+                    "Platform7Maduleid" => null,
+                    "GroupMaduleBox" => null,
+                    "IsAmazzingoffer" => false
+                ],
+                [
+                    "BoxID" => 39403,
+                    "MenuID" => 29267,
+                    "BoxTitle" => "نیاوران - خیابان اقدسیه - خیابان آجودانیه - باشگاه آجودانیه",
+                    "BoxDescription" => "+ 98 21  26700812, + 98 21 26700814",
+                    "Priority" => 2,
+                    "Width" => null,
+                    "Height" => 250,
+                    "BoxCount" => 1,
+                    "MaduleID" => null,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 7,
+                    "BoxGroupName" => "singleImage",
+                    "BoxPersianName" => "ØªØµÙˆÛŒØ±",
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => "paralax",
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "Background" => null,
+                    "ParallaxStyle" => null,
+                    "DisableBoxBack" => null,
+                    "BackTitleColor" => null,
+                    "DisableBoxBackgroundColor" => null,
+                    "BoxBackgroundColor" => null,
+                    "BlurEffectBack" => null,
+                    "BlackEffectBack" => null,
+                    "ButtonList" => [
+                        [
+                            "Text" => "مشاهده اطلاعات تماس",
+                            "LinkUrl" => "footer",
+                            "MenuID" => null,
+                            "TempName" => null,
+                            "IsProfileMenu" => false
+                        ]
+                    ],
+                    "Platform7Maduleid" => null,
+                    "GroupMaduleBox" => null,
+                    "IsAmazzingoffer" => false
+                ],
+                [
+                    "BoxID" => 39189,
+                    "MenuID" => 29267,
+                    "BoxTitle" => "تماس با مدیریت",
+                    "BoxDescription" => null,
+                    "Priority" => 3,
+                    "Width" => null,
+                    "Height" => null,
+                    "BoxCount" => 1,
+                    "MaduleID" => null,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => 8420,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 6,
+                    "BoxGroupName" => "form",
+                    "BoxPersianName" => "ÙØ±Ù… ÙˆØ±ÙˆØ¯ Ø§Ø·Ù„Ø§Ø¹Ø§Øª",
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => "",
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "Background" => null,
+                    "ParallaxStyle" => null,
+                    "DisableBoxBack" => null,
+                    "BackTitleColor" => null,
+                    "DisableBoxBackgroundColor" => null,
+                    "BoxBackgroundColor" => null,
+                    "BlurEffectBack" => null,
+                    "BlackEffectBack" => null,
+                    "ButtonList" => [],
+                    "Platform7Maduleid" => null,
+                    "GroupMaduleBox" => null,
+                    "IsAmazzingoffer" => false
+                ]
+            ],
+            [
+                [
+                    "BoxID" => 39404,
+                    "Content" => [
+                        "TabRepository" => [
+                            [
+                                "TabID" => 6222,
+                                "BoxID" => 39404,
+                                "LinkUrl" => "",
+                                "TempName" => null,
+                                "MenuID" => null,
+                                "Title" => "دفتر رزرواسیون تالار و رستوران",
+                                "Titr" => "شماره تماس: 22292525 داخلی 101، 102، 301",
+                                "Picture" => "1b0faf68-ea23-4607-a7a0-5a570e8e63e7",
+                                "Priority" => 0,
+                                "Icon" => null,
+                                "BaseWebsiteID" => null
+                            ]
+                        ],
+                        "boxCount" => 20,
+                        "PopupStyle" => false,
+                        "boxTitle" => "باکس تایتل",
+                        "BoxCountPerRow" => 2
+                    ]
+                ],
+                [
+                    "BoxID" => 39403,
+                    "Content" => [
+                        "boxTitle" => "نیاوران - خیابان اقدسیه - خیابان آجودانیه - باشگاه آجودانیه",
+                        "boxDescription" => "+ 98 21  26700812, + 98 21 26700814",
+                        "MediaID" => 25644
+                    ]
+                ],
+                [
+                    "BoxID" => 39189,
+                    "Content" => [
+                        "foreignTableFields" => [],
+                        "shahrs" => "<option>Ø§Ù†ØªØ®Ø§Ø¨ Ø§Ø³ØªØ§Ù†</option><option value='Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† Ø´Ø±Ù‚ÙŠ'>Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† Ø´Ø±Ù‚ÙŠ</option><option value='Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† ØºØ±Ø¨ÙŠ'>Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† ØºØ±Ø¨ÙŠ</option><option value='Ø§Ø±Ø¯Ø¨ÙŠÙ„'>Ø§Ø±Ø¯Ø¨ÙŠÙ„</option><option value='Ø§ØµÙÙ‡Ø§Ù†'>Ø§ØµÙÙ‡Ø§Ù†</option><option value='Ø§Ù„Ø¨Ø±Ø²'>Ø§Ù„Ø¨Ø±Ø²</option><option value='Ø§ÙŠÙ„Ø§Ù…'>Ø§ÙŠÙ„Ø§Ù…</option><option value='Ø¨ÙˆØ´Ù‡Ø±'>Ø¨ÙˆØ´Ù‡Ø±</option><option value='ØªÙ‡Ø±Ø§Ù†'>ØªÙ‡Ø±Ø§Ù†</option><option value='Ú†Ù‡Ø§Ø±Ù…Ø­Ø§Ù„ ÙˆØ¨Ø®ØªÙŠØ§Ø±ÙŠ'>Ú†Ù‡Ø§Ø±Ù…Ø­Ø§Ù„ ÙˆØ¨Ø®ØªÙŠØ§Ø±ÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø¬Ù†ÙˆØ¨ÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø¬Ù†ÙˆØ¨ÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø±Ø¶ÙˆÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø±Ø¶ÙˆÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø´Ù…Ø§Ù„ÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø´Ù…Ø§Ù„ÙŠ</option><option value='Ø®ÙˆØ²Ø³ØªØ§Ù†'>Ø®ÙˆØ²Ø³ØªØ§Ù†</option><option value='Ø²Ù†Ø¬Ø§Ù†'>Ø²Ù†Ø¬Ø§Ù†</option><option value='Ø³Ù…Ù†Ø§Ù†'>Ø³Ù…Ù†Ø§Ù†</option><option value='Ø³ÙŠØ³ØªØ§Ù† ÙˆØ¨Ù„ÙˆÚ†Ø³ØªØ§Ù†'>Ø³ÙŠØ³ØªØ§Ù† ÙˆØ¨Ù„ÙˆÚ†Ø³ØªØ§Ù†</option><option value='ÙØ§Ø±Ø³'>ÙØ§Ø±Ø³</option><option value='Ù‚Ø²ÙˆÙŠÙ†'>Ù‚Ø²ÙˆÙŠÙ†</option><option value='Ù‚Ù…'>Ù‚Ù…</option><option value='ÙƒØ±Ø¯Ø³ØªØ§Ù†'>ÙƒØ±Ø¯Ø³ØªØ§Ù†</option><option value='ÙƒØ±Ù…Ø§Ù†'>ÙƒØ±Ù…Ø§Ù†</option><option value='ÙƒØ±Ù…Ø§Ù†Ø´Ø§Ù‡'>ÙƒØ±Ù…Ø§Ù†Ø´Ø§Ù‡</option><option value='ÙƒÙ‡Ú¯ÙŠÙ„ÙˆÙŠÙ‡ ÙˆØ¨ÙˆÙŠØ±Ø§Ø­Ù…Ø¯'>ÙƒÙ‡Ú¯ÙŠÙ„ÙˆÙŠÙ‡ ÙˆØ¨ÙˆÙŠØ±Ø§Ø­Ù…Ø¯</option><option value='Ú¯Ù„Ø³ØªØ§Ù†'>Ú¯Ù„Ø³ØªØ§Ù†</option><option value='Ú¯ÙŠÙ„Ø§Ù†'>Ú¯ÙŠÙ„Ø§Ù†</option><option value='Ù„Ø±Ø³ØªØ§Ù†'>Ù„Ø±Ø³ØªØ§Ù†</option><option value='Ù…Ø§Ø²Ù†Ø¯Ø±Ø§Ù†'>Ù…Ø§Ø²Ù†Ø¯Ø±Ø§Ù†</option><option value='Ù…Ø±ÙƒØ²ÙŠ'>Ù…Ø±ÙƒØ²ÙŠ</option><option value='Ù‡Ø±Ù…Ø²Ú¯Ø§Ù†'>Ù‡Ø±Ù…Ø²Ú¯Ø§Ù†</option><option value='Ù‡Ù…Ø¯Ø§Ù†'>Ù‡Ù…Ø¯Ø§Ù†</option><option value='ÙŠØ²Ø¯'>ÙŠØ²Ø¯</option>",
+                        "formDynamicOptionDataList" => [],
+                        "formBiulderData" => "{\"fields\":[{\"label\":\"نام و نام خانوادگی\",\"field_type\":\"Ù…ØªÙ†\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"name\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"تلفن همراه\",\"field_type\":\"Ø¹Ø¯Ø¯\",\"required\":true,\"isPhonNumber\":true,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":null,\"description\":\"\",\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"phone\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"آدرس الکترونیک\",\"field_type\":\"Ø¢Ø¯Ø±Ø³ Ø§Ù„Ú©ØªØ±ÙˆÙ†ÛŒÚ©\",\"required\":false,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":false,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":null,\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"mail\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"موضوع پیام\",\"field_type\":\"Ù…ØªÙ†\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"title\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"متن پیام\",\"field_type\":\"Ù¾Ø§Ø±Ø§Ú¯Ø±Ø§Ù\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"msg\",\"FormID\":null,\"foreignTableFields\":null}]}",
+                        "CaptchaLength" => null,
+                        "FormName" => "تماس با ما",
+                        "IsEditable" => false,
+                        "RegistrationRequired" => false,
+                        "ISClubMember" => false,
+                        "Multiplerowperuser" => false,
+                        "IsOnlinePayment" => false,
+                        "IsOnlineOrder" => false,
+                        "BottonText" => "ایجاد پیام",
+                        "formDataList" => null,
+                        "editedLogID" => null,
+                        "editedTrackingCode" => "-1",
+                        "isAuthenticated" => false,
+                        "userGroupDiscount" => 0,
+                        "totalPrice" => 0
+                    ]
+                ]
+            ]
+        ];
+    }
 
     public function render_sliders()
     {
@@ -174,6 +390,66 @@ class RenderController extends Controller
                 "BoxID" => 38865,
                 "Content" => [
                     "TabRepository" => $galleries == null ? $this->get_galleries() : $galleries,
+                    "boxCount" => 9,
+                    "PopupStyle" => false,
+                    "boxTitle" => "باکس تایتل 2",
+                    "BoxCountPerRow" => 3
+                ]
+            ],
+        ];
+    }
+    
+    public function render_videos()
+    {
+        return [
+            [
+                "BoxID" => 38865,
+                "MenuID" => -1,
+                "BoxTitle" => "آخرین ویدیوها",
+                "BoxDescription" => null,
+                "Priority" => 2,
+                "Width" => null,
+                "Height" => 180,
+                "BoxCount" => 9,
+                "MaduleID" => null,
+                "SubBoxHeight" => null,
+                "BoxCountPerRow" => 3,
+                "FormID" => null,
+                "FormReportID" => null,
+                "BoxGroupID" => 1,
+                "BoxGroupName" => "tabs",
+                "BoxPersianName" => "تب ها",
+                "Pagination" => 2,
+                "SortType" => 1,
+                "Content" => null,
+                "MediaID" => null,
+                "HasProductTabs" => null,
+                "ProductSlides" => null,
+                "RowIDList" => null,
+                "BoxStyle" => "services",
+                "PopupStyle" => false,
+                "BoxTemp" => null,
+                "ShowMoreLink" => null,
+                "ContainerTabs" => null,
+                "WebsiteDisplay" => true,
+                "MobileDisplay" => true,
+                "Background" => null,
+                "ParallaxStyle" => null,
+                "DisableBoxBack" => null,
+                "BackTitleColor" => null,
+                "DisableBoxBackgroundColor" => null,
+                "BoxBackgroundColor" => null,
+                "BlurEffectBack" => null,
+                "BlackEffectBack" => null,
+                "ButtonList" => [],
+                "Platform7Maduleid" => null,
+                "GroupMaduleBox" => null,
+                "IsAmazzingoffer" => false
+            ],
+            [
+                "BoxID" => 38865,
+                "Content" => [
+                    "TabRepository" => $this->get_videos(),
                     "boxCount" => 9,
                     "PopupStyle" => false,
                     "boxTitle" => "باکس تایتل 2",
@@ -479,6 +755,134 @@ class RenderController extends Controller
         ];
     }
 
+    public function render_about_cafe()
+    {
+        return
+            [
+                [
+                    [
+                    "BoxID" => 39691,
+                    "MenuID" => 29412,
+                    "BoxTitle" => "",
+                    "BoxDescription" => null,
+                    "Priority" => 1,
+                    "Width" => null,
+                    "Height" => 380,
+                    "BoxCount" => 1,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 11,
+                    "BoxGroupName" => "ContainerTabs",
+                    "BoxPersianName" => "ØªØ¨ Ù‡Ø§ÛŒ Ø­Ø§ÙˆÛŒ Ø§Ø·Ù„Ø§Ø¹Ø§Øª",
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => "tabServices",
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => [
+                        [
+                            "TabID" => 1777,
+                            "Title" => "...",
+                            "BoxIDList" => "39692.39693.41615.",
+                            "Picture" => null
+                        ]
+                    ],
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "ButtonList" => []
+                ],
+                [
+                    "BoxID" => 39692,
+                    "MenuID" => 29412,
+                    "BoxTitle" => "معرفی کافی شاپ",
+                    "BoxDescription" => null,
+                    "Priority" => 2,
+                    "Width" => 50,
+                    "Height" => 122,
+                    "BoxCount" => 1,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 5,
+                    "BoxGroupName" => "content",
+                    "BoxPersianName" => "Ù…Ø­ØªÙˆØ§ÛŒ Ù…ØªÙ†ÛŒ",
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => "",
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "ButtonList" => []
+                ],
+                [
+                    "BoxID" => 39693,
+                    "MenuID" => 29412,
+                    "BoxTitle" => "",
+                    "BoxDescription" => null,
+                    "Priority" => 3,
+                    "Width" => 49,
+                    "Height" => 252,
+                    "BoxCount" => 1,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 2,
+                    "BoxGroupName" => "slideshow",
+                    "BoxPersianName" => "Ø§Ø³Ù„Ø§ÛŒØ¯ Ø´Ùˆ ØªØµØ§ÙˆÛŒØ±",
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => "10222",
+                    "BoxStyle" => null,
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "ButtonList" => []
+                ]
+            ],
+            [
+                [
+                    "BoxID" => 39691,
+                    "Content" => null
+                ],
+                [
+                    "BoxID" => 39692,
+                    "Content" => '<p style="font-size: 16px">' . Config::first()->cafe . '</p>'
+                ],
+                [
+                    "BoxID" => 39693,
+                    "Content" => [
+                        "SlideList" => $this->get_cafe_sliders(),
+                        "PopupStyle" => false
+                    ]
+                ]
+            ]
+        ];
+    }
     
     public function render_total_videos()
     {
@@ -568,6 +972,12 @@ class RenderController extends Controller
             array_push($contents, $gallery_section[1]);
         }
         
+        if($config->show_videos) {
+            $video_section = $this->render_videos();
+            array_push($modules, $video_section[0]);
+            array_push($contents, $video_section[1]);
+        }
+        
         if($config->show_news) {
             $news_section = $this->render_news();
             array_push($modules, $news_section[0]);
@@ -594,6 +1004,51 @@ class RenderController extends Controller
         return ["madules" => [$news_section[0]], "jsonContentList" => [$news_section[1]]];
     }
 
+    public function render_people() {
+        return [
+            [
+                [
+                    "BoxID" => 39690,
+                    "MenuID" => 29412,
+                    "BoxTitle" => "",
+                    "BoxDescription" => null,
+                    "Priority" => 5,
+                    "Width" => null,
+                    "Height" => null,
+                    "BoxCount" => 1,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 15,
+                    "BoxGroupName" => "HtmlCode",
+                    "BoxPersianName" => "Ú©Ø¯ html",
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => null,
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "ButtonList" => []
+                ]
+            ],
+            [
+                [
+                    "BoxID" => 39690,
+                    "Content" => "<section data-updatecontent=\"true\" data-formid=\"null\" data-pagination=\"2\" data-href=\"/Home/GetProductGroupManager?boxID=38865&amp;boxCount=9&amp;lazyLoad=true\" data-boxid=\"38865\" data-boxstyle=\"services\" data-popupstyle=\"false\" data-boxcount=\"9\" data-boxtemp=\"null\" data-tmplname=\"tabs\" class=\"resizable ui-state-active animated\" ><h4>افراد متخصص</h4></section>"
+                ]
+            ]
+        ];
+    }
+
     public function galleries_json_file()
     {
         $galleries_section = $this->render_total_galleries();
@@ -604,5 +1059,20 @@ class RenderController extends Controller
     {
         $videos_section = $this->render_total_videos();
         return ["madules" => [$videos_section[0]], "jsonContentList" => [$videos_section[1]]];
+    }
+
+    public function contact_json_file() {
+        $contact_section = $this->render_contact();
+        return ["madules" => $contact_section[0], "jsonContentList" => $contact_section[1]];
+    }
+    
+    public function about_cafe_json_file() {
+        $cafe_section = $this->render_about_cafe();
+        return ["madules" => $cafe_section[0], "jsonContentList" => $cafe_section[1]];
+    }
+    
+    public function people_json_file() {
+        $cafe_section = $this->render_people();
+        return ["madules" => $cafe_section[0], "jsonContentList" => $cafe_section[1]];
     }
 }

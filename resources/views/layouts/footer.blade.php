@@ -5,25 +5,23 @@
                     <div>
                         <div class="contactInfoContainer">
                         <h3>راه های ارتباطی با ما</h3>
-                        <h4>Contact Us</h4>
                         <div class="footer_address">
                             {{-- <img src="/Content/base/dynamic/shopping742/img/92634.jpg"> --}}
-                            <p>نیاوران - خیابان اقدسیه - خیابان آجودانیه - باشگاه آجودانیه</p><p>Ajodanieh Club,Ajodanieh St , Aghdasieh St, Niavaran, Tehran, Iran</p>
+                            <p>نیاوران - خیابان اقدسیه - خیابان آجودانیه - باشگاه آجودانیه</p>
                         </div>
 
                         <ul id="contactInfo">
-                            <li>+ 98 21  22293619, + 98 21 22295395, +98 21 22292525 </li>
-                            <li>+ 95 21 26111728 </li>
+                            <li>+ 98 21  26700812, + 98 21 26700814 </li>
                             <li>info@ajodanieh.com</li>
                         </ul>
                         <ul id="footer_social">
-                            <li class="s_telegram"><a></a></li><li class="s_linkedin"><a></a></li>
-                            <li class="s_instagram"><a href="http://instagram.com/ajoudanieh"></a></li>
+                            {{-- <li class="s_telegram"><a></a></li> --}}
+                            <li class="s_whatsapp"><a target="_blank" href="https://api.whatsapp.com/send?phone=982126700812"></a></li>
+                            <li class="s_instagram"><a target="_blank" href="https://www.instagram.com/hivadcenter/"></a></li>
                         </ul>
                     </div>
                     <div class="socialContainer">
                         <h3>لینک های مرتبط</h3>
-                        <h4>Related Links</h4>
 
                         <ul id="RelatedLinks">
                             <li><a href="https://bmi.ir/">بانک ملی ایران</a></li>

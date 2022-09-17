@@ -68,245 +68,272 @@
         <script src="{{URL::asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
         <script src="{{URL::asset('js/jquery.min.js')}}"></script>
 
-        
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        .column {
-            padding: 5px;
-            height: 200px;
-            max-height: 300px;
-
-        }
-
-        /* Clearfix (clear floats) */
-        .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-        .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #008CBA;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            -webkit-transform: scale(0);
-            -ms-transform: scale(0);
-            transform: scale(0);
-            -webkit-transition: .3s ease;
-            transition: .3s ease;
-            display: flex;
-            justify-content: center;
-        }
-
-        .myContainer:hover .overlay .infoBox {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-            overflow: auto;
-            width: 100%;
-            padding: 5px;
-        }
-        
-        .myContainer:hover .overlay .opBox {
-            display: flex;
-            flex-direction: row;
-            align-self: center;
-            gap: 20px;
-        }
-
-        .editor {
-            width: calc(100% - 20px);
-            min-height: 300px;
-        }
-
-        .myContainer:hover .overlay .infoBox .op {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 15px;
-        }
-
-        .myContainer:hover .overlay .infoBox label {
-            display: inline-block;
-            width: 75px;
-        }
-        
-        .myContainer:hover .overlay .infoBox input,
-        .myContainer:hover .overlay .infoBox select,
-        .myContainer:hover .overlay .infoBox textarea {
-            display: inline-block;
-            width: calc(100% - 110px);
-        }
-
-        .myContainer:hover .overlay p {
-            direction: rtl;
-            color: white;
-            font-size: 16px;
-        }
-
-        .myContainer:hover .overlay .remove {
-            color: white; 
-            background-color: rgb(153, 51, 51);
-        }
-
-        .myContainer:hover .overlay {
-            -webkit-transform: scale(1);
-            -ms-transform: scale(1);
-            transform: scale(1);
-        }
-
-        .text {
-            color: white;
-            font-size: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .flex-col {
-            flex-direction: column;
-        }
-
-        .center {
-            align-self: center;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .gap10 {
-            gap: 10px;
-        }
-
-        .container {
-            position: relative;
-        }
-
-        .modal {
-            display: block; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        /* Modal Content */
-        .modal-content {
-            padding: 15px !important;
-            position: relative;
-            background-color: #fefefe;
-            margin: auto;
-            padding: 0;
-            border: 1px solid #888;
-            width: 30%;
-            direction: rtl;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-            -webkit-animation-name: animatetop;
-            -webkit-animation-duration: 0.4s;
-            animation-name: animatetop;
-            animation-duration: 0.4s
-        }
-
-        @-webkit-keyframes animatetop {
-            from {top:-300px; opacity:0}
-            to {top:0; opacity:1}
-        }
-
-        @keyframes animatetop {
-            from {top:-300px; opacity:0}
-            to {top:0; opacity:1}
-        }
-        .cke_chrome {
-            margin-top: 20px;
-            border: none !important;
-        }
-    </style>
-
-
+            
         <style>
+            * {
+                box-sizing: border-box;
+            }
 
-            .alarm1 {
-                margin: 6px;
+            .column {
                 padding: 5px;
-                font-size: 0.6em;
-                border-radius: 100%;
-                border: 1px solid red;
-                background-color: red;
-                color: white;
+                height: 200px;
+                max-height: 300px;
+
             }
 
-            .messages-scrollbar {
-                height: auto !important;
+            /* Clearfix (clear floats) */
+            .row::after {
+                content: "";
+                clear: both;
+                display: table;
             }
 
-            .alarm2 {
-                margin: 6px;
-                padding: 5px;
-                font-size: 0.6em;
-                border-radius: 100%;
-                border: 1px solid #ff7c3e;
-                background-color: #ff7c3e;
-                color: white;
-            }
-
-            .dropdown-item {
-                text-align: right;
-            }
-
-            .main-sparkline8-hd {
-                direction: rtl;
-            }
-
-            .hidden {
-                display: none !important;
-            }
-
-            .nav-item {
-                margin: 10px;
-            }
-
-            .calendar > table {
+            .overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: #008CBA;
+                overflow: hidden;
                 width: 100%;
+                height: 100%;
+                -webkit-transform: scale(0);
+                -ms-transform: scale(0);
+                transform: scale(0);
+                -webkit-transition: .3s ease;
+                transition: .3s ease;
+                display: flex;
+                justify-content: center;
             }
 
-            .nav-link {
-                height: 28px;
+            .myContainer:hover .overlay .infoBox {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+                overflow: auto;
+                width: 100%;
+                padding: 5px;
+            }
+            
+            .myContainer:hover .overlay .opBox {
+                display: flex;
+                flex-direction: row;
+                align-self: center;
+                gap: 20px;
             }
 
-            .fixed-table-body {
-                direction: ltr !important;
+            .editor {
+                width: calc(100% - 20px);
+                min-height: 300px;
             }
 
-
-            .col-md-7, .col-md-5, .col-md-6, .col-md-4, .col-lg-2, .col-lg-10, .col-xs-4, .col-xs-8, .col-xs-6, .col-md-3, .col-lg-4, .col-xs-3 {
-                float: right !important;
+            .myContainer:hover .overlay .infoBox .op {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 15px;
             }
 
-            div, center {
+            .myContainer:hover .overlay .infoBox label {
+                display: inline-block;
+                width: 75px;
+            }
+            
+            .myContainer:hover .overlay .infoBox input,
+            .myContainer:hover .overlay .infoBox select,
+            .myContainer:hover .overlay .infoBox textarea {
+                display: inline-block;
+                width: calc(100% - 110px);
+            }
+
+            .myContainer:hover .overlay p {
                 direction: rtl;
+                color: white;
+                font-size: 16px;
             }
+
+            .myContainer:hover .overlay .remove {
+                color: white; 
+                background-color: rgb(153, 51, 51);
+            }
+
+            .myContainer:hover .overlay {
+                -webkit-transform: scale(1);
+                -ms-transform: scale(1);
+                transform: scale(1);
+            }
+
+            .text {
+                color: white;
+                font-size: 20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+
+            .flex {
+                display: flex;
+            }
+
+            .flex-col {
+                flex-direction: column;
+            }
+
+            .center {
+                align-self: center;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .gap10 {
+                gap: 10px;
+            }
+
+            .container {
+                position: relative;
+            }
+
+            .modal {
+                display: block; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                padding: 15px !important;
+                position: relative;
+                background-color: #fefefe;
+                margin: auto;
+                padding: 0;
+                border: 1px solid #888;
+                width: 30%;
+                direction: rtl;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+                -webkit-animation-name: animatetop;
+                -webkit-animation-duration: 0.4s;
+                animation-name: animatetop;
+                animation-duration: 0.4s
+            }
+
+            @-webkit-keyframes animatetop {
+                from {top:-300px; opacity:0}
+                to {top:0; opacity:1}
+            }
+
+            @keyframes animatetop {
+                from {top:-300px; opacity:0}
+                to {top:0; opacity:1}
+            }
+            .cke_chrome {
+                margin-top: 20px;
+                border: none !important;
+            }
+            
+                .alarm1 {
+                    margin: 6px;
+                    padding: 5px;
+                    font-size: 0.6em;
+                    border-radius: 100%;
+                    border: 1px solid red;
+                    background-color: red;
+                    color: white;
+                }
+
+                .messages-scrollbar {
+                    height: auto !important;
+                }
+
+                .alarm2 {
+                    margin: 6px;
+                    padding: 5px;
+                    font-size: 0.6em;
+                    border-radius: 100%;
+                    border: 1px solid #ff7c3e;
+                    background-color: #ff7c3e;
+                    color: white;
+                }
+
+                .dropdown-item {
+                    text-align: right;
+                }
+
+                .main-sparkline8-hd {
+                    direction: rtl;
+                }
+
+                .hidden {
+                    display: none !important;
+                }
+
+                .nav-item {
+                    margin: 10px;
+                }
+
+                .calendar > table {
+                    width: 100%;
+                }
+
+                .nav-link {
+                    height: 28px;
+                }
+
+                .fixed-table-body {
+                    direction: ltr !important;
+                }
+
+
+                .col-md-7, .col-md-5, .col-md-6, .col-md-4, .col-lg-2, .col-lg-10, .col-xs-4, .col-xs-8, .col-xs-6, .col-md-3, .col-lg-4, .col-xs-3 {
+                    float: right !important;
+                }
+
+                div, center {
+                    direction: rtl;
+                }
+
+                th, td {
+                    padding: 10px;
+                    min-width: 130px;
+                    text-align: center;
+                }
+
+                table {
+                    width: 100%;
+                }
+
+                .newCounter {
+                    background-color: red;
+                    color: white;
+                    height: 25px;
+                    border-radius: 50%;
+                    width: 25px;
+                    text-align: center;
+                    display: flex;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 13px;
+                }
+
+                .newCounterContainer {
+                    display: flex; 
+                    justify-content: space-between; 
+                    padding-right: 0; 
+                    padding-left: 0;
+                }
         </style>
 
         <script>
@@ -358,12 +385,37 @@
                                 <li class="nav-item"><a data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i></i> <span class="mini-dn">تنظیمات سیستمی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                     <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                         <a href="{{route('manageIntroduce')}}" class="dropdown-item">معرفی مجموعه</a>
+                                        <a href="{{route('manageCafe')}}" class="dropdown-item">معرفی کافه</a>
                                         <a href="{{route('manageSlideShow')}}" class="dropdown-item">مدیریت اسلایدبار</a>
                                         <a href="{{route('manageGallery')}}" class="dropdown-item">مدیریت گالری</a>
                                         <a href="{{route('manageConfig')}}" class="dropdown-item">مدیریت صفحه نخست</a>
+                                        <a href="{{route('manageVideo')}}" class="dropdown-item">مدیریت ویدیوها</a>
+                                        <a href="{{route('managePeople')}}" class="dropdown-item">مدیریت افراد متخصص</a>
                                         {{-- <a href="{{route('manageArticles')}}" class="dropdown-item">مدیریت مقالات</a> --}}
                                         <a href="{{route('manageNews')}}" class="dropdown-item">مدیریت اخبار</a>
                                         <a href="{{route('manageCategory')}}" class="dropdown-item">مدیریت دسته ها</a>
+                                    </div>
+                                </li>
+
+                                <?php
+                                    $unseenMsgCount = \App\Models\Msg::unSeen()->count();
+                                ?>
+
+                                <li class="nav-item">
+                                    <a class={{ $unseenMsgCount > 0 ? "nav-link dropdown-toggle newCounterContainer" : "nav-link dropdown-toggle" }} data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <i></i> 
+                                        <span class="mini-dn">مدیریت پیام ها</span>
+                                        @if($unseenMsgCount > 0)
+                                            <span class="newCounter">{{ $unseenMsgCount }}</span>
+                                        @endif
+                                        <span class="indicator-right-menu mini-dn">
+                                            <i class="fa indicator-mn fa-angle-left"></i>
+                                        </span>
+                                    </a>
+
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('msgs', ['seen' => 'false'])}}" class="dropdown-item">پیام های خوانده نشده</a>
+                                        <a href="{{route('msgs')}}" class="dropdown-item">کل پیام ها</a>
                                     </div>
                                 </li>
 

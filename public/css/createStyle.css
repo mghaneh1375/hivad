@@ -1,0 +1,17 @@
+#myForm > div > div {
+    width: calc(100% - 20px);
+}
+
+#myForm > div > div:not(.editor) {
+    display: flex;
+}
+
+#myForm > div > div > label {
+    width: 150px;
+}
+
+#myForm > div > div > textarea,
+#myForm > div > div > input,
+#myForm > div > div > select {
+    width: calc(100% - 170px);
+}

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Msg;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends RenderController {
 
@@ -15,12 +17,24 @@ class HomeController extends RenderController {
         return json_encode($this->news_json_file());
     }
 
+    public function cafe_get_json_file() {
+        return json_encode($this->about_cafe_json_file());
+    }
+    
+    public function people_get_json_file() {
+        return json_encode($this->people_json_file());
+    }
+
     public function galleries_get_json_file() {
         return json_encode($this->galleries_json_file());
     }
     
     public function videos_get_json_file() {
         return json_encode($this->videos_json_file());
+    }
+
+    public function contact_get_json_file() {
+        return json_encode($this->contact_json_file());
     }
 
     public function panel() {
@@ -74,14 +88,6 @@ class HomeController extends RenderController {
     //     return view('login', ['msg' => '']);
     // }
 
-    // public function getCities() {
-
-    //     if(myPostIsset(["stateId"])) {
-    //         echo json_encode(City::whereStateId(makeValidInput($_POST["stateId"]))->get());
-    //     }
-
-    // }
-
     // public function doChangePass() {
 
     //     if(isset($_POST["oldPass"]) && isset($_POST["newPass"]) &&
@@ -124,17 +130,46 @@ class HomeController extends RenderController {
     //     return view('changePass');
     // }
 
-    // public function managers() {
-    //     return view('managers');
-    // }
+    public function submitForm(Request $request) {
 
-    // public function home() {
+        $formID = $request->query('formID');
+        if($formID == 8420) {
+            $request->validate([
+                'filedValue_name' => 'required|string|min:2',
+                'filedValue_mail' => 'nullable|email',
+                'filedValue_phone' => 'required|regex:/(09)[0-9]{9}/',
+                'filedValue_title' => 'required|string|min:2',
+                'filedValue_msg' => 'required|string|min:2'
+            ]);
 
-    //     $gallery = Gallery::all()->take(4);
-    //     foreach ($gallery as $g) {
-    //         $g->category = Category::whereId($g->category)->name;
-    //     }
-    //     return view('home2', ['gallery' => $gallery]);
-    // }
+            $msg = new Msg();
+            $msg->name = $request['filedValue_name'];
+            $msg->mail = $request['filedValue_mail'];
+            $msg->phone = $request['filedValue_phone'];
+            $msg->title = $request['filedValue_title'];
+            $msg->msg = $request['filedValue_msg'];
+
+            $msg->save();
+            return response()->json(['status' => 'ok', 'sunccess' => true, 'logID' => 1, 'message' => 'فرم شما با موفقیت ثبت گردید.']);
+        }
+    }
+
+    public function msgs(Request $request) {
+        
+        $seen = $request->query('seen');
+        if($seen != null && $seen == 'false')
+            $msgs = Msg::unSeen()->orderBy('id', 'desc')->get();
+        else
+            $msgs = Msg::orderBy('id', 'desc')->get();
+
+        DB::update('update msg set seen = true where seen = false');
+
+        return view('admin.msgs', ['msgs' => $msgs]);
+    }
+
+    public function removeMsg(Msg $msg) {
+        $msg->delete();
+        return response()->json(['status' => 'ok']);
+    }
 
 }

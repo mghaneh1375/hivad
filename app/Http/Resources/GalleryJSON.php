@@ -17,12 +17,12 @@ class GalleryJSON extends JsonResource
         return [
             "TabID" => 5959 + $this->id,
             "BoxID" => 38865,
-            "LinkUrl" => "",
+            "LinkUrl" => $this->file != null ? "/videos" : '',
             "TempName" => "PageContent",
             "MenuID" => 29263 + $this->id,
             "Title" => $this->title,
             "Titr" => $this->tags,
-            "Picture" => $this->image,
+            "Picture" => asset('Content/images/GalleryPictures/crop/' . $this->image),
             "Priority" => $this->priority,
             "Icon" => null,
         ];
