@@ -19,7 +19,7 @@ class ScheduleController extends Controller
     public function index(Request $request)
     {
         return view('admin.Schedule.list', [
-            'days' => AdminScheduleResource::collection(Schedule::open())->toArray($request)
+            'days' => AdminScheduleResource::collection(Schedule::all())->toArray($request),
         ]);
     }
 
@@ -32,7 +32,7 @@ class ScheduleController extends Controller
     public function show(Request $request)
     {
         return view('workTimes', [
-            'days' => ScheduleResource::collection(Schedule::all())->toArray($request),
+            'days' => ScheduleResource::collection(Schedule::open()->get())->toArray($request),
             'can_booking' => Config::first()->online_booking
         ]);
     }

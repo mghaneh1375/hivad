@@ -14,6 +14,7 @@ use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\PeopleWorkTimeController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\UserAdviceRequestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -130,3 +131,12 @@ Route::post('advice/question/{field}/update', [AdviceFormController::class, 'upd
 Route::delete('advice/question/{field}/destroy', [AdviceFormController::class, 'destroy'])->name('api.advice.question.destroy');
 
 Route::delete('advice/forms/{form}/destroy', [AdviceFormController::class, 'destroy'])->name('api.advice.forms.destroy');
+
+
+Route::post('submitTimeRequest', [UserAdviceRequestController::class, 'store'])->name('api.submitTimeRequest');
+
+Route::delete('user_advice_requests/{user_advice_request}/destroy', [UserAdviceRequestController::class, 'destroy'])->name('api.user_advice_requests');
+
+Route::post('user_advice_requests/update', [UserAdviceRequestController::class, 'update'])->name('api.user_advice_requests.update');
+
+

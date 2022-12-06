@@ -198,6 +198,15 @@
                 position: relative;
             }
 
+            .mCSB_container {
+                overflow: scroll !important;
+                transform: rotateX(180deg) !important;
+            }
+
+            #mainContainer {
+                transform: rotateX(180deg) !important;
+            }
+
             .modal {
                 display: block; /* Hidden by default */
                 position: fixed; /* Stay in place */
@@ -416,7 +425,8 @@
                                     </a>
                                     <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                         <a href="{{route('schedule.index')}}" class="dropdown-item">مدیریت برنامه هفتگی</a>
-                                        <a href="{{route('survey.forms', ['seen' => 'false'])}}" class="dropdown-item">مدیریت درخواست ها</a>
+                                        <a href="{{route('user_advice_requests', ['seen' => 'false'])}}" class="dropdown-item">مدیریت درخواست های دیده نشده</a>
+                                        <a href="{{route('user_advice_requests')}}" class="dropdown-item">مدیریت کل درخواست ها</a>
                                     </div>
                                 </li>
 

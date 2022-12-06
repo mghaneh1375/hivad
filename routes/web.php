@@ -13,6 +13,7 @@ use App\Http\Controllers\PeopleWorkTimeController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\UserAdviceRequestController;
 use App\Http\Controllers\VideoController;
 use App\Http\Resources\PeopleResource;
 use Illuminate\Support\Facades\Route;
@@ -115,6 +116,9 @@ Route::get('manageSlideShow', [SlideController::class, 'manageSlideShow'])->name
 Route::get('manageIntroduce', [IntroduceController::class, 'manageIntroduce'])->name('manageIntroduce');
 
 Route::post('saveSlideShow', ['as' => 'saveSlideShow', 'uses' => 'SlideController@saveSlideShow']);
+
+
+Route::get('user_advice_requests', [UserAdviceRequestController::class, 'index'])->name('user_advice_requests');
 
 
 Route::get('msgs', [HomeController::class, 'msgs'])->name('msgs');

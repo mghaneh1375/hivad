@@ -30,6 +30,54 @@
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/css_underDesign.css') }}" rel="stylesheet" />
 
+    
+    <style>
+        .hidden {
+            display: none !important;
+        }
+        .modal {
+            display: block;
+            position: fixed;
+            z-index: 100000;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            padding: 15px !important;
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 70%;
+            direction: rtl;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+        .gap10 {
+            gap: 10px;
+        }
+        .center {
+            align-self: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .flex {
+            display: flex;
+        }
+    </style>
+
+
     <script>
     
         var dynamicFields = {
@@ -83,7 +131,7 @@
                                             @endforeach
                                             
                                             @if($can_booking)
-                                                <button>درخواست مشاوره</button>
+                                                <button onclick="request({{ json_encode($people['times']) }}, {{ json_encode($people['ids']) }})">درخواست مشاوره</button>
                                             @endif
                                         </center>
                                     @endforeach
@@ -104,6 +152,96 @@
 
     <script src="{{ asset('assets/js/siteLayout.min.js') }}" defer></script>
     <script src="{{ asset('assets/js/js_underDesign.js') }}" defer></script>
+
+   
+    <div id="registryModal" class="modal hidden">
+        <div class="modal-content">
+            
+            <div>
+                <input id="name" placeholder="نام و نام خانوادگی" type="text" />
+            </div>
+            
+            <div style="margin-top: 10px">
+                <input id="phone" placeholder="شماره همراه" type="tel" />
+            </div>
+
+            <div style="margin-top: 10px">
+                <label style="font-size: 14px;" for="date">تاریخ موردنظر</label>
+                <select style="height: 40px" id="date">
+                    <option value="curr">این هفته</option>
+                    <option value="next">هفته بعد</option>
+                    <option value="next2">دو هفته بعد</option>
+                    <option value="next3">سه هفته بعد</option>
+                    <option value="next4">چهار هفته بعد</option>
+                </select>
+            </div>
+            
+            <div id="times"></div>
+
+            <div>
+                <input type="button" value="ثبت وقت" class="btn green"  style="margin-left: 5px;" onclick="submit()">
+                <input type="button" value="بازگشت" class="btn green"  style="margin-left: 5px;" onclick="$('#registryModal').addClass('hidden')">
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function request(times, ids) {
+            
+            if(times.length > 1) {
+                
+                var html = "<div><label style='font-size: 14px' for='wanted_time'>زمان موردنظر</label><select style='height: 40px' id='wanted_time'>";
+                var i = 0;
+
+                times.forEach(elem => {
+                    html += "<option value='" + ids[i++] + "'>" + elem[0] + " تا " + elem[1] + "</option>";
+                });
+
+                html += '</select></div>';
+
+                $("#times").empty().append(html).removeClass('hidden');
+            }
+            else {
+                $("#times").empty().addClass('hidden');
+            }
+
+            $("#registryModal").removeClass('hidden');
+        }
+
+        function submit() {
+
+            let name = $("#name").val();
+            let phone = $("#phone").val();
+
+            if(name.length === 0 || phone.length === 0) {
+                alert("لطفا تمامی اطلاعات لازم را پرنمایید.");
+                return;
+            }
+
+            let date = $("#date").val();
+            let wantedTime = $("#wanted_time").val();
+
+            $.ajax({
+                type: 'post',
+                url: '{{ route('api.submitTimeRequest') }}',
+                data: {
+                    name: name,
+                    phone: phone,
+                    date: date,
+                    people_work_time_id: wantedTime
+                },
+                success: function(res) {
+                    if(res.status === "ok") {
+                        alert("زمان موردنظر شما با موفقیت در سیستم ثبت گردید و با شما تماس گرفته خواهد شد.");
+                        $('#registryModal').addClass('hidden');
+                    }
+                }
+            });
+
+        }
+
+    </script>
 
 </body>
 </html>

@@ -6,6 +6,7 @@ use App\Http\Resources\AdminPeopleWorkResource;
 use App\Http\Resources\AdminScheduleResource;
 use App\Http\Resources\PeopleDigest;
 use App\Http\Resources\PeopleResource;
+use App\Http\Resources\PeopleWorkResource;
 use App\models\People;
 use App\Models\PeopleWorkTime;
 use App\Models\Schedule;
@@ -80,9 +81,15 @@ class PeopleWorkTimeController extends Controller
      * @param  \App\Models\PeopleWorkTime  $peopleWorkTime
      * @return \Illuminate\Http\Response
      */
-    public function edit(PeopleWorkTime $peopleWorkTime)
+    public function edit(PeopleWorkTime $peopleWorkTime, Request $request)
     {
-        //
+        $schedule = $peopleWorkTime->schedule;
+        return view('admin.PeopleWork.create', [
+            'schedule' => $peopleWorkTime->schedule->id,
+            'day' => self::translate_day($schedule->day),
+            'peoples' => PeopleDigest::collection(People::all())->toArray($request),
+            'people' => AdminPeopleWorkResource::make($peopleWorkTime)->toArray($request)
+        ]);
     }
 
     /**
@@ -94,7 +101,24 @@ class PeopleWorkTimeController extends Controller
      */
     public function update(Request $request, PeopleWorkTime $peopleWorkTime)
     {
-        //
+        $validator = [
+            'people_id' => 'required|exists:people,id',
+            'start' => 'required|date_format:H:i',
+            'end' => 'required|date_format:H:i',
+            'priority' => 'required|integer|min:1'
+        ];
+
+        $request->validate($validator);
+
+        $peopleWorkTime->people_id = $request['people_id'];
+        $peopleWorkTime->start = $request['start'];
+        $peopleWorkTime->end = $request['end'];
+        $peopleWorkTime->priority = $request['priority'];
+
+        $peopleWorkTime->save();
+
+        return Redirect::route('schedule.people_work_times.index', ['schedule' => $peopleWorkTime->schedule_id]);
+
     }
 
     /**

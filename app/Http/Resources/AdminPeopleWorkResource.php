@@ -20,6 +20,8 @@ class AdminPeopleWorkResource extends JsonResource
             'id' => $this->id,
             'start' => $this->start,
             'end' => $this->end,
+            'people_id' => $people->id,
+            'priority' => $this->priority,
             'name' => $people->name,
             'tag' => $people->tag,
         ];

@@ -35,6 +35,7 @@
                                     <td>تخصص</td>
                                     <td>ساعت آغاز به کار</td>
                                     <td>ساعت اتمام به کار</td>
+                                    <td>عملیات</td>
                                 </tr>
                                 @foreach($peoples as $people)
                                     <tr>
@@ -45,9 +46,9 @@
                                         <td>{{ $people['end'] }}</td>
                                         <td>
                                             
-                                            {{-- <button onclick="document.location.href = '{{ route('schedule.edit', ['schedule' => $day['id']]) }}'" class="btn btn-primary">
+                                            <button onclick="document.location.href = '{{ route('people_work_times.edit', ['people_work_time' => $people['id']]) }}'" class="btn btn-primary">
                                                 <span class="glyphicon glyphicon-edit"></span>
-                                            </button> --}}
+                                            </button>
 
                                             {{-- <button onclick="document.location.href = '{{ route('schedule.people_work_times.index', ['schedule' => $day['id']]) }}'" class="btn btn-danger">
                                                 <span class="glyphicon glyphicon-trash"></span>
