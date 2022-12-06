@@ -13,7 +13,7 @@
         <div class="sparkline8-list shadow-reset mg-tb-30">
             <div class="sparkline8-hd">
                 <div class="main-sparkline8-hd">
-                    <h1>مدیریت صفحخ نخست</h1>
+                    <h1>مدیریت صفحه نخست</h1>
                 </div>
             </div>
 
@@ -105,6 +105,21 @@
                                     </select>
                                 </div>
 
+                                
+                                <div>
+                                    <label for="online_booking">امکان وقت گیری</label>
+                                    <select id="online_booking">
+                                        @if($config->online_booking)
+                                            <option value="true">بله</option>
+                                            <option value="false">خیر</option>
+                                        @else
+                                            <option value="false">خیر</option>
+                                            <option value="true">بله</option>
+                                        @endif
+                                    </select>
+                                </div>
+
+
                                 <div class="flex center">
                                     <button onclick="save()" class="btn btn-sucess">ذخیره</button>
                                 </div>
@@ -136,6 +151,7 @@
                     'show_gallery': $("#showGallery").val() == 'true' ? 1 : 0,
                     'show_videos': $("#showVideos").val() == 'true' ? 1 : 0,
                     'show_about': $("#showAbout").val() == 'true' ? 1 : 0,
+                    'online_booking': $("#online_booking").val() == 'true' ? 1 : 0,
                 },
                 headers: {
                     "accept": "application/json"

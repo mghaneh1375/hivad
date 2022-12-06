@@ -31,9 +31,15 @@
 
                             @foreach ($peoples as $item)
                                 <div class="column col-xs-12 col-lg-4 myContainer" id="item_{{ $item->id }}">
-                                    <img src="{{URL::asset('Content/images/shortcutTab/' . $item->image)}}" alt="{{ $item->alt }}" style="width:100%; height: 100%">
+                                    <img src="{{asset('Content/images/shortcutTab/' . $item->image)}}" alt="{{ $item->alt }}" style="width:100%; height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $item->id }}">
+                                            <p>{{ $item->name }}</p>
+
+                                            @if($item->tag != null)
+                                                <p>{{ $item->tag }}</p>
+                                            @endif
+
                                             <button class="btn btn-primary" onclick="document.location.href = '{{ route('people.edit', ['people' => $item]) }}'">مشاهده اطلاعات</button>
                                             <button class="btn btn-danger" onclick="remmoveModal('item', {{$item->id}}, '{{ route('api.removePeople', ['people' => $item->id]) }}')">حذف</button>
                                         </div>

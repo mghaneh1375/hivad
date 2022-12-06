@@ -18,11 +18,11 @@ class SlideController extends Controller {
 
     public function remove(SlideBar $slidebar) {
 
-        if(file_exists(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $slidebar->image . '.jpg'))
-            unlink(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $slidebar->image . '.jpg');
-        
-        if(file_exists(__DIR__ . '/../../../public/Content/images/GalleryPictures/thumb/' . $slidebar->image . '.jpg'))
-            unlink(__DIR__ . '/../../../public/Content/images/GalleryPictures/thumb/' . $slidebar->image . '.jpg');
+        if(file_exists(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $slidebar->image))
+            unlink(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $slidebar->image);
+
+        if(file_exists(__DIR__ . '/../../../public/Content/images/GalleryPictures/thumb/' . $slidebar->image))
+            unlink(__DIR__ . '/../../../public/Content/images/GalleryPictures/thumb/' . $slidebar->image);
 
         $slidebar->delete();
         return response()->json(["status" => "ok"]);
@@ -33,7 +33,7 @@ class SlideController extends Controller {
 
         if($slidebar == null)
             return response()->json(["status" => "nok"]);
-        
+
         $request->validate([
             'priority' => 'required|int|min:1',
             'alt' => 'nullable|string|min:1',
@@ -65,10 +65,15 @@ class SlideController extends Controller {
         ]);
 
         $image       = $request->file('image');
-        $filename    = time() . '.jpg';
-        
+
+	    $img = $request->file('image')->getClientOriginalName();
+        $ext = explode('.', $img);
+        $ext = $ext[count($ext) - 1];
+
+        $filename    = time() . '.' . $ext;
+
         $image_resize = Image::make($image->getRealPath());
-        $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename));              
+        $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename));
         $image_resize->resize(150, 150);
         $image_resize->save(public_path('Content/images/GalleryPictures/thumb/' . $filename));
 

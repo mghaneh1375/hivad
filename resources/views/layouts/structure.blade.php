@@ -398,15 +398,90 @@
                                 </li>
 
                                 <?php
-                                    $unseenMsgCount = \App\Models\Msg::unSeen()->count();
+                                    $unseenAdviceRequests = \App\models\UserAdviceRequest::unSeen()->count();
+                                ?>
+                                
+                                <li class="nav-item">
+                                    @if($unseenAdviceRequests > 0)
+	                                    <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
+				                    @else
+	                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+				                    @endif
+                                    <i></i> 
+                                    <span class="mini-dn">مدیریت وقت گیری</span> 
+                                    @if($unseenAdviceRequests > 0)
+                                        <span style="align-self: center" class="newCounter">{{ $unseenAdviceRequests }}</span>
+                                    @endif
+                                    <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span>
+                                    </a>
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('schedule.index')}}" class="dropdown-item">مدیریت برنامه هفتگی</a>
+                                        <a href="{{route('survey.forms', ['seen' => 'false'])}}" class="dropdown-item">مدیریت درخواست ها</a>
+                                    </div>
+                                </li>
+
+                                <?php
+                                    $unseenSurveyCount = \App\models\UserForm::survey()->unSeen()->count();
                                 ?>
 
                                 <li class="nav-item">
-                                    <a class={{ $unseenMsgCount > 0 ? "nav-link dropdown-toggle newCounterContainer" : "nav-link dropdown-toggle" }} data-toggle="dropdown" role="button" aria-expanded="false">
+                                    @if($unseenSurveyCount > 0)
+	                                    <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
+				                    @else
+	                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+				                    @endif
+                                    <i></i> 
+                                    <span class="mini-dn">نظرسنجی</span> 
+                                    @if($unseenSurveyCount > 0)
+                                        <span style="align-self: center" class="newCounter">{{ $unseenSurveyCount }}</span>
+                                    @endif
+                                    <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span>
+                                    </a>
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('survey.questions.list')}}" class="dropdown-item">مدیریت سوالات</a>
+                                        <a href="{{route('survey.forms', ['seen' => 'false'])}}" class="dropdown-item">مدیریت فرم های دیده نشده</a>
+                                        <a href="{{route('survey.forms')}}" class="dropdown-item">مدیریت فرم ها</a>
+                                    </div>
+                                </li>
+                                
+                                <?php
+                                    $unseenAdviceCount = \App\models\UserForm::advice()->unSeen()->count();
+                                ?>
+
+                                <li class="nav-item">
+                                    @if($unseenAdviceCount > 0)
+	                                    <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
+				                    @else
+	                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+				                    @endif
+                                    <i></i> 
+                                    <span class="mini-dn">فرم درخواست مشاوره</span> 
+                                    @if($unseenAdviceCount > 0)
+                                        <span style="align-self: center" class="newCounter">{{ $unseenAdviceCount }}</span>
+                                    @endif
+                                    <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('advice.questions.list')}}" class="dropdown-item">مدیریت سوالات</a>
+                                        <a href="{{route('advice.forms', ['seen' => 'false'])}}" class="dropdown-item">مدیریت فرم های دیده نشده</a>
+                                        <a href="{{route('advice.forms')}}" class="dropdown-item">مدیریت فرم ها</a>
+                                    </div>
+                                </li>
+
+
+                                <?php
+                                    $unseenMsgCount = \App\models\Msg::unSeen()->count();
+                                ?>
+
+                                <li class="nav-item">
+                                    @if($unseenMsgCount > 0)
+	                                    <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
+				                    @else
+	                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+				                    @endif
                                         <i></i> 
                                         <span class="mini-dn">مدیریت پیام ها</span>
                                         @if($unseenMsgCount > 0)
-                                            <span class="newCounter">{{ $unseenMsgCount }}</span>
+                                            <span style="align-self: center" class="newCounter">{{ $unseenMsgCount }}</span>
                                         @endif
                                         <span class="indicator-right-menu mini-dn">
                                             <i class="fa indicator-mn fa-angle-left"></i>

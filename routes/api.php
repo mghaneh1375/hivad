@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdviceFormController;
 use App\Http\Controllers\CafeController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
@@ -10,6 +11,9 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\PeopleController;
+use App\Http\Controllers\PeopleWorkTimeController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -98,3 +102,31 @@ Route::post('updateVideo/{video?}', [VideoController::class, 'update'])->name('a
 
 
 Route::delete('removeMsg/{msg}', [HomeController::class, 'removeMsg'])->name('api.removeMsg');
+
+Route::post('schedule/{schedule}/update', [ScheduleController::class, 'update'])->name('api.schedule.update');
+
+
+Route::post('peopleWorkTime/{peopleWorkTime}/update', [PeopleWorkTimeController::class, 'update'])->name('api.peopleWorkTime.update');
+
+Route::delete('peopleWorkTime/{peopleWorkTime}/destroy', [PeopleWorkTimeController::class, 'destroy'])->name('api.peopleWorkTime.destroy');
+
+Route::post('peopleWorkTime/{schedule}/store', [PeopleWorkTimeController::class, 'store'])->name('api.peopleWorkTime.store');
+
+
+
+Route::post('survey/question/store', [SurveyController::class, 'store'])->name('api.survey.question.store');
+
+Route::post('survey/question/{field}/update', [SurveyController::class, 'update'])->name('api.survey.question.update');
+
+Route::delete('survey/question/{field}/destroy', [SurveyController::class, 'destroy'])->name('api.survey.question.destroy');
+
+Route::delete('survey/forms/{form}/destroy', [SurveyController::class, 'destroy'])->name('api.survey.forms.destroy');
+
+
+Route::post('advice/question/store', [AdviceFormController::class, 'store'])->name('api.advice.question.store');
+
+Route::post('advice/question/{field}/update', [AdviceFormController::class, 'update'])->name('api.advice.question.update');
+
+Route::delete('advice/question/{field}/destroy', [AdviceFormController::class, 'destroy'])->name('api.advice.question.destroy');
+
+Route::delete('advice/forms/{form}/destroy', [AdviceFormController::class, 'destroy'])->name('api.advice.forms.destroy');

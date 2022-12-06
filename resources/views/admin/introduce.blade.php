@@ -67,7 +67,7 @@
 
                             @foreach ($introduces as $intro)
                                 <div class="column col-xs-12 col-lg-4 myContainer" id="item_{{ $intro->id }}">
-                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/' . $intro->image . '.jpg')}}" alt="{{ $intro->alt }}" style="width:100%; height: 100%">
+                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/' . $intro->image)}}" alt="{{ $intro->alt }}" style="width:100%; height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $intro->id }}">
                                             <button class="btn btn-primary" onclick="$('#opBox_{{ $intro->id }}').addClass('hidden'); $('#infoBox_{{ $intro->id }}').removeClass('hidden')">مشاهده اطلاعات</button>

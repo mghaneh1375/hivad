@@ -7,12 +7,14 @@ use App\Http\Resources\IntroduceJSON;
 use App\Http\Resources\NewsJSON;
 use App\Http\Resources\SliderBarJSON;
 use App\Http\Resources\CategoryJSON;
+use App\Http\Resources\FieldResource;
 use App\Http\Resources\SliderCafe;
-use App\Models\Cafe;
+use App\models\Cafe;
 use App\models\Config;
 use App\models\Gallery;
 use App\models\Introduce;
 use App\models\Category;
+use App\Models\Field;
 use App\models\News;
 use App\models\SlideBar;
 use App\models\Video;
@@ -20,6 +22,14 @@ use App\models\Video;
 class RenderController extends Controller
 {
 
+    public function get_fields($mode) {
+
+        if($mode == 'survey')
+            return ["fields" => FieldResource::collection(Field::survey()->visible()->orderBy('priority', 'asc')->get())];
+            
+        return ["fields" => FieldResource::collection(Field::advice()->visible()->orderBy('priority', 'asc')->get())];
+    }
+    
     public function get_cafe_sliders()
     {
         return SliderCafe::collection(Cafe::visible()->orderBy('priority', 'asc')->get());
@@ -77,6 +87,277 @@ class RenderController extends Controller
         return [CategoryJSON::collection($cats), $ids];
     }
 
+    public function render_survey() {
+
+        return [
+            [
+                [
+                    "BoxID" => 39184, 
+                    "MenuID" => 29453, 
+                    "BoxTitle" => "نظرسنجی", 
+                    "BoxDescription" => "", 
+                    "Priority" => 1, 
+                    "Width" => null, 
+                    "Height" => null, 
+                    "BoxCount" => 1, 
+                    "MaduleID" => null, 
+                    "SubBoxHeight" => null, 
+                    "BoxCountPerRow" => 1, 
+                    "FormID" => "survey", 
+                    "FormReportID" => null, 
+                    "BoxGroupID" => 6, 
+                    "BoxGroupName" => "form", 
+                    "BoxPersianName" => "ÙØ±Ù… ÙˆØ±ÙˆØ¯ Ø§Ø·Ù„Ø§Ø¹Ø§Øª", 
+                    "Pagination" => 2, 
+                    "SortType" => 1, 
+                    "Content" => null, 
+                    "MediaID" => null, 
+                    "HasProductTabs" => null, 
+                    "ProductSlides" => null, 
+                    "RowIDList" => null, 
+                    "BoxStyle" => "", 
+                    "PopupStyle" => false, 
+                    "BoxTemp" => null, 
+                    "ShowMoreLink" => null, 
+                    "ContainerTabs" => null, 
+                    "WebsiteDisplay" => true, 
+                    "MobileDisplay" => true, 
+                    "Background" => null, 
+                    "ParallaxStyle" => null, 
+                    "DisableBoxBack" => null, 
+                    "BackTitleColor" => null, 
+                    "DisableBoxBackgroundColor" => null, 
+                    "BoxBackgroundColor" => null, 
+                    "BlurEffectBack" => null, 
+                    "BlackEffectBack" => null, 
+                    "ButtonList" => [
+                    ], 
+                    "Platform7Maduleid" => null, 
+                    "GroupMaduleBox" => null, 
+                    "IsAmazzingoffer" => false 
+                ],
+                [
+                    "BoxID" => 39407, 
+                    "MenuID" => 29453, 
+                    "BoxTitle" => "", 
+                    "BoxDescription" => null, 
+                    "Priority" => 2, 
+                    "Width" => null, 
+                    "Height" => 250, 
+                    "BoxCount" => 1, 
+                    "MaduleID" => null, 
+                    "SubBoxHeight" => null, 
+                    "BoxCountPerRow" => 1, 
+                    "FormID" => null, 
+                    "FormReportID" => null, 
+                    "BoxGroupID" => 7, 
+                    "BoxGroupName" => "singleImage", 
+                    "BoxPersianName" => "ØªØµÙˆÛŒØ±", 
+                    "Pagination" => 2, 
+                    "SortType" => 1, 
+                    "Content" => null, 
+                    "MediaID" => null, 
+                    "HasProductTabs" => null, 
+                    "ProductSlides" => null, 
+                    "RowIDList" => null, 
+                    "BoxStyle" => "paralax", 
+                    "PopupStyle" => false, 
+                    "BoxTemp" => null, 
+                    "ShowMoreLink" => null, 
+                    "ContainerTabs" => null, 
+                    "WebsiteDisplay" => true, 
+                    "MobileDisplay" => true, 
+                    "Background" => null, 
+                    "ParallaxStyle" => null, 
+                    "DisableBoxBack" => null, 
+                    "BackTitleColor" => null, 
+                    "DisableBoxBackgroundColor" => null, 
+                    "BoxBackgroundColor" => null, 
+                    "BlurEffectBack" => null, 
+                    "BlackEffectBack" => null, 
+                    "ButtonList" => [
+                    ], 
+                    "Platform7Maduleid" => null, 
+                    "GroupMaduleBox" => null, 
+                    "IsAmazzingoffer" => false 
+                ]
+            ],
+            [
+                [
+                    "BoxID" => 39184, 
+                    "Content" => [
+                        "foreignTableFields" => [
+                        ], 
+                        "shahrs" => "<option>Ø§Ù†ØªØ®Ø§Ø¨ Ø§Ø³ØªØ§Ù†</option><option value='Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† Ø´Ø±Ù‚ÙŠ'>Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† Ø´Ø±Ù‚ÙŠ</option><option value='Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† ØºØ±Ø¨ÙŠ'>Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† ØºØ±Ø¨ÙŠ</option><option value='Ø§Ø±Ø¯Ø¨ÙŠÙ„'>Ø§Ø±Ø¯Ø¨ÙŠÙ„</option><option value='Ø§ØµÙÙ‡Ø§Ù†'>Ø§ØµÙÙ‡Ø§Ù†</option><option value='Ø§Ù„Ø¨Ø±Ø²'>Ø§Ù„Ø¨Ø±Ø²</option><option value='Ø§ÙŠÙ„Ø§Ù…'>Ø§ÙŠÙ„Ø§Ù…</option><option value='Ø¨ÙˆØ´Ù‡Ø±'>Ø¨ÙˆØ´Ù‡Ø±</option><option value='ØªÙ‡Ø±Ø§Ù†'>ØªÙ‡Ø±Ø§Ù†</option><option value='Ú†Ù‡Ø§Ø±Ù…Ø­Ø§Ù„ ÙˆØ¨Ø®ØªÙŠØ§Ø±ÙŠ'>Ú†Ù‡Ø§Ø±Ù…Ø­Ø§Ù„ ÙˆØ¨Ø®ØªÙŠØ§Ø±ÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø¬Ù†ÙˆØ¨ÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø¬Ù†ÙˆØ¨ÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø±Ø¶ÙˆÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø±Ø¶ÙˆÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø´Ù…Ø§Ù„ÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø´Ù…Ø§Ù„ÙŠ</option><option value='Ø®ÙˆØ²Ø³ØªØ§Ù†'>Ø®ÙˆØ²Ø³ØªØ§Ù†</option><option value='Ø²Ù†Ø¬Ø§Ù†'>Ø²Ù†Ø¬Ø§Ù†</option><option value='Ø³Ù…Ù†Ø§Ù†'>Ø³Ù…Ù†Ø§Ù†</option><option value='Ø³ÙŠØ³ØªØ§Ù† ÙˆØ¨Ù„ÙˆÚ†Ø³ØªØ§Ù†'>Ø³ÙŠØ³ØªØ§Ù† ÙˆØ¨Ù„ÙˆÚ†Ø³ØªØ§Ù†</option><option value='ÙØ§Ø±Ø³'>ÙØ§Ø±Ø³</option><option value='Ù‚Ø²ÙˆÙŠÙ†'>Ù‚Ø²ÙˆÙŠÙ†</option><option value='Ù‚Ù…'>Ù‚Ù…</option><option value='ÙƒØ±Ø¯Ø³ØªØ§Ù†'>ÙƒØ±Ø¯Ø³ØªØ§Ù†</option><option value='ÙƒØ±Ù…Ø§Ù†'>ÙƒØ±Ù…Ø§Ù†</option><option value='ÙƒØ±Ù…Ø§Ù†Ø´Ø§Ù‡'>ÙƒØ±Ù…Ø§Ù†Ø´Ø§Ù‡</option><option value='ÙƒÙ‡Ú¯ÙŠÙ„ÙˆÙŠÙ‡ ÙˆØ¨ÙˆÙŠØ±Ø§Ø­Ù…Ø¯'>ÙƒÙ‡Ú¯ÙŠÙ„ÙˆÙŠÙ‡ ÙˆØ¨ÙˆÙŠØ±Ø§Ø­Ù…Ø¯</option><option value='Ú¯Ù„Ø³ØªØ§Ù†'>Ú¯Ù„Ø³ØªØ§Ù†</option><option value='Ú¯ÙŠÙ„Ø§Ù†'>Ú¯ÙŠÙ„Ø§Ù†</option><option value='Ù„Ø±Ø³ØªØ§Ù†'>Ù„Ø±Ø³ØªØ§Ù†</option><option value='Ù…Ø§Ø²Ù†Ø¯Ø±Ø§Ù†'>Ù…Ø§Ø²Ù†Ø¯Ø±Ø§Ù†</option><option value='Ù…Ø±ÙƒØ²ÙŠ'>Ù…Ø±ÙƒØ²ÙŠ</option><option value='Ù‡Ø±Ù…Ø²Ú¯Ø§Ù†'>Ù‡Ø±Ù…Ø²Ú¯Ø§Ù†</option><option value='Ù‡Ù…Ø¯Ø§Ù†'>Ù‡Ù…Ø¯Ø§Ù†</option><option value='ÙŠØ²Ø¯'>ÙŠØ²Ø¯</option>", 
+                        "formDynamicOptionDataList" => [
+                        ],
+                        "formBiulderData" => json_encode($this->get_fields('survey')),
+                        "CaptchaLength" => null, 
+                        "FormName" => "نظرسنجی", 
+                        "IsEditable" => false, 
+                        "RegistrationRequired" => false, 
+                        "ISClubMember" => false, 
+                        "Multiplerowperuser" => false, 
+                        "IsOnlinePayment" => false, 
+                        "IsOnlineOrder" => false, 
+                        "BottonText" => "ثبت نهایی", 
+                        "formDataList" => null, 
+                        "editedLogID" => null, 
+                        "editedTrackingCode" => "-1", 
+                        "isAuthenticated" => false, 
+                        "userGroupDiscount" => 0, 
+                        "totalPrice" => 0 
+                    ] 
+                ], 
+                [
+                    "BoxID" => 39407, 
+                    "Content" => [
+                        "boxTitle" => "", 
+                        "boxDescription" => null, 
+                        "MediaID" => 25644 
+                    ]
+                ]
+            ]
+        ];
+
+    }
+
+    
+    public function render_advice_request() {
+
+        return [
+            [
+                [
+                    "BoxID" => 39184, 
+                    "MenuID" => 29453, 
+                    "BoxTitle" => "درخواست مشاوره", 
+                    "BoxDescription" => "", 
+                    "Priority" => 1, 
+                    "Width" => null, 
+                    "Height" => null, 
+                    "BoxCount" => 1, 
+                    "MaduleID" => null, 
+                    "SubBoxHeight" => null, 
+                    "BoxCountPerRow" => 1, 
+                    "FormID" => "advice",
+                    "FormReportID" => null, 
+                    "BoxGroupID" => 6, 
+                    "BoxGroupName" => "form", 
+                    "BoxPersianName" => "ÙØ±Ù… ÙˆØ±ÙˆØ¯ Ø§Ø·Ù„Ø§Ø¹Ø§Øª", 
+                    "Pagination" => 2, 
+                    "SortType" => 1, 
+                    "Content" => null, 
+                    "MediaID" => null, 
+                    "HasProductTabs" => null, 
+                    "ProductSlides" => null, 
+                    "RowIDList" => null, 
+                    "BoxStyle" => "", 
+                    "PopupStyle" => false, 
+                    "BoxTemp" => null, 
+                    "ShowMoreLink" => null, 
+                    "ContainerTabs" => null, 
+                    "WebsiteDisplay" => true, 
+                    "MobileDisplay" => true, 
+                    "Background" => null, 
+                    "ParallaxStyle" => null, 
+                    "DisableBoxBack" => null, 
+                    "BackTitleColor" => null, 
+                    "DisableBoxBackgroundColor" => null, 
+                    "BoxBackgroundColor" => null, 
+                    "BlurEffectBack" => null, 
+                    "BlackEffectBack" => null, 
+                    "ButtonList" => [
+                    ], 
+                    "Platform7Maduleid" => null, 
+                    "GroupMaduleBox" => null, 
+                    "IsAmazzingoffer" => false 
+                ],
+                [
+                    "BoxID" => 39407, 
+                    "MenuID" => 29453, 
+                    "BoxTitle" => "", 
+                    "BoxDescription" => null, 
+                    "Priority" => 2, 
+                    "Width" => null, 
+                    "Height" => 250, 
+                    "BoxCount" => 1, 
+                    "MaduleID" => null, 
+                    "SubBoxHeight" => null, 
+                    "BoxCountPerRow" => 1, 
+                    "FormID" => null, 
+                    "FormReportID" => null, 
+                    "BoxGroupID" => 7, 
+                    "BoxGroupName" => "singleImage", 
+                    "BoxPersianName" => "ØªØµÙˆÛŒØ±", 
+                    "Pagination" => 2, 
+                    "SortType" => 1, 
+                    "Content" => null, 
+                    "MediaID" => null, 
+                    "HasProductTabs" => null, 
+                    "ProductSlides" => null, 
+                    "RowIDList" => null, 
+                    "BoxStyle" => "paralax", 
+                    "PopupStyle" => false, 
+                    "BoxTemp" => null, 
+                    "ShowMoreLink" => null, 
+                    "ContainerTabs" => null, 
+                    "WebsiteDisplay" => true, 
+                    "MobileDisplay" => true, 
+                    "Background" => null, 
+                    "ParallaxStyle" => null, 
+                    "DisableBoxBack" => null, 
+                    "BackTitleColor" => null, 
+                    "DisableBoxBackgroundColor" => null, 
+                    "BoxBackgroundColor" => null, 
+                    "BlurEffectBack" => null, 
+                    "BlackEffectBack" => null, 
+                    "ButtonList" => [
+                    ], 
+                    "Platform7Maduleid" => null, 
+                    "GroupMaduleBox" => null, 
+                    "IsAmazzingoffer" => false 
+                ]
+            ],
+            [
+                [
+                    "BoxID" => 39184, 
+                    "Content" => [
+                        "foreignTableFields" => [
+                        ], 
+                        "shahrs" => "<option>Ø§Ù†ØªØ®Ø§Ø¨ Ø§Ø³ØªØ§Ù†</option><option value='Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† Ø´Ø±Ù‚ÙŠ'>Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† Ø´Ø±Ù‚ÙŠ</option><option value='Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† ØºØ±Ø¨ÙŠ'>Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† ØºØ±Ø¨ÙŠ</option><option value='Ø§Ø±Ø¯Ø¨ÙŠÙ„'>Ø§Ø±Ø¯Ø¨ÙŠÙ„</option><option value='Ø§ØµÙÙ‡Ø§Ù†'>Ø§ØµÙÙ‡Ø§Ù†</option><option value='Ø§Ù„Ø¨Ø±Ø²'>Ø§Ù„Ø¨Ø±Ø²</option><option value='Ø§ÙŠÙ„Ø§Ù…'>Ø§ÙŠÙ„Ø§Ù…</option><option value='Ø¨ÙˆØ´Ù‡Ø±'>Ø¨ÙˆØ´Ù‡Ø±</option><option value='ØªÙ‡Ø±Ø§Ù†'>ØªÙ‡Ø±Ø§Ù†</option><option value='Ú†Ù‡Ø§Ø±Ù…Ø­Ø§Ù„ ÙˆØ¨Ø®ØªÙŠØ§Ø±ÙŠ'>Ú†Ù‡Ø§Ø±Ù…Ø­Ø§Ù„ ÙˆØ¨Ø®ØªÙŠØ§Ø±ÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø¬Ù†ÙˆØ¨ÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø¬Ù†ÙˆØ¨ÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø±Ø¶ÙˆÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø±Ø¶ÙˆÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø´Ù…Ø§Ù„ÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø´Ù…Ø§Ù„ÙŠ</option><option value='Ø®ÙˆØ²Ø³ØªØ§Ù†'>Ø®ÙˆØ²Ø³ØªØ§Ù†</option><option value='Ø²Ù†Ø¬Ø§Ù†'>Ø²Ù†Ø¬Ø§Ù†</option><option value='Ø³Ù…Ù†Ø§Ù†'>Ø³Ù…Ù†Ø§Ù†</option><option value='Ø³ÙŠØ³ØªØ§Ù† ÙˆØ¨Ù„ÙˆÚ†Ø³ØªØ§Ù†'>Ø³ÙŠØ³ØªØ§Ù† ÙˆØ¨Ù„ÙˆÚ†Ø³ØªØ§Ù†</option><option value='ÙØ§Ø±Ø³'>ÙØ§Ø±Ø³</option><option value='Ù‚Ø²ÙˆÙŠÙ†'>Ù‚Ø²ÙˆÙŠÙ†</option><option value='Ù‚Ù…'>Ù‚Ù…</option><option value='ÙƒØ±Ø¯Ø³ØªØ§Ù†'>ÙƒØ±Ø¯Ø³ØªØ§Ù†</option><option value='ÙƒØ±Ù…Ø§Ù†'>ÙƒØ±Ù…Ø§Ù†</option><option value='ÙƒØ±Ù…Ø§Ù†Ø´Ø§Ù‡'>ÙƒØ±Ù…Ø§Ù†Ø´Ø§Ù‡</option><option value='ÙƒÙ‡Ú¯ÙŠÙ„ÙˆÙŠÙ‡ ÙˆØ¨ÙˆÙŠØ±Ø§Ø­Ù…Ø¯'>ÙƒÙ‡Ú¯ÙŠÙ„ÙˆÙŠÙ‡ ÙˆØ¨ÙˆÙŠØ±Ø§Ø­Ù…Ø¯</option><option value='Ú¯Ù„Ø³ØªØ§Ù†'>Ú¯Ù„Ø³ØªØ§Ù†</option><option value='Ú¯ÙŠÙ„Ø§Ù†'>Ú¯ÙŠÙ„Ø§Ù†</option><option value='Ù„Ø±Ø³ØªØ§Ù†'>Ù„Ø±Ø³ØªØ§Ù†</option><option value='Ù…Ø§Ø²Ù†Ø¯Ø±Ø§Ù†'>Ù…Ø§Ø²Ù†Ø¯Ø±Ø§Ù†</option><option value='Ù…Ø±ÙƒØ²ÙŠ'>Ù…Ø±ÙƒØ²ÙŠ</option><option value='Ù‡Ø±Ù…Ø²Ú¯Ø§Ù†'>Ù‡Ø±Ù…Ø²Ú¯Ø§Ù†</option><option value='Ù‡Ù…Ø¯Ø§Ù†'>Ù‡Ù…Ø¯Ø§Ù†</option><option value='ÙŠØ²Ø¯'>ÙŠØ²Ø¯</option>", 
+                        "formDynamicOptionDataList" => [
+                        ],
+                        "formBiulderData" => json_encode($this->get_fields('advice')),
+                        "CaptchaLength" => null, 
+                        "FormName" => "نظرسنجی", 
+                        "IsEditable" => false, 
+                        "RegistrationRequired" => false, 
+                        "ISClubMember" => false, 
+                        "Multiplerowperuser" => false, 
+                        "IsOnlinePayment" => false, 
+                        "IsOnlineOrder" => false, 
+                        "BottonText" => "ثبت نهایی", 
+                        "formDataList" => null, 
+                        "editedLogID" => null, 
+                        "editedTrackingCode" => "-1", 
+                        "isAuthenticated" => false, 
+                        "userGroupDiscount" => 0, 
+                        "totalPrice" => 0 
+                    ] 
+                ], 
+                [
+                    "BoxID" => 39407, 
+                    "Content" => [
+                        "boxTitle" => "", 
+                        "boxDescription" => null, 
+                        "MediaID" => 25644 
+                    ]
+                ]
+            ]
+        ];
+
+    }
+
     public function render_contact() {
         return [
             [
@@ -127,7 +408,7 @@ class RenderController extends Controller
                 [
                     "BoxID" => 39403,
                     "MenuID" => 29267,
-                    "BoxTitle" => "نیاوران - خیابان اقدسیه - خیابان آجودانیه - باشگاه آجودانیه",
+                    "BoxTitle" => "تهران، خیابان آذرشهر",
                     "BoxDescription" => "+ 98 21  26700812, + 98 21 26700814",
                     "Priority" => 2,
                     "Width" => null,
@@ -232,8 +513,8 @@ class RenderController extends Controller
                                 "LinkUrl" => "",
                                 "TempName" => null,
                                 "MenuID" => null,
-                                "Title" => "دفتر رزرواسیون تالار و رستوران",
-                                "Titr" => "شماره تماس: 22292525 داخلی 101، 102، 301",
+                                "Title" => "مرکز مشاوره هیواد",
+                                "Titr" => "مرکز مشاوره هیواد (مرکز خدمات روانشناسی و مشاوره) در محله سید خندان تهران و بزرگراه شهید همت، بروجردی، بین میلان و سراب واقع شده است. این مرکز یکی از چهار مرکز خدمات روانشناسی و مشاوره در محله سید خندان تهران می‌باشد ",
                                 "Picture" => "1b0faf68-ea23-4607-a7a0-5a570e8e63e7",
                                 "Priority" => 0,
                                 "Icon" => null,
@@ -243,13 +524,13 @@ class RenderController extends Controller
                         "boxCount" => 20,
                         "PopupStyle" => false,
                         "boxTitle" => "باکس تایتل",
-                        "BoxCountPerRow" => 2
+                        "BoxCountPerRow" => 1
                     ]
                 ],
                 [
                     "BoxID" => 39403,
                     "Content" => [
-                        "boxTitle" => "نیاوران - خیابان اقدسیه - خیابان آجودانیه - باشگاه آجودانیه",
+                        "boxTitle" => "تهران، خیابان آذرشهر",
                         "boxDescription" => "+ 98 21  26700812, + 98 21 26700814",
                         "MediaID" => 25644
                     ]
@@ -260,7 +541,7 @@ class RenderController extends Controller
                         "foreignTableFields" => [],
                         "shahrs" => "<option>Ø§Ù†ØªØ®Ø§Ø¨ Ø§Ø³ØªØ§Ù†</option><option value='Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† Ø´Ø±Ù‚ÙŠ'>Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† Ø´Ø±Ù‚ÙŠ</option><option value='Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† ØºØ±Ø¨ÙŠ'>Ø¢Ø°Ø±Ø¨Ø§ÙŠØ¬Ø§Ù† ØºØ±Ø¨ÙŠ</option><option value='Ø§Ø±Ø¯Ø¨ÙŠÙ„'>Ø§Ø±Ø¯Ø¨ÙŠÙ„</option><option value='Ø§ØµÙÙ‡Ø§Ù†'>Ø§ØµÙÙ‡Ø§Ù†</option><option value='Ø§Ù„Ø¨Ø±Ø²'>Ø§Ù„Ø¨Ø±Ø²</option><option value='Ø§ÙŠÙ„Ø§Ù…'>Ø§ÙŠÙ„Ø§Ù…</option><option value='Ø¨ÙˆØ´Ù‡Ø±'>Ø¨ÙˆØ´Ù‡Ø±</option><option value='ØªÙ‡Ø±Ø§Ù†'>ØªÙ‡Ø±Ø§Ù†</option><option value='Ú†Ù‡Ø§Ø±Ù…Ø­Ø§Ù„ ÙˆØ¨Ø®ØªÙŠØ§Ø±ÙŠ'>Ú†Ù‡Ø§Ø±Ù…Ø­Ø§Ù„ ÙˆØ¨Ø®ØªÙŠØ§Ø±ÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø¬Ù†ÙˆØ¨ÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø¬Ù†ÙˆØ¨ÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø±Ø¶ÙˆÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø±Ø¶ÙˆÙŠ</option><option value='Ø®Ø±Ø§Ø³Ø§Ù† Ø´Ù…Ø§Ù„ÙŠ'>Ø®Ø±Ø§Ø³Ø§Ù† Ø´Ù…Ø§Ù„ÙŠ</option><option value='Ø®ÙˆØ²Ø³ØªØ§Ù†'>Ø®ÙˆØ²Ø³ØªØ§Ù†</option><option value='Ø²Ù†Ø¬Ø§Ù†'>Ø²Ù†Ø¬Ø§Ù†</option><option value='Ø³Ù…Ù†Ø§Ù†'>Ø³Ù…Ù†Ø§Ù†</option><option value='Ø³ÙŠØ³ØªØ§Ù† ÙˆØ¨Ù„ÙˆÚ†Ø³ØªØ§Ù†'>Ø³ÙŠØ³ØªØ§Ù† ÙˆØ¨Ù„ÙˆÚ†Ø³ØªØ§Ù†</option><option value='ÙØ§Ø±Ø³'>ÙØ§Ø±Ø³</option><option value='Ù‚Ø²ÙˆÙŠÙ†'>Ù‚Ø²ÙˆÙŠÙ†</option><option value='Ù‚Ù…'>Ù‚Ù…</option><option value='ÙƒØ±Ø¯Ø³ØªØ§Ù†'>ÙƒØ±Ø¯Ø³ØªØ§Ù†</option><option value='ÙƒØ±Ù…Ø§Ù†'>ÙƒØ±Ù…Ø§Ù†</option><option value='ÙƒØ±Ù…Ø§Ù†Ø´Ø§Ù‡'>ÙƒØ±Ù…Ø§Ù†Ø´Ø§Ù‡</option><option value='ÙƒÙ‡Ú¯ÙŠÙ„ÙˆÙŠÙ‡ ÙˆØ¨ÙˆÙŠØ±Ø§Ø­Ù…Ø¯'>ÙƒÙ‡Ú¯ÙŠÙ„ÙˆÙŠÙ‡ ÙˆØ¨ÙˆÙŠØ±Ø§Ø­Ù…Ø¯</option><option value='Ú¯Ù„Ø³ØªØ§Ù†'>Ú¯Ù„Ø³ØªØ§Ù†</option><option value='Ú¯ÙŠÙ„Ø§Ù†'>Ú¯ÙŠÙ„Ø§Ù†</option><option value='Ù„Ø±Ø³ØªØ§Ù†'>Ù„Ø±Ø³ØªØ§Ù†</option><option value='Ù…Ø§Ø²Ù†Ø¯Ø±Ø§Ù†'>Ù…Ø§Ø²Ù†Ø¯Ø±Ø§Ù†</option><option value='Ù…Ø±ÙƒØ²ÙŠ'>Ù…Ø±ÙƒØ²ÙŠ</option><option value='Ù‡Ø±Ù…Ø²Ú¯Ø§Ù†'>Ù‡Ø±Ù…Ø²Ú¯Ø§Ù†</option><option value='Ù‡Ù…Ø¯Ø§Ù†'>Ù‡Ù…Ø¯Ø§Ù†</option><option value='ÙŠØ²Ø¯'>ÙŠØ²Ø¯</option>",
                         "formDynamicOptionDataList" => [],
-                        "formBiulderData" => "{\"fields\":[{\"label\":\"نام و نام خانوادگی\",\"field_type\":\"Ù…ØªÙ†\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"name\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"تلفن همراه\",\"field_type\":\"Ø¹Ø¯Ø¯\",\"required\":true,\"isPhonNumber\":true,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":null,\"description\":\"\",\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"phone\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"آدرس الکترونیک\",\"field_type\":\"Ø¢Ø¯Ø±Ø³ Ø§Ù„Ú©ØªØ±ÙˆÙ†ÛŒÚ©\",\"required\":false,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":false,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":null,\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"mail\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"موضوع پیام\",\"field_type\":\"Ù…ØªÙ†\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"title\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"متن پیام\",\"field_type\":\"Ù¾Ø§Ø±Ø§Ú¯Ø±Ø§Ù\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"msg\",\"FormID\":null,\"foreignTableFields\":null}]}",
+                        "formBiulderData" => "{\"fields\":[{\"label\":\"نام و نام خانوادگی\",\"field_type\":\"text\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"name\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"تلفن همراه\",\"field_type\":\"number\",\"required\":true,\"isPhonNumber\":true,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":null,\"description\":\"\",\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"phone\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"آدرس الکترونیک\",\"field_type\":\"email\",\"required\":false,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":false,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":null,\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"mail\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"موضوع پیام\",\"field_type\":\"text\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"title\",\"FormID\":null,\"foreignTableFields\":null},{\"label\":\"متن پیام\",\"field_type\":\"textarea\",\"required\":true,\"isPhonNumber\":null,\"IsNationalCode\":null,\"IsPrimaryKey\":null,\"display\":true,\"displayInAdmin\":null,\"notEditable\":null,\"IsUnique\":null,\"FieldScore\":null,\"field_options\":{\"size\":\"small\",\"description\":null,\"minlength\":null,\"maxlength\":null,\"MinSelect\":null,\"MaxSelect\":null,\"min\":null,\"max\":null,\"AnniversaryScore\":0,\"HappyAnniversary\":null,\"HappyAnniversaryText\":null,\"min_max_length_units\":null,\"include_blank_option\":null,\"TableID\":null,\"ImgHeight\":null,\"ImageWidth\":null,\"ImgHeight2\":null,\"ImageWidth2\":null,\"AcceptMimeType\":null,\"FileMinCount\":null,\"Formula\":null,\"Filters\":null,\"ColSelected\":null,\"IsBoxCode\":null,\"IsUniqueMessage\":null,\"ParrentFieldCID\":null,\"ClassName\":null,\"RequiredMessage\":null,\"FormDynamicOptionGroupID\":null,\"options\":null},\"cid\":\"msg\",\"FormID\":null,\"foreignTableFields\":null}]}",
                         "CaptchaLength" => null,
                         "FormName" => "تماس با ما",
                         "IsEditable" => false,
@@ -814,7 +1095,7 @@ class RenderController extends Controller
                     "FormReportID" => null,
                     "BoxGroupID" => 5,
                     "BoxGroupName" => "content",
-                    "BoxPersianName" => "Ù…Ø­ØªÙˆØ§ÛŒ Ù…ØªÙ†ÛŒ",
+                    "BoxPersianName" => "Ù…Ø­ØªÙˆØ§ÛŒ textÛŒ",
                     "Pagination" => 2,
                     "SortType" => 1,
                     "Content" => null,
@@ -1059,6 +1340,16 @@ class RenderController extends Controller
     {
         $videos_section = $this->render_total_videos();
         return ["madules" => [$videos_section[0]], "jsonContentList" => [$videos_section[1]]];
+    }
+
+    public function survey_json_file() {
+        $survey_section = $this->render_survey();
+        return ["madules" => $survey_section[0], "jsonContentList" => $survey_section[1]];
+    }
+    
+    public function advice_request_json_file() {
+        $survey_section = $this->render_advice_request();
+        return ["madules" => $survey_section[0], "jsonContentList" => $survey_section[1]];
     }
 
     public function contact_json_file() {

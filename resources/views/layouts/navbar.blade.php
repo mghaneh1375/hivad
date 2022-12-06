@@ -48,13 +48,22 @@
                 </li>
                 </ul>
             </li>
-            <li class='' data-menuID='29453'>
-                <a class=' ' href='/29453-نظر-سنجی' data-menuID='29453' data-isprofilemenu='False' data-temp='PageContent' data-hash='نظر-سنجی'>نظر سنجی</a>
+            <li data-menuID='29453'>
+                <a href='{{ route('workTimes') }}'>ساعات کاری</a>
             </li>
-            <li class='' data-menuID='29267'>
-                <a class='' href='/contactUs'>تماس با ما</a>
+            
+            <li data-menuID='29453'>
+                <a href='{{ route('survey') }}'>نظر سنجی</a>
             </li>
-            <li class='' data-menuID='29846'>
+            
+            <li data-menuID='29453'>
+                <a href='{{ route('adviceRequest') }}'>درخواست مشاوره</a>
+            </li>
+
+            <li data-menuID='29267'>
+                <a href='/contactUs'>تماس با ما</a>
+            </li>
+            <li data-menuID='29846'>
                 <a data-menuID='29846' class=' '>امکانات</a>
             </li>
             </ul>

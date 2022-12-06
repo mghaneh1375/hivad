@@ -25,7 +25,7 @@
                         <div class="col-xs-12">
                             @foreach($slides as $slide)
                                 <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $slide->id }}">
-                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/'.$slide->image . '.jpg')}}" alt="{{ $slide->alt }}" style="width:100%; height: 100%">
+                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/'.$slide->image)}}" alt="{{ $slide->alt }}" style="width:100%; height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $slide->id }}">
                                             <button class="btn btn-primary" onclick="$('#opBox_{{ $slide->id }}').addClass('hidden'); $('#infoBox_{{ $slide->id }}').removeClass('hidden')">مشاهده اطلاعات</button>

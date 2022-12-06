@@ -6,8 +6,7 @@
                         <div class="contactInfoContainer">
                         <h3>راه های ارتباطی با ما</h3>
                         <div class="footer_address">
-                            {{-- <img src="/Content/base/dynamic/shopping742/img/92634.jpg"> --}}
-                            <p>نیاوران - خیابان اقدسیه - خیابان آجودانیه - باشگاه آجودانیه</p>
+                            <p>تهران، خیابان آذرشهر</p>
                         </div>
 
                         <ul id="contactInfo">
@@ -33,7 +32,7 @@
                         <div>  
                             <div class="haftsetare_copyRight ">
                                 <span class="footer_logo"></span>
-                                <span>Copyright © 2018 refahiajoudanieh.com, Inc. All Rights Reserved.</span>
+                                <span>تمام حقوق این سایت متعلق به مجموعه هیواد است.</span>
                             </div>
                         </div>
                         <div id="scroll_diamond" class="up sdFooter" data-index="2">

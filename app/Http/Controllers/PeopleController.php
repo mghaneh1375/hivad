@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\People;
+use App\models\People;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -43,6 +43,7 @@ class PeopleController extends Controller
             'bio' => 'nullable|string|min:1',
             'name' => 'nullable|string|min:1',
             'image' => 'nullable|image',
+            'tag' => 'nullable|string|min:2'
         ]);
 
         if($request->has('image')) {    
@@ -52,7 +53,7 @@ class PeopleController extends Controller
             $ext = explode('.', $img);
             $ext = $ext[count($ext) - 1];
 
-            $filename    = time() . $ext;
+            $filename    = time() . '.' . $ext;
             
             $image_resize = Image::make($image->getRealPath());
             $image_resize->save(public_path('Content/images/shortcutTab/' . $filename));
@@ -66,6 +67,7 @@ class PeopleController extends Controller
         $people->visibility = $request->has('visibility') ? $request['visibility'] : $people->visibility;
         $people->priority = $request->priority;
         $people->alt = $request->has('alt') ? $request->alt : $people->alt;
+        $people->tag = $request->has('tag') ? $request->tag : $people->tag;
         $people->bio = $request->has('bio') ? $request->bio : $people->bio;
         $people->name = $request->has('name') ? $request->name : $people->name;
 
@@ -80,7 +82,8 @@ class PeopleController extends Controller
             'alt' => 'nullable|string|min:1',
             'priority' => 'required|integer|min:1',
             'bio' => 'required|string|min:1',
-            'name' => 'required|string|min:1'
+            'name' => 'required|string|min:1',
+            'tag' => 'nullable|string|min:2'
         ]);
         
         $image       = $request->file('image');
@@ -89,7 +92,7 @@ class PeopleController extends Controller
         $ext = explode('.', $img);
         $ext = $ext[count($ext) - 1];
 
-        $filename    = time() . $ext;
+        $filename    = time() . '.' . $ext;
         
         $image_resize = Image::make($image->getRealPath());
         $image_resize->save(public_path('Content/images/shortcutTab/' . $filename));
@@ -97,6 +100,7 @@ class PeopleController extends Controller
         People::create([
             'image' => $filename,
             'alt' => $request->has('alt') ? $request['alt'] : null,
+            'tag' => $request->has('tag') ? $request['tag'] : null,
             'priority' => $request['priority'],
             'bio' => $request['bio'],
             'name' => $request['name']

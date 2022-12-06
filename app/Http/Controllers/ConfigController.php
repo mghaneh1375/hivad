@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Config;
+use App\models\Config;
 use Illuminate\Http\Request;
 
 class ConfigController extends Controller
@@ -19,6 +19,8 @@ class ConfigController extends Controller
             'show_gallery' => 'nullable|boolean',
             'show_about' => 'nullable|boolean',
             'show_videos' => 'nullable|boolean',
+            'show_videos' => 'nullable|boolean',
+            'online_booking' => 'nullable|boolean',
         ]);
 
         $config = Config::first();
@@ -28,6 +30,7 @@ class ConfigController extends Controller
         $config->show_gallery = $request->has('show_gallery') ? $request->show_gallery : $config->show_gallery;
         $config->show_about = $request->has('show_about') ? $request->show_about : $config->show_about;
         $config->show_videos = $request->has('show_videos') ? $request->show_videos : $config->show_videos;
+        $config->online_booking = $request->has('online_booking') ? $request->online_booking : $config->online_booking;
 
         $config->save();
         return response()->json(['status' => 'ok']);

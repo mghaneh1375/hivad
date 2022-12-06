@@ -18,7 +18,7 @@
 
             <div class="sparkline8-graph dashone-comment messages-scrollbar dashtwo-messages">
 
-                <div id="mainContainer" class="page-content" style="margin-top: 5%; margin: 50px; direction: rtl">
+                <div id="mainContainer" class="page-content" style="margin-top: 5%; direction: rtl">
 
                     <div class="row">
 
@@ -30,7 +30,9 @@
                                     <th>شماره تماس</th>
                                     <th>ایمیل</th>
                                     <th>عنوان</th>
+				    <th>متن پیام</th>
                                     <th>زمان ارسال</th>
+
                                     <th>عملیات</th>
                                 </thead>
                                 <tbody>
@@ -42,9 +44,9 @@
                                             <td>{{ $itr->phone }}</td>
                                             <td>{{ $itr->mail }}</td>
                                             <td>{{ $itr->title }}</td>
+					    <td>{{ $itr->msg }}</td>
                                             <td>{{ $itr->created_at }}</td>
                                             <td>
-                                                <button onclick="showMsg('{{ $itr->msg }}')" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></button>
                                                 <button onclick="remmoveModal('item', {{$itr->id}}, '{{ route('api.removeMsg', ['msg' => $itr->id]) }}')" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                                             </td>
                                         </tr>

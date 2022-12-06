@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +14,8 @@ class People extends Model
         'alt',
         'priority',
         'bio',
-        'name'
+        'name',
+        'tag'
     ];
 
     protected $table = 'people';

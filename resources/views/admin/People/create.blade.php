@@ -27,6 +27,10 @@
                             
                             <div style="margin-top: 10px;">
                                 
+                                @if($errors->any())
+                                    {{ implode('', $errors->all('<div>:message</div>')) }}
+                                @endif
+
                                 @if(isset($people))
                                     <img src="{{URL::asset('Content/images/shortcutTab/' . $people->image)}}" alt="{{ $people->alt }}" style="width:100px; height: 100px">
                                 @endif
@@ -50,9 +54,15 @@
                                             <label for="priority">اولویت</label>
                                             <input value="{{ isset($people) ? $people->priority : '' }}" type="number" required name="priority" id="priority" />
                                         </div>
+
                                         <div>
                                             <label for="alt">تگ alt</label>
                                             <input value="{{ isset($people) ? $people->alt : '' }}" type="text" placeholder="این فیلد اختیاری است" name="alt" id="alt" />
+                                        </div>
+                                        
+                                        <div>
+                                            <label for="tag">تخصص</label>
+                                            <input value="{{ isset($people) ? $people->tag : '' }}" type="text" placeholder="این فیلد اختیاری است" name="tag" id="tag" />
                                         </div>
                                             
                                         

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cafe;
+use App\models\Cafe;
 use App\models\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -78,7 +78,7 @@ class CafeController extends Controller
         $ext = explode('.', $img);
         $ext = $ext[count($ext) - 1];
 
-        $filename    = time() . $ext;
+        $filename    = time() . '.' . $ext;
         
         $image_resize = Image::make($image->getRealPath());
         $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename));              

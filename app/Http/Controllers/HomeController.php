@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Msg;
+use App\models\Msg;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +35,14 @@ class HomeController extends RenderController {
 
     public function contact_get_json_file() {
         return json_encode($this->contact_json_file());
+    }
+
+    public function survey_get_json_file() {
+        return json_encode($this->survey_json_file());
+    }
+    
+    public function advice_request_get_json_file() {
+        return json_encode($this->advice_request_json_file());
     }
 
     public function panel() {
@@ -151,6 +159,9 @@ class HomeController extends RenderController {
 
             $msg->save();
             return response()->json(['status' => 'ok', 'sunccess' => true, 'logID' => 1, 'message' => 'فرم شما با موفقیت ثبت گردید.']);
+        }
+        else if($formID == "survey" || $formID == "advice") {
+            return AdviceFormController::submit($request, $formID);
         }
     }
 
