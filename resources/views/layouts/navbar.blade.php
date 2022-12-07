@@ -37,8 +37,11 @@
             <li>
                 <a href='/news'>اخبار</a>
             </li>
+            <li data-menuID='87665' data-isprofilemenu='False' data-temp='PageContent'>
+                <a onclick="document.location.href = '{{ route('articles.show') }}'">مقالات</a>
+            </li>
             <li>
-                <a class='arrow ' href='/Home/Page?menuID=29271&pN=گالری-تصاویر' data-menuID='29271' data-isprofilemenu='False' data-temp='PageContent' data-hash='گالری'>گالری</a>
+                <a class='arrow '  data-menuID='29271' data-isprofilemenu='False' data-temp='PageContent'>گالری</a>
                 <ul class=' subSecondNavigation' style='display: none;'>
                 <li class='' data-menuID='29271'>
                     <a href='/galleries'>گالری تصاویر</a>
@@ -48,20 +51,20 @@
                 </li>
                 </ul>
             </li>
-            <li data-menuID='29453'>
-                <a href='{{ route('workTimes') }}'>ساعات کاری</a>
+            <li data-menuID='54423' data-isprofilemenu='False' data-temp='PageContent'>
+                <a class="selected" onclick="document.location.href = '{{ route('workTimes') }}'">ساعات کاری</a>
             </li>
             
-            <li data-menuID='29453'>
-                <a href='{{ route('survey') }}'>نظر سنجی</a>
+            <li data-menuID='98423' data-isprofilemenu='False' data-temp='PageContent'>
+                <a onclick="document.location.href = '{{ route('survey') }}'">نظر سنجی</a>
             </li>
             
-            <li data-menuID='29453'>
-                <a href='{{ route('adviceRequest') }}'>درخواست مشاوره</a>
+            <li>
+                <a onclick="document.location.href = '{{ route('adviceRequest') }}'">درخواست مشاوره</a>
             </li>
 
-            <li data-menuID='29267'>
-                <a href='/contactUs'>تماس با ما</a>
+            <li>
+                <a onclick="document.location.href = '{{ route('contactUs') }}'">تماس با ما</a>
             </li>
             <li data-menuID='29846'>
                 <a data-menuID='29846' class=' '>امکانات</a>

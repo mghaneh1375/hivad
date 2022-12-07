@@ -54,7 +54,7 @@
                                         <td id="status_{{ $form['id'] }}">{{ $form['status'] }}</td>
                                         <td>
                                             
-                                            <button data-id='{{ $form['id'] }}'  class="updateBtn btn btn-primary">
+                                            <button data-id='{{ $form['id'] }}' class="updateBtn btn btn-primary">
                                                 <span class="glyphicon glyphicon-eye-open"></span>
                                             </button>
 
@@ -75,7 +75,7 @@
     <div class="col-md-1"></div>
 
     
-    <div id="myModal" class="modal hidden">
+    <div id="statusModal" class="modal hidden">
         <div class="modal-content" style="width: 70%;">
             
             <div>
@@ -89,7 +89,7 @@
 
             <div class="flex center gap10">
                 <input type="button" value="تایید" class="btn green"  style="margin-bottom: 3%; margin-left: 5px;" onclick="update()">
-                <input type="button" value="بازگشت" class="btn green"  style="margin-bottom: 3%; margin-left: 5px;" onclick="$('#myModal').addClass('hidden')">
+                <input type="button" value="بازگشت" class="btn green"  style="margin-bottom: 3%; margin-left: 5px;" onclick="$('#statusModal').addClass('hidden')">
             </div>
 
         </div>
@@ -102,7 +102,7 @@
         $(document).ready(function() {
             $(".updateBtn").on('click', function() {
                 selectedId = $(this).attr('data-id');
-                $('#myModal').removeClass('hidden');
+                $('#statusModal').removeClass('hidden');
             });
         });
 
@@ -127,7 +127,7 @@
                         else if(newStatus === 'rejected')
                             $("#status_" + selectedId).empty().append('رد شده');
 
-                        $('#myModal').addClass('hidden');
+                        $('#statusModal').addClass('hidden');
                     }
 
                 }

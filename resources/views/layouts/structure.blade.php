@@ -67,6 +67,7 @@
             ============================================ -->
         <script src="{{URL::asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
         <script src="{{URL::asset('js/jquery.min.js')}}"></script>
+        <link href="{{ asset('assets/css/iziToast.min.css') }}" rel="stylesheet" />
 
             
         <style>
@@ -198,14 +199,14 @@
                 position: relative;
             }
 
-            .mCSB_container {
+            /* .mCSB_container {
                 overflow: scroll !important;
                 transform: rotateX(180deg) !important;
             }
 
             #mainContainer {
                 transform: rotateX(180deg) !important;
-            }
+            } */
 
             .modal {
                 display: block; /* Hidden by default */
@@ -503,6 +504,20 @@
                                         <a href="{{route('msgs')}}" class="dropdown-item">کل پیام ها</a>
                                     </div>
                                 </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <i></i> 
+                                        <span class="mini-dn">مقالات</span>
+                                        <span class="indicator-right-menu mini-dn">
+                                            <i class="fa indicator-mn fa-angle-left"></i>
+                                        </span>
+                                    </a>
+
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('articles.index')}}" class="dropdown-item">مدیریت مقالات</a>
+                                    </div>
+                                </li>
 
                             {{-- @endif --}}
 
@@ -604,14 +619,79 @@
             <!-- main JS
                 ============================================ -->
             <script src="{{URL::asset('js/main.js')}}"></script>
+            <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
 
             <script type="text/javascript">
-                $.ajaxSetup({
+
+                function showErr(msg) {
+                    s = {
+                        rtl: true,
+                        class: "iziToast-" + "danger",
+                        title: "ناموفق",
+                        message: msg,
+                        animateInside: !1,
+                        position: "topRight",
+                        progressBar: !1,
+                        icon: 'ri-close-fill',
+                        timeout: 3200,
+                        transitionIn: "fadeInLeft",
+                        transitionOut: "fadeOut",
+                        transitionInMobile: "fadeIn",
+                        transitionOutMobile: "fadeOut",
+                        color: "red",
+                        };
+                    iziToast.show(s);
+                }
+
+                function showSuccess(msg) {
+                    s = {
+                        rtl: true,
+                        class: "iziToast-" + "danger",
+                        title: "موفق!",
+                        message: msg,
+                        animateInside: !1,
+                        position: "topRight",
+                        progressBar: !1,
+                        icon: 'ri-check-fill',
+                        timeout: 3200,
+                        transitionIn: "fadeInLeft",
+                        transitionOut: "fadeOut",
+                        transitionInMobile: "fadeIn",
+                        transitionOutMobile: "fadeOut",
+                        color: "green",
+                        type: 'success'
+                        };
+                    iziToast.show(s);
+                }
+
+                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            
+                        var errs = JSON.parse(XMLHttpRequest.responseText).errors;
+
+                        if(errs instanceof Object) {
+                            var errsText = '';
+
+                            Object.keys(errs).forEach(function(key) {
+                                errsText += errs[key] + "<br />";
+                            });
+
+                            showErr(errsText);    
+                        }
+                        else {
+                            var errsText = '';
+
+                            for(let i = 0; i < errs.length; i++)
+                                errsText += errs[i].value;
+                            
+                            showErr(errsText);
+                        }
                     }
                 });
-
+                
                 function isNumber(evt) {
                     evt = (evt) ? evt : window.event;
                     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -643,7 +723,7 @@
                         success: function(res) {
                             if(res.status === "ok") {
                                 $("#myModal").addClass('hidden');
-                                alert("عملیات موردنظر با موفقیت انجام شد.");
+                                showSuccess("عملیات موردنظر با موفقیت انجام شد.");
                                 $("#" + item + "_" + itemID).remove();
                             }
                         }

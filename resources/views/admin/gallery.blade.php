@@ -25,7 +25,7 @@
                         <div class="col-xs-12">
                             @foreach($galleries as $gallery)
                                 <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $gallery->id }}">
-                                    <img src="{{URL::asset('Content/images/shortcutTab/'.$gallery->image)}}" alt="{{ $gallery->alt }}" style="width:100%; height: 100%">
+                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/'.$gallery->image)}}" alt="{{ $gallery->alt }}" style="width:100%; height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $gallery->id }}">
                                             <button class="btn btn-primary" onclick="$('#opBox_{{ $gallery->id }}').addClass('hidden'); $('#infoBox_{{ $gallery->id }}').removeClass('hidden')">مشاهده اطلاعات</button>
@@ -72,6 +72,15 @@
                                                     </select>
                                                 </div>
 
+                                                <div>
+                                                    <label for="category_id_{{ $gallery->id }}">دسته موردنظر</label>
+                                                    <select id="category_id_{{ $gallery->id }}">
+                                                        @foreach ($categories as $category)
+                                                            <option {{ $category->id == $gallery->category_id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->title }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
                                                 <div class="op">
                                                     <button onclick="$('#opBox_{{ $gallery->id }}').removeClass('hidden'); $('#infoBox_{{ $gallery->id }}').addClass('hidden')" class="btn btn-danger">بازگشت</button>
                                                     <button onclick="editItem({{ $gallery->id }})" class="btn btn-success">اعمال تغییرات</button>
@@ -84,11 +93,15 @@
 
                         <div class="col-xs-12" style="border: solid;">
                             
+                            @if($errors->any())
+                            <h1>salamdqw</h1>
+                                {{ implode('', $errors->all('<div>:message</div>')) }}
+                            @endif
+
                             <div style="margin-top: 10px;">
-                                <form action="{{route('api.addGallery')}}" method="post" 
-                                 enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="kind" value="save">
+                                <form action="{{route('api.addGallery')}}" method="post" enctype="multipart/form-data">
+                                    
+                                    @csrf
 
                                     <div class="flex flex-col center gap10" style="margin: 10px">
                                         <input type="file" name="image" required id="imgInp">
@@ -111,6 +124,15 @@
                                             <select name="is_imp" id="isImp">
                                                 <option value="0">خیر</option>
                                                 <option value="1">بله</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label for="category_id">دسته موردنظر</label>
+                                            <select name="category_id" id="category_id">
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -145,14 +167,15 @@
                     'alt': $("#alt_" + id).val(),
                     'title': $("#title_" + id).val(),
                     'visibility': $('#visibility_' + id).val(),
-                    'is_imp': $('#isImp_' + id).val()
+                    'is_imp': $('#isImp_' + id).val(),
+                    'category_id': $('#category_id_' + id).val(),
                 },
                 titles: {
                     "accept": "application/json"
                 },
                 success: function(res) {
                     if(res.status === "ok") {
-                        alert('عملیات موردنظر با موفقیت انجام شد.');
+                        showSuccess('عملیات موردنظر با موفقیت انجام شد.');
                         $('#opBox_' + id).removeClass('hidden'); 
                         $('#infoBox_' + id).addClass('hidden');
                     }

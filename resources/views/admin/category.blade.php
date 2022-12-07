@@ -47,6 +47,15 @@
                                                 </div>
 
                                                 <div>
+                                                    <label for="section_{{ $category->id }}">بخش</label>
+                                                    <select id="section_{{ $category->id }}">
+                                                        <option {{ $category->section == 'gallery' ? 'selected' : '' }} value="gallery">گالری</option>
+                                                        <option {{ $category->section == 'article' ? 'selected' : '' }} value="article">مقالات</option>
+                                                        <option {{ $category->section == 'shop' ? 'selected' : '' }} value="shop">فروشگاه</option>
+                                                    </select>
+                                                </div>
+
+                                                <div>
                                                     <label for="visibility_{{ $category->id }}">وضعیت نمایش</label>
                                                     <select id="visibility_{{ $category->id }}">
                                                         @if($category->visibility == 1)
@@ -92,6 +101,8 @@
                                             <label for="section">بخش</label>
                                             <select name="section" id="section">
                                                 <option value="gallery">گالری</option>
+                                                <option value="article">مقالات</option>
+                                                <option value="shop">فروشگاه</option>
                                             </select>
                                         </div>
 
@@ -124,20 +135,21 @@
         function editItem(id) {
 
             $.ajax({
-                type: 'put',
+                type: 'post',
                 url: '{{ route('api.updateCategory') }}' + '/' + id,
                 data: {
                     'priority': $("#priority_" + id).val(),
                     'alt': $("#alt_" + id).val(),
                     'title': $("#title_" + id).val(),
-                    'visibility': $('#visibility_' + id).val()
+                    'visibility': $('#visibility_' + id).val(),
+                    'section': $('#section_' + id).val(),
                 },
                 titles: {
                     "accept": "application/json"
                 },
                 success: function(res) {
                     if(res.status === "ok") {
-                        alert('عملیات موردنظر با موفقیت انجام شد.');
+                        showSuccess('عملیات موردنظر با موفقیت انجام شد.');
                         $('#opBox_' + id).removeClass('hidden'); 
                         $('#infoBox_' + id).addClass('hidden');
                     }

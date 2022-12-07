@@ -115,7 +115,7 @@
                 },
                 success: function(res) {
                     if(res.status === "ok")
-                        alert('عملیات موردنظر با موفقیت انجام شد.');
+                        showSuccess('عملیات موردنظر با موفقیت انجام شد.');
                 }
             })
         }
@@ -134,7 +134,7 @@
                 },
                 success: function(res) {
                     if(res.status === "ok") {
-                        alert('عملیات موردنظر با موفقیت انجام شد.');
+                        showSuccess('عملیات موردنظر با موفقیت انجام شد.');
                         $('#opBox_' + id).removeClass('hidden'); 
                         $('#infoBox_' + id).addClass('hidden');
                     }

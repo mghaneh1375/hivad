@@ -29,7 +29,7 @@
                         <div class="col-xs-12">
                             @foreach($allNews as $news)
                                 <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $news->id }}">
-                                    <img src="{{URL::asset('Content/images/news/crop/'.$news->image)}}" alt="{{ $news->alt }}" style="width:100%; height: 100%">
+                                    <img src="{{URL::asset('Content/images/news/crop/' . $news->image)}}" alt="{{ $news->alt }}" style="width:100%; height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $news->id }}">
                                             <button class="btn btn-primary" onclick="document.location.href = '{{ route('editNews', ['news' => $news->id]) }}'">ویرایش</button>

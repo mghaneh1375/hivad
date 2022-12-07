@@ -158,7 +158,7 @@
                 },
                 success: function(res) {
                     if(res.status === "ok") {
-                        alert("عملیات با موفقیت انجام شد.");
+                        showSuccess("عملیات با موفقیت انجام شد.");
                     }
                 }
             });
