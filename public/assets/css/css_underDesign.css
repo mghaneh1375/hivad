@@ -1120,6 +1120,16 @@ body[data-menuid="-1"] .resizable[data-tmplname="slideshow"] {
     transition: all .2s linear
 }
 
+.red-btn {
+    background-color: red;
+    color: white;
+}
+
+.green-btn {
+    background-color: green;
+    color: white;
+}
+
 .buttonList {
     position: absolute;
     bottom: 80px;
