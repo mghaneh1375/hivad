@@ -43,7 +43,8 @@ class UserAdviceRequestController extends Controller
             'name' => 'required|string|min:2',
             'phone' => 'required|regex:/(09)[0-9]{9}/',
             'date' => ['required', Rule::in(['curr', 'next', 'next2', 'next3', 'next4'])],
-            'people_work_time_id' => 'required|exists:people_work_times,id'
+            'people_work_time_id' => 'required|exists:people_work_times,id',
+            'description' => 'nullable|string|min:2'
         ];
 
         $request->validate($validator);

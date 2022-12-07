@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdviceFormController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CafeController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\CategoryController;
@@ -40,6 +41,8 @@ Route::get('people-get_json_file', [HomeController::class, 'people_get_json_file
 
 Route::get('news-get_json_file', [HomeController::class, 'news_get_json_file'])->name('news_get_json_file');
 
+Route::get('article-get_json_file', [HomeController::class, 'article_get_json_file'])->name('article_get_json_file');
+
 Route::get('galleries-get_json_file', [HomeController::class, 'galleries_get_json_file'])->name('galleries_get_json_file');
 
 Route::get('videos-get_json_file', [HomeController::class, 'videos_get_json_file'])->name('videos_get_json_file');
@@ -75,6 +78,9 @@ Route::get('editVideo/{video}', [VideoController::class, 'editVideo'])->name('ed
 
 Route::get('addVideo', [VideoController::class, 'add'])->name('addVideo');
 
+
+
+Route::resource('articles', ArticleController::class)->only('index', 'edit', 'create');
 
 Route::resource('schedule', ScheduleController::class)->only('index', 'edit');
 
@@ -161,15 +167,19 @@ Route::view('galleries', 'galleries');
 
 Route::view('videos', 'videos');
 
-Route::view('contactUs', 'contact');
+Route::view('contactUs', 'contact')->name('contactUs');
 
 Route::view('survey', 'survey')->name('survey');
+
+Route::view('show-articles', 'articles')->name('articles.show');
 
 Route::get('workTimes', [ScheduleController::class, 'show'])->name('workTimes');
 
 Route::view('adviceRequest', 'advice_request')->name('adviceRequest');
 
 Route::get('/Home/GetGalleryList', [GalleryController::class, 'list']);
+
+Route::get('/Home/GetArticleList', [ArticleController::class, 'list']);
 
 Route::view('a', 'a');
 

@@ -16,6 +16,10 @@ class HomeController extends RenderController {
     public function news_get_json_file() {
         return json_encode($this->news_json_file());
     }
+    
+    public function article_get_json_file() {
+        return json_encode($this->article_json_file());
+    }
 
     public function cafe_get_json_file() {
         return json_encode($this->about_cafe_json_file());
@@ -56,7 +60,11 @@ class HomeController extends RenderController {
         ]);
 
         $image       = $request->file('upload');
-        $filename    = time() . '.jpg';
+        $img = $request->file('upload')->getClientOriginalName();
+        $ext = explode('.', $img);
+        $ext = $ext[count($ext) - 1];
+
+        $filename    = time() . '.' . $ext;
         
         $image_resize = Image::make($image->getRealPath());
         $image_resize->save(public_path('Content/images/tmp/' . $filename));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SingleGalleryJSON;
+use App\models\Article;
 use App\models\Category;
 use App\models\Gallery;
 use Illuminate\Http\Request;
@@ -16,14 +17,17 @@ class GalleryController extends RenderController
 
     public function manageGallery()
     {
-        return view('admin.gallery', ['galleries' => Gallery::all()]);
+        return view('admin.gallery', [
+            'galleries' => Gallery::all(),
+            'categories' => Category::where('section', 'gallery')->get()
+        ]);
     }
 
     public function remove(Gallery $gallery)
     {
 
-        if (file_exists(__DIR__ . '/../../../public/Content/images/shortcutTab/' . $gallery->image . '.jpg'))
-            unlink(__DIR__ . '/../../../public/Content/images/shortcutTab/' . $gallery->image . '.jpg');
+        if (file_exists(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $gallery->image))
+            unlink(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $gallery->image);
 
         $gallery->delete();
         return response()->json(["status" => "ok"]);
@@ -32,9 +36,14 @@ class GalleryController extends RenderController
     public function list(Request $request)
     {
         $isVideo = $request->query('isVideo');
-        if(!$isVideo) {
+        if(!$isVideo || $isVideo == 'false') {
             $category = Category::whereId($request->query('albumID'))->first();
-            $galleries = Gallery::whereCatId($category->id)->where('visibility', true)->get();
+            
+            if($category->section == 'gallery')
+                $galleries = Gallery::whereCatId($category->id)->visible()->get();
+            else if($category->section == 'article')
+                $galleries = Article::where('category_id', $category->id)->visible()->get();
+                
             return json_encode(
                 [
                     "boxID" => 38888,
@@ -59,22 +68,25 @@ class GalleryController extends RenderController
 
     public function store(Request $request)
     {
-
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,jpg',
+            'image' => 'required|image',
             'priority' => 'required|int|min:1',
             'alt' => 'nullable|string|min:1',
             'title' => 'nullable|string|min:1',
-            'is_imp' => 'required|boolean'
+            'is_imp' => 'required|boolean',
+            'category_id' => 'required|exists:category,id'
         ]);
 
         $image       = $request->file('image');
-        $filename    = time() . '.jpg';
+        
+        $img = $request->file('image')->getClientOriginalName();
+        $ext = explode('.', $img);
+        $ext = $ext[count($ext) - 1];
+
+        $filename    = time() . '.' . $ext;
 
         $image_resize = Image::make($image->getRealPath());
-        $image_resize->save(public_path('Content/images/shortcutTab/' . $filename));
-
-        $filename = str_replace('.jpg', '', $filename);
+        $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename));
 
         Gallery::create([
             'image' => $filename,
@@ -82,6 +94,7 @@ class GalleryController extends RenderController
             'priority' => $request['priority'],
             'title' => $request->has('title') ? $request['title'] : null,
             'is_imp' => $request['is_imp'],
+            'cat_id' => $request['category_id']
         ]);
 
         return Redirect::route('manageGallery');
@@ -98,11 +111,13 @@ class GalleryController extends RenderController
             'alt' => 'nullable|string|min:1',
             'title' => 'nullable|string|min:1',
             'is_imp' => 'required|boolean',
-            'visibility' => 'required|boolean'
+            'visibility' => 'required|boolean',
+            'category_id' => 'required|exists:category,id'
         ]);
 
         $gallery->priority = $request->priority;
         $gallery->visibility = $request->visibility;
+        $gallery->cat_id = $request->category_id;
         $gallery->alt = $request->has('alt') ? $request->alt : $gallery->alt;
         $gallery->title = $request->has('title') ? $request->title : $gallery->title;
         $gallery->is_imp = $request->is_imp;

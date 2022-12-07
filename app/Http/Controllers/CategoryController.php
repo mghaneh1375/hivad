@@ -32,7 +32,7 @@ class CategoryController extends Controller
             'priority' => 'required|int|min:1',
             'alt' => 'nullable|string|min:1',
             'title' => 'required|string|min:1',
-            'section' => ['required', Rule::in(['gallery'])],
+            'section' => ['required', Rule::in(['gallery', 'article', 'shop'])],
         ]);
 
         $image       = $request->file('image');
@@ -53,5 +53,35 @@ class CategoryController extends Controller
 
         return Redirect::route('manageCategory');
     }
+
+    public function update(Category $category, Request $request) {
+        
+        $request->validate([
+            'image' => 'nullable|image',
+            'priority' => 'required|int|min:1',
+            'alt' => 'nullable|string|min:1',
+            'title' => 'required|string|min:1',
+            'section' => ['required', Rule::in(['gallery', 'article', 'shop'])],
+        ]);
+
+        if($request->has('image')) {
+            $image       = $request->file('image');
+            $n = $image->getClientOriginalName();
+            $arr = explode('.', $n);
+            $filename    = time() . '.' . $arr[count($arr) - 1];
+            
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename));
+        }
+
+        $category->alt = $request->has('alt') ? $request['alt'] : $category->alt;
+        $category->title = $request['title'];
+        $category->section = $request['section'];
+        $category->priority = $request['priority'];
+        
+        $category->save();
+        return response()->json(['status' => 'ok']);
+    }
+
 
 }

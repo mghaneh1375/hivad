@@ -47,4 +47,16 @@ class Controller extends BaseController
         }
 
     }
+
+    protected static $errors = [
+        'img.required' => 'لطفا تصویر را آپلود نمایید',
+        'priority.required' => 'لطفا اولویت را وارد نمایید',
+        'is_imp.required' => 'لطفا اینکه آیا در صفحه نخست نمایش داده شود را مشخص کنید',
+        'category_id.required' => 'لطفا دسته موردنظر خود را وارد نمایید',
+        'f.required' => 'لطفا فایل موردنظر خود را وارد نمایید ',
+        'description.required' => 'لطفا توضیحات موردنظر خود را وارد نمایید',
+        'digest.required' => 'لطفا خلاصه موردنظر خود را وارد نمایید',
+        'title.required' => 'لطفا عنوان موردنظر خود را وارد نمایید'
+    ];
+    
 }

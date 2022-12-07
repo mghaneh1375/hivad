@@ -67,13 +67,41 @@ class RenderController extends Controller
 
     public function get_categories()
     {
-        $cats = Category::visible()->orderBy('priority', 'asc')->get();
+        $cats = Category::where('section', 'gallery')->visible()->orderBy('priority', 'asc')->get();
+        $wantedCats = [];
         $ids = "";
         foreach ($cats as $cat) {
+
+            $numOfGalleries = $cat->galleries()->count();
+            if($numOfGalleries == 0)
+                continue;
+
             $ids .= "," . $cat->id;
+            $cat->numOfGalleries = $numOfGalleries;
+            array_push($wantedCats, $cat);
         }
 
-        return [CategoryJSON::collection($cats), $ids];
+        return [CategoryJSON::collection($wantedCats), $ids];
+    }
+    
+    public function get_article_categories()
+    {
+        $cats = Category::where('section', 'article')->visible()->orderBy('priority', 'asc')->get();
+        $wantedCats = [];
+        $ids = [];
+
+        foreach ($cats as $cat) {
+
+            $numOfArticles = $cat->articles()->count();
+            if($numOfArticles == 0)
+                continue;
+
+            array_push($ids, $cat->id);
+            $cat->numOfGalleries = $numOfArticles;
+            array_push($wantedCats, $cat);
+        }
+
+        return [CategoryJSON::collection($wantedCats), implode(',', $ids)];
     }
     
     public function get_video_categories()
@@ -93,7 +121,7 @@ class RenderController extends Controller
             [
                 [
                     "BoxID" => 39184, 
-                    "MenuID" => 29453, 
+                    "MenuID" => 98423, 
                     "BoxTitle" => "نظرسنجی", 
                     "BoxDescription" => "", 
                     "Priority" => 1, 
@@ -1036,6 +1064,77 @@ class RenderController extends Controller
         ];
     }
 
+    public function render_total_articles()
+    {
+
+        $cats = $this->get_article_categories();
+
+        return [
+            [
+                "BoxID" => 38888,
+                "MenuID" => 87665,
+                "BoxTitle" => "مقالات",
+                "BoxDescription" => "",
+                "Priority" => 1,
+                "Height" => 280,
+                "BoxCount" => 100,
+                "MaduleID" => null,
+                "SubBoxHeight" => null,
+                "BoxCountPerRow" => 3,
+                "FormID" => null,
+                "FormReportID" => null,
+                "BoxGroupID" => 3,
+                "BoxGroupName" => "gallery",
+                "BoxPersianName" => "مقالات",
+                "Pagination" => 3,
+                "SortType" => 1,
+                "Content" => null,
+                "MediaID" => null,
+                "HasProductTabs" => null,
+                "ProductSlides" => null,
+                "RowIDList" => $cats[1],
+                "BoxStyle" => "",
+                "PopupStyle" => false,
+                "BoxTemp" => null,
+                "ShowMoreLink" => null,
+                "ContainerTabs" => null,
+                "WebsiteDisplay" => true,
+                "MobileDisplay" => true,
+                "Background" => null,
+                "ParallaxStyle" => null,
+                "DisableBoxBack" => null,
+                "BackTitleColor" => null,
+                "DisableBoxBackgroundColor" => null,
+                "BoxBackgroundColor" => null,
+                "BlurEffectBack" => null,
+                "BlackEffectBack" => null,
+                "ButtonList" => [],
+                "Platform7Maduleid" => null,
+                "GroupMaduleBox" => null,
+                "IsAmazzingoffer" => false
+            ],
+            [
+                "BoxID" => 38888,
+                "Content" => [
+                    "boxID" => 38888,
+                    "isVideo" => false,
+                    "isFileGallery" => false,
+                    "model" => [
+                        "GalleryList" => null,
+                        "AlbumList" => $cats[0],
+                        "BoxCountPerRow" => 3,
+                        "SubBoxHeight" => 116,
+                        "paddingBottom" => 0,
+                        "boxID" => 38888
+                    ],
+                    "top" => 100,
+                    "Pagination" => 3,
+                    "ShowMoreLink" => null
+                ]
+            ],
+        ];
+    }
+
     public function render_about_cafe()
     {
         return
@@ -1283,6 +1382,12 @@ class RenderController extends Controller
     {
         $news_section = $this->render_total_news();
         return ["madules" => [$news_section[0]], "jsonContentList" => [$news_section[1]]];
+    }
+
+    public function article_json_file()
+    {
+        $article_section = $this->render_total_articles();
+        return ["madules" => [$article_section[0]], "jsonContentList" => [$article_section[1]]];
     }
 
     public function render_people() {

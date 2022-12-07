@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdviceFormController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CafeController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
@@ -140,3 +141,9 @@ Route::delete('user_advice_requests/{user_advice_request}/destroy', [UserAdviceR
 Route::post('user_advice_requests/update', [UserAdviceRequestController::class, 'update'])->name('api.user_advice_requests.update');
 
 
+
+Route::post('article/{article}/update', [ArticleController::class, 'update'])->name('api.article.update');
+
+Route::post('article/store', [ArticleController::class, 'store'])->name('api.article.store');
+
+Route::delete('article/{article}/destroy', [ArticleController::class, 'destroy'])->name('api.article.destory');

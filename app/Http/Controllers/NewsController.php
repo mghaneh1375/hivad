@@ -64,8 +64,8 @@ class NewsController extends Controller {
 
     public function remove(News $news) {
 
-        if(file_exists(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image . '.jpg'))
-            unlink(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image . '.jpg');
+        if(file_exists(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image))
+            unlink(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image);
 
         $news->delete();
         return response()->json(["status" => "ok"]);
@@ -86,7 +86,12 @@ class NewsController extends Controller {
         ]);
 
         $image       = $request->file('image');
-        $filename    = time() . '.jpg';
+        
+        $img = $request->file('image')->getClientOriginalName();
+        $ext = explode('.', $img);
+        $ext = $ext[count($ext) - 1];
+
+        $filename    = time() . '.' . $ext;
         
         $image_resize = Image::make($image->getRealPath());
         $image_resize->save(public_path('Content/images/news/crop/' . $filename));
@@ -135,13 +140,18 @@ class NewsController extends Controller {
         if($request->has('image')) {
             $image       = $request->file('image');
             if($image != null) {
-                $filename    = time() . '.jpg';
+                
+                $img = $request->file('image')->getClientOriginalName();
+                $ext = explode('.', $img);
+                $ext = $ext[count($ext) - 1];
+
+                $filename    = time() . '.' . $ext;
                 
                 $image_resize = Image::make($image->getRealPath());
                 $image_resize->save(public_path('Content/images/news/crop/' . $filename));
                 
-                if(file_exists(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image . '.jpg'))
-                    unlink(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image . '.jpg');
+                if(file_exists(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image))
+                    unlink(__DIR__ . '/../../../public/Content/images/news/crop/' . $news->image);
                     
                 $news->image = $filename;
             }

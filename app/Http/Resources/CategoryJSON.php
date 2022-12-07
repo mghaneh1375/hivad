@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\models\Gallery;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryJSON extends JsonResource
@@ -19,7 +18,7 @@ class CategoryJSON extends JsonResource
             "AlbumID" => $this->id,
             "AlbumName" => $this->title,
             "AlbumDescription" => null,
-            "ImageCount" => Gallery::whereCatId($this->id)->count(),
+            "ImageCount" => $this->numOfGalleries,
             "tumbDir1" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
             "tumbDir2" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
             "tumbDir3" => asset('/Content/images/GalleryPictures/crop/' . $this->image),

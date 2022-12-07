@@ -18,10 +18,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model {
 
-    protected $table = 'articles';
-    public $timestamps = false;
+    protected $table = 'article';
 
-    public static function whereId($value) {
-        return Article::find($value);
+    protected $fillable = [
+        'image',
+        'alt_image',
+        'priority',
+        'visibility',
+        'title',
+        'file',
+        'tags',
+        'price',
+        'digest',
+        'keywords',
+        'is_imp',
+        'description',
+        'category_id'
+    ];
+
+    public function scopeVisible($query)
+    {
+        return $query->where('visibility', true);
     }
+    
+    public function scopeImp($query)
+    {
+        return $query->where('is_imp', true);
+    }
+
 }

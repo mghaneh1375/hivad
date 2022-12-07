@@ -13,7 +13,8 @@ class UserAdviceRequest extends Model
         'name',
         'phone',
         'people_work_time_id',
-        'date'
+        'date',
+        'description'
     ];
 
     public function scopeUnSeen($query)

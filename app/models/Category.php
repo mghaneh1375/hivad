@@ -30,5 +30,15 @@ class Category extends Model
     {
         return $this->hasMany(Video::class, 'cat_id', 'id');
     }
+    
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class, 'cat_id', 'id');
+    }
+    
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 
 }

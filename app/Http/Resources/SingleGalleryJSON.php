@@ -17,7 +17,7 @@ class SingleGalleryJSON extends JsonResource
         $arr = explode('.', $this->image);
 
         return [
-            "MediaID" => $arr[0],
+            "MediaID" => $this->image,
             "AlbumID" => $this->cat_id,
             "BoxID" => null,
             "IsImage" => true,
@@ -26,7 +26,7 @@ class SingleGalleryJSON extends JsonResource
             "Display" => true,
             "Description" => null,
             "Image" => $this->image,
-            "Text" => $this->title,
+            "Text" => '<p>' . $this->title . '</p>' . '<div>' . $this->digest . '</div><a>مشاهده بیشتر</a>',
             "DateTime" => "2020-01-01T12 =>14 =>00",
             "WebsiteID" => 762,
             "BaseWebsiteID" => null,
