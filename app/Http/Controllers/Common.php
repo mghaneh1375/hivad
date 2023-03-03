@@ -274,11 +274,11 @@ function createPayLink($shouldPay, $uId) {
 
     $rand = generateRandomString();
 
-    while (\App\models\Links::whereVal_($rand)->count() > 0) {
+    while (\App\Models\Links::whereVal_($rand)->count() > 0) {
         $rand = generateRandomString();
     }
 
-    $tmp = new \App\models\Links();
+    $tmp = new \App\Models\Links();
     $tmp->should_pay = $shouldPay;
     $tmp->val_ = $rand;
     $tmp->user_id = $uId;

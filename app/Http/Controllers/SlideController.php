@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\models\SlideBar;
+use App\Models\SlideBar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;

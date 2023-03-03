@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SingleGalleryJSON;
-use App\models\Article;
-use App\models\Category;
-use App\models\Gallery;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;

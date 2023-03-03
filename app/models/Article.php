@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $img
  * @property string $title
  * @property integer $category
- * @method static \Illuminate\Database\Query\Builder|\App\models\Article whereCategory($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Article whereCategory($value)
  */
 
 class Article extends Model {

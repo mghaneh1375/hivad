@@ -10,16 +10,16 @@ use App\Http\Resources\CategoryJSON;
 use App\Http\Resources\FieldResource;
 use App\Http\Resources\ProductJSON;
 use App\Http\Resources\SliderCafe;
-use App\models\Cafe;
-use App\models\Config;
-use App\models\Gallery;
-use App\models\Introduce;
-use App\models\Category;
+use App\Models\Cafe;
+use App\Models\Config;
+use App\Models\Gallery;
+use App\Models\Introduce;
+use App\Models\Category;
 use App\Models\Field;
-use App\models\News;
+use App\Models\News;
 use App\Models\Product;
-use App\models\SlideBar;
-use App\models\Video;
+use App\Models\SlideBar;
+use App\Models\Video;
 
 class RenderController extends Controller
 {

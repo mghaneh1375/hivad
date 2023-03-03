@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\models\News;
+use App\Models\News;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

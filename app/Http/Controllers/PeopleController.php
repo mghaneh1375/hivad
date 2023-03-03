@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\models\People;
+use App\Models\People;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;

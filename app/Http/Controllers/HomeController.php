@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Msg;
-use App\models\User;
+use App\Models\Msg;
+use App\Models\User;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

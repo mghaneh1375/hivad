@@ -19,10 +19,10 @@ use App\Http\Controllers\UserAdviceRequestController;
 use App\Http\Controllers\VideoController;
 use App\Http\Resources\PeopleResource;
 use Illuminate\Support\Facades\Route;
-use App\models\News;
-use App\models\People;
+use App\Models\News;
+use App\Models\People;
 use App\Models\Product;
-use App\models\Video;
+use App\Models\Video;
 
 /*
 |--------------------------------------------------------------------------

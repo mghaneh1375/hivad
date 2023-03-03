@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Config;
-use App\models\Introduce;
+use App\Models\Config;
+use App\Models\Introduce;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;

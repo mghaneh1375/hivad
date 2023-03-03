@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\models\City;
-use App\models\State;
-use App\models\User;
+use App\Models\City;
+use App\Models\State;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;

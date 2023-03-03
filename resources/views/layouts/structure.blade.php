@@ -437,7 +437,7 @@
                                 </li>
 
                                 <?php
-                                    $unseenSurveyCount = \App\models\UserForm::survey()->unSeen()->count();
+                                    $unseenSurveyCount = \App\Models\UserForm::survey()->unSeen()->count();
                                 ?>
 
                                 <li class="nav-item">
@@ -461,7 +461,7 @@
                                 </li>
                                 
                                 <?php
-                                    $unseenAdviceCount = \App\models\UserForm::advice()->unSeen()->count();
+                                    $unseenAdviceCount = \App\Models\UserForm::advice()->unSeen()->count();
                                 ?>
 
                                 <li class="nav-item">
@@ -485,7 +485,7 @@
 
 
                                 <?php
-                                    $unseenMsgCount = \App\models\Msg::unSeen()->count();
+                                    $unseenMsgCount = \App\Models\Msg::unSeen()->count();
                                 ?>
 
                                 <li class="nav-item">

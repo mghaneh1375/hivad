@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Cafe;
-use App\models\Config;
+use App\Models\Cafe;
+use App\Models\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;

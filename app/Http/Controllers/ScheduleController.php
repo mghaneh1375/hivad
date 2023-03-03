@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AdminScheduleResource;
 use App\Http\Resources\ScheduleResource;
-use App\models\Config;
+use App\Models\Config;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;

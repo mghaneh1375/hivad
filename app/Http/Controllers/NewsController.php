@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Category;
-use App\models\News;
+use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;

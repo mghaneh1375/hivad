@@ -21,12 +21,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $last_name
  * @property int $city_id
  * @property string $img
- * @method static \Illuminate\Database\Query\Builder|\App\models\User whereUsername($value)
- * @method static \Illuminate\Database\Query\Builder|\App\models\User whereNid($value)
- * @method static \Illuminate\Database\Query\Builder|\App\models\User whereLevel($value)
- * @method static \Illuminate\Database\Query\Builder|\App\models\User whereStatus($value)
- * @method static \Illuminate\Database\Query\Builder|\App\models\User wherePhoneNum($value)
- * @method static \Illuminate\Database\Query\Builder|\App\models\User whereCreator($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereUsername($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereNid($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereLevel($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User wherePhoneNum($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereCreator($value)
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @mixin \Eloquent

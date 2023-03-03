@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\models\SlideBar;
+use App\Models\SlideBar;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

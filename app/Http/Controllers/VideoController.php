@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SingleGalleryJSON;
-use App\models\Category;
-use App\models\Video;
+use App\Models\Category;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;

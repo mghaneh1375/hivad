@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $title
  * @property integer $cat_Id
- * @method static \Illuminate\Database\Query\Builder|\App\models\Gallery whereCatId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Gallery whereCatId($value)
  */
 
 class Gallery extends Model
