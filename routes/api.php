@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\PeopleWorkTimeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UserAdviceRequestController;
@@ -84,6 +85,15 @@ Route::post('addNews', [NewsController::class, 'store'])->name('api.addNews');
 Route::delete('removeNews/{news?}', [NewsController::class, 'remove'])->name('api.removeNews');
 
 Route::post('updateNews/{news?}', [NewsController::class, 'update'])->name('api.updateNews');
+
+
+
+Route::post('addProduct', [ProductController::class, 'store'])->name('api.addProduct');
+
+Route::delete('removeProduct/{product?}', [ProductController::class, 'remove'])->name('api.removeProduct');
+
+Route::post('updateProduct/{product?}', [ProductController::class, 'update'])->name('api.updateProduct');
+
 
 
 Route::post('addCategory', [CategoryController::class, 'store'])->name('api.addCategory');

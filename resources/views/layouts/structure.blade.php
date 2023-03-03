@@ -322,6 +322,7 @@
 
                 table {
                     width: 100%;
+                    direction: rtl !important;
                 }
 
                 .newCounter {
@@ -429,6 +430,10 @@
                                         <a href="{{route('user_advice_requests', ['seen' => 'false'])}}" class="dropdown-item">مدیریت درخواست های دیده نشده</a>
                                         <a href="{{route('user_advice_requests')}}" class="dropdown-item">مدیریت کل درخواست ها</a>
                                     </div>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a href="{{route('manageProducts')}}" class="dropdown-item">مدیریت محصولات</a>
                                 </li>
 
                                 <?php

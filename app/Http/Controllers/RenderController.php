@@ -8,6 +8,7 @@ use App\Http\Resources\NewsJSON;
 use App\Http\Resources\SliderBarJSON;
 use App\Http\Resources\CategoryJSON;
 use App\Http\Resources\FieldResource;
+use App\Http\Resources\ProductJSON;
 use App\Http\Resources\SliderCafe;
 use App\models\Cafe;
 use App\models\Config;
@@ -16,6 +17,7 @@ use App\models\Introduce;
 use App\models\Category;
 use App\Models\Field;
 use App\models\News;
+use App\Models\Product;
 use App\models\SlideBar;
 use App\models\Video;
 
@@ -58,6 +60,12 @@ class RenderController extends Controller
     public function get_all_news()
     {
         return NewsJSON::collection(News::visible()->orderBy('priority', 'asc')->get());
+    }
+
+    
+    public function get_all_products()
+    {
+        return ProductJSON::collection(Product::visible()->orderBy('priority', 'asc')->get());
     }
 
     public function get_introduce()
@@ -993,6 +1001,72 @@ class RenderController extends Controller
         ];
     }
 
+    
+    public function render_shop_json_file()
+    {
+        return [
+            [
+                "BoxID" => 38931,
+                "MenuID" => 29270,
+                "BoxTitle" => "محصولات",
+                "BoxDescription" => "",
+                "Priority" => 1,
+                "Width" => null,
+                "Height" => null,
+                "BoxCount" => 20,
+                "MaduleID" => null,
+                "SubBoxHeight" => null,
+                "BoxCountPerRow" => 20,
+                "FormID" => null,
+                "FormReportID" => null,
+                "BoxGroupID" => 4,
+                "BoxGroupName" => "news",
+                "BoxPersianName" => "اخبار، مقالات و ...",
+                "Pagination" => 3,
+                "SortType" => 1,
+                "Content" => null,
+                "MediaID" => null,
+                "HasProductTabs" => null,
+                "ProductSlides" => null,
+                "RowIDList" => "783",
+                "BoxStyle" => "",
+                "PopupStyle" => false,
+                "BoxTemp" => null,
+                "ShowMoreLink" => null,
+                "ContainerTabs" => null,
+                "WebsiteDisplay" => true,
+                "MobileDisplay" => true,
+                "Background" => null,
+                "ParallaxStyle" => null,
+                "DisableBoxBack" => null,
+                "BackTitleColor" => null,
+                "BlurEffectBack" => null,
+                "BlackEffectBack" => null,
+                "ButtonList" => [],
+                "Platform7Maduleid" => null,
+                "GroupMaduleBox" => null,
+                "IsAmazzingoffer" => false
+            ],
+            [
+                "BoxID" => 38931,
+                "Content" => [
+                    "model" => [
+                        "News" => $this->get_all_products(),
+                        "PopupStyle" => false,
+                    ],
+                    "boxID" => 38931,
+                    "newsCount" => 9,
+                    "top" => 20,
+                    "Pagination" => 3,
+                    "ShowMoreLink" => null,
+                    "paginationData" => "[\"step\" =>1,\"top\" =>20,\"paginationCount\" =>8,\"advCount\" =>9,\"GridTableInfo\" =>null,\"ElementList\" =>null,\"HasFilter\" =>false]",
+                    "skip" => 0
+                ],
+            ],
+        ];
+    }
+
+
     public function render_total_galleries()
     {
 
@@ -1383,6 +1457,14 @@ class RenderController extends Controller
         $news_section = $this->render_total_news();
         return ["madules" => [$news_section[0]], "jsonContentList" => [$news_section[1]]];
     }
+
+
+    public function shop_json_file()
+    {
+        $shop_section = $this->render_shop_json_file();
+        return ["madules" => [$shop_section[0]], "jsonContentList" => [$shop_section[1]]];
+    }
+
 
     public function article_json_file()
     {

@@ -11,6 +11,7 @@ use App\Http\Controllers\IntroduceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\PeopleWorkTimeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SurveyController;
@@ -20,6 +21,7 @@ use App\Http\Resources\PeopleResource;
 use Illuminate\Support\Facades\Route;
 use App\models\News;
 use App\models\People;
+use App\Models\Product;
 use App\models\Video;
 
 /*
@@ -40,6 +42,8 @@ Route::get('cafe-get_json_file', [HomeController::class, 'cafe_get_json_file'])-
 Route::get('people-get_json_file', [HomeController::class, 'people_get_json_file'])->name('people_get_json_file');
 
 Route::get('news-get_json_file', [HomeController::class, 'news_get_json_file'])->name('news_get_json_file');
+
+Route::get('shop-get_json_file', [HomeController::class, 'shop_get_json_file'])->name('shop-get_json_file');
 
 Route::get('article-get_json_file', [HomeController::class, 'article_get_json_file'])->name('article_get_json_file');
 
@@ -117,6 +121,16 @@ Route::get('editNews/{news}', [NewsController::class, 'editNews'])->name('editNe
 
 Route::view('addNews', 'admin.News.create')->name('addNews');
 
+
+
+Route::get('manageProducts', [ProductController::class, 'manageProducts'])->name('manageProducts');
+
+Route::get('editProduct/{product}', [ProductController::class, 'editProduct'])->name('editProduct');
+
+Route::view('addProduct', 'admin.Product.create')->name('addProduct');
+
+
+
 Route::get('manageSlideShow', [SlideController::class, 'manageSlideShow'])->name('manageSlideShow');
 
 Route::get('manageIntroduce', [IntroduceController::class, 'manageIntroduce'])->name('manageIntroduce');
@@ -132,55 +146,66 @@ Route::get('msgs', [HomeController::class, 'msgs'])->name('msgs');
 
 Route::get('panel', [HomeController::class, 'panel'])->name('panel');
 
-Route::view('/', 'home');
+Route::group(['middleware' => ['shareWithAllViews']], function() {
 
-Route::view('news', 'news');
+    Route::view('/', 'home');
 
-Route::view('cafe', 'cafe');
+    Route::view('news', 'news');
 
-Route::view('people', 'people');
+    Route::view('shop', 'shop');
 
-Route::get('News/{news}/{title}', function (News $news, $title) {
-    $d = date("Y-m-d H:i:s", strtotime($news->created_at));
-    return view('single-news', compact('news', 'd'));
+    Route::view('cafe', 'cafe');
+
+    Route::view('people', 'people');
+
+    Route::get('News/{news}/{title}', function (News $news, $title) {
+        $d = date("Y-m-d H:i:s", strtotime($news->created_at));
+        return view('single-news', compact('news', 'd'));
+    });
+
+    Route::get('Product/{product}/{title}', function (Product $product, $title) {
+        return view('single-product', compact('product'));
+    })->name('product');
+
+    Route::get('Video/{video}', function (Video $video) {
+        $video->file = asset('storage/videos/' . $video->file);
+        return view('single-video', ['video' => $video]);
+    });
+
+    Route::get('Home/GetProductGroupManager', function() {
+        $people = PeopleResource::collection(People::visible()->orderBy('priority', 'asc')->get());
+        $arr = [    
+            "TabRepository" => $people,
+            "boxCount" => 9,
+            "PopupStyle" => false,
+            "boxTitle" => "متخصصین",
+            "BoxCountPerRow" => 3
+        ];
+
+        return json_encode($arr);
+    });
+
+    Route::view('galleries', 'galleries');
+
+    Route::view('videos', 'videos');
+
+    Route::view('contactUs', 'contact')->name('contactUs');
+
+    Route::view('survey', 'survey')->name('survey');
+
+    Route::view('show-articles', 'articles')->name('articles.show');
+
+    Route::get('workTimes', [ScheduleController::class, 'show'])->name('workTimes');
+
+    Route::view('adviceRequest', 'advice_request')->name('adviceRequest');
+
+    Route::get('/Home/GetGalleryList', [GalleryController::class, 'list']);
+
+    Route::get('/Home/GetArticleList', [ArticleController::class, 'list']);
+
 });
 
-Route::get('Video/{video}', function (Video $video) {
-    $video->file = asset('storage/videos/' . $video->file);
-    return view('single-video', ['video' => $video]);
-});
 
-Route::get('Home/GetProductGroupManager', function() {
-    $people = PeopleResource::collection(People::visible()->orderBy('priority', 'asc')->get());
-    $arr = [    
-        "TabRepository" => $people,
-        "boxCount" => 9,
-        "PopupStyle" => false,
-        "boxTitle" => "متخصصین",
-        "BoxCountPerRow" => 3
-    ];
-
-    return json_encode($arr);
-});
-
-Route::view('galleries', 'galleries');
-
-Route::view('videos', 'videos');
-
-Route::view('contactUs', 'contact')->name('contactUs');
-
-Route::view('survey', 'survey')->name('survey');
-
-Route::view('show-articles', 'articles')->name('articles.show');
-
-Route::get('workTimes', [ScheduleController::class, 'show'])->name('workTimes');
-
-Route::view('adviceRequest', 'advice_request')->name('adviceRequest');
-
-Route::get('/Home/GetGalleryList', [GalleryController::class, 'list']);
-
-Route::get('/Home/GetArticleList', [ArticleController::class, 'list']);
-
-Route::view('a', 'a');
+Route::post('signUp', [HomeController::class, 'signUp'])->name('signUp');
 
 Route::post('submitForm', [HomeController::class, 'submitForm']);

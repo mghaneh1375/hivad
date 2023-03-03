@@ -53,8 +53,8 @@ div#ah7CircleLodding {
 }
 
     .circles-text:before {
-        content: "Ajoudanieh";
-        font-family: Helvetica,sans-serif;
+        content: "مجموعه هیواد";
+        font-family: IRANSans;
         font-size: 81px;
         color: white;
         height: 0;
@@ -3929,7 +3929,7 @@ div#headerContainer {
 
 .fixed div#layout-logo {
     height: 83px;
-    width: 89px;
+    width: 50px;
     top: -41px;
     z-index: 100
 }
@@ -4758,7 +4758,7 @@ a.btn.btn-expand:hover:before, a.btn.btn-reduce:hover:before {
         z-index: 1000;
         left: 6px;
         top: -44px;
-        width: 199px;
+        width: 50px;
         background-repeat: no-repeat;
         background-size: cover;
         height: 59px

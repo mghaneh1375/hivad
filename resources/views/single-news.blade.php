@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -52,31 +51,6 @@
 
 </script>
 
-</head>
-
-<body data-menuid="-2" data-expire="False" data-wid="762" data-un="" data-roles="" data-uid="" data-ap="False" data-isprofilemenu="" class="    noLogin    haspageContent   " style=" " priceUnit="">
-
-    <div id="msScroll_wrapper">
-
-        <div id="virtualView" >
-
-                <div><div><a class="header-opener"><span><span></span></span></a>
-
-<div class="top_header1"><div class="nav_1"><div class="right_nav1"><div class="social_net"><ul><li class="each_net"><a href="#" title="" style="background-image: url(/Content/base/dynamic/shopping572/img/91327.jpg);"></a></li><li class="each_net"><a href="#" title="" style="background-image: url(/Content/base/dynamic/shopping572/img/91330.jpg);"></a></li><li class="each_net"><a href="https://www.instagram.com/ajoudanieh/" style="background-image:url(/Content/base/dynamic/shopping572/img/91329.jpg);" target="_blank"></a></li></ul></div></div></div></div></div></div>
-        </div>
-        
-        @include('layouts.navbar')
-
-        <div id="container_wrapper">
-            <div id="container">
-
-
-                <main id="mainContent">
-                    <div class="mainContent-wrapper">
-                    </div>
-                    <div class="textContent first"></div>
-                    <div id="siteMap"><span></span></div>
-                    <div id="wrapper-main-page" class="textContent" data-menuid="">
 
 <style>
     #loading-img {
@@ -105,54 +79,79 @@
     }
 </style>
 
-<div id="dialogContent">
+</head>
 
-    <div class="news-header" id="newsWidget">
-        <div>
-                <span id="newsInfo">
-                    <span class="newsDate">{{$d}}</span>
+<body data-menuid="-2" data-expire="False" data-wid="762" data-un="" data-roles="" data-uid="" data-ap="False" data-isprofilemenu="" class="    noLogin    haspageContent   " style=" " priceUnit="">
 
-                    <a data-newsid="9399"><h3>{{$news->title}}</h3></a>
-                    <p>{{$news->digest}}</p>
-                </span>
-                    
-                <div class="info_wrapper_wrapper ">
-                    <div class="info_wrapper" style="display:none;">
-                        
-                        <span class="logsynce_eye"><span class="logsynce" data-actid="60" data-tid="39" data-id="9399"></span><i class="fa fa-eye"></i></span>
+    <div id="msScroll_wrapper">
+
+        <div id="virtualView" >
+
+                <div><div><a class="header-opener"><span><span></span></span></a>
+
+<div class="top_header1"><div class="nav_1"><div class="right_nav1"><div class="social_net"><ul><li class="each_net"><a href="#" title="" style="background-image: url(/Content/base/dynamic/shopping572/img/91327.jpg);"></a></li><li class="each_net"><a href="#" title="" style="background-image: url(/Content/base/dynamic/shopping572/img/91330.jpg);"></a></li><li class="each_net"><a href="https://www.instagram.com/ajoudanieh/" style="background-image:url(/Content/base/dynamic/shopping572/img/91329.jpg);" target="_blank"></a></li></ul></div></div></div></div></div></div>
+        </div>
+        
+        @include('layouts.navbar')
+
+        <div id="container_wrapper">
+            <div id="container">
+
+
+                <main id="mainContent">
+
+                    <div class="mainContent-wrapper"></div>
+
+                    <div class="textContent first"></div>
+                    <div id="siteMap"><span></span></div>
+
+                    <div id="wrapper-main-page" class="textContent" data-menuid="">
+
+
+                        <div id="dialogContent">
+
+                            <div class="news-header" id="newsWidget">
+                                <div>
+                                    <span id="newsInfo">
+                                        <span class="newsDate">{{$d}}</span>
+
+                                        <a data-newsid="9399"><h3>{{$news->title}}</h3></a>
+                                        <p>{{$news->digest}}</p>
+                                    </span>
+                                        
+                                    <div class="info_wrapper_wrapper ">
+                                        <div class="info_wrapper" style="display:none;">
+                                            
+                                            <span class="logsynce_eye"><span class="logsynce" data-actid="60" data-tid="39" data-id="9399"></span><i class="fa fa-eye"></i></span>
+
+                                        </div>
+                                    </div>
+
+                                    <a class="img_link_wrapper" data-temp='NewsText' data-newsid="9399">
+                                        <span style="display:block;">
+                                                <img src="{{ asset('Content/images/news/crop/' . $news->image) }}"
+                                                    alt="{{$news->alt}}" />
+                                        </span>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                            
+                            <div class="news-content">                 
+                                    {!! $news->description !!}
+                            </div>
+
+                            <div class="tagList">
+                                {{$news->tags}}
+                            </div>
+                        </div>
 
                     </div>
-                </div>
 
-            <a class="img_link_wrapper" data-temp='NewsText' data-newsid="9399">
-                <span style="display:block;">
-                        <img src="{{ asset('Content/images/news/crop/' . $news->image) }}"
-                             alt="{{$news->alt}}" />
-                </span>
-            </a>
-
-        </div>
-
-    </div>
-    
-    <div class="news-content">                 
-             {!! $news->description !!}
-    </div>
-
-        <div class="tagList">
-            {{$news->tags}}
-        </div>
-    </div>
-
-</div>
-
-</main>
-
-
+                </main>
             </div>
         </div>
-
-
 
         <div id="pageCover"></div>
         @include('layouts.footer')
@@ -162,11 +161,11 @@
     @include('layouts.progress')
     @include('layouts.comment')
 
-<script src="{{ asset('assets/js/siteLayout.min.js') }}" defer></script>
-<script src="{{ asset('assets/js/isotope.pkgd.min.js') }}" defer></script>
-<script src="{{ asset('assets/js/js_underDesign.js') }}" defer></script>
-<script src="{{ asset('assets/js/commonJS.js') }}"></script>
+    <script src="{{ asset('assets/js/siteLayout.min.js') }}" defer></script>
+    <script src="{{ asset('assets/js/isotope.pkgd.min.js') }}" defer></script>
+    <script src="{{ asset('assets/js/js_underDesign.js') }}" defer></script>
+    <script src="{{ asset('assets/js/commonJS.js') }}"></script>
     
-</body>
+    </body>
 </html>
 

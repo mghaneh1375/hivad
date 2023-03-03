@@ -93,6 +93,19 @@
                                 </div>
                                 
                                 <div>
+                                    <label for="showProducts">نمایش محصولات</label>
+                                    <select id="showProducts">
+                                        @if($config->show_products)
+                                            <option value="true">نمایش</option>
+                                            <option value="false">مخفی</option>
+                                        @else
+                                            <option value="false">مخفی</option>
+                                            <option value="true">نمایش</option>
+                                        @endif
+                                    </select>
+                                </div>
+
+                                <div>
                                     <label for="showInsta">نمایش پست های اینستاگرام</label>
                                     <select id="showInsta">
                                         @if($config->show_insta)
@@ -119,6 +132,18 @@
                                     </select>
                                 </div>
 
+                                <div>
+                                    <label for="showSurvey">امکان نظرسنجی</label>
+                                    <select id="showSurvey">
+                                        @if($config->show_survey)
+                                            <option value="true">نمایش</option>
+                                            <option value="false">مخفی</option>
+                                        @else
+                                            <option value="false">مخفی</option>
+                                            <option value="true">نمایش</option>
+                                        @endif
+                                    </select>
+                                </div>
 
                                 <div class="flex center">
                                     <button onclick="save()" class="btn btn-sucess">ذخیره</button>
@@ -151,6 +176,8 @@
                     'show_gallery': $("#showGallery").val() == 'true' ? 1 : 0,
                     'show_videos': $("#showVideos").val() == 'true' ? 1 : 0,
                     'show_about': $("#showAbout").val() == 'true' ? 1 : 0,
+                    'show_survey': $("#showSurvey").val() == 'true' ? 1 : 0,
+                    'show_products': $("#showProducts").val() == 'true' ? 1 : 0,
                     'online_booking': $("#online_booking").val() == 'true' ? 1 : 0,
                 },
                 headers: {

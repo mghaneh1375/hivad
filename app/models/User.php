@@ -52,7 +52,7 @@ class User extends Authenticatable{
 	 */
 
 	protected $fillable = [
-		'name', 'password'
+		'first_name', 'last_name', 'password', 'phone'
 	];
 
 	protected $hidden = array('password', 'remember_token');

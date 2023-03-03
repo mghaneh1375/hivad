@@ -11,7 +11,7 @@
 
                         <ul id="contactInfo">
                             <li>+ 98 21  26700812, + 98 21 26700814 </li>
-                            <li>info@ajodanieh.com</li>
+                            <li>info@hivadcenter.com</li>
                         </ul>
                         <ul id="footer_social">
                             {{-- <li class="s_telegram"><a></a></li> --}}

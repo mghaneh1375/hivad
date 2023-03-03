@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\models\Msg;
+use App\models\User;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends RenderController {
 
@@ -15,6 +18,10 @@ class HomeController extends RenderController {
 
     public function news_get_json_file() {
         return json_encode($this->news_json_file());
+    }
+
+    public function shop_get_json_file() {
+        return json_encode($this->shop_json_file());
     }
     
     public function article_get_json_file() {
@@ -188,6 +195,34 @@ class HomeController extends RenderController {
 
     public function removeMsg(Msg $msg) {
         $msg->delete();
+        return response()->json(['status' => 'ok']);
+    }
+
+    public function signUp(Request $request) {
+    
+        $request->validate([
+            'username' => 'required|regex:/(09)[0-9]{9}/|unique:users,phone',
+            'first_name' => 'required|string|min:2',
+            'last_name' => 'required|string|min:2',
+            'password' => 'required|string|min:6',
+            'rpassword' => 'required|string|min:6'
+        ]);
+
+        if($request['password'] != $request['rpassword']) {
+            return response()->json([
+                'status' => 'nok',
+                'msg' => 'رمز و تکرار آن یکسان نیست'
+            ]);
+        }
+
+        $request['password'] = Hash::make($request['password']);
+        $request['phone'] = $request['username'];
+        unset($request['rpassword']);
+        unset($request['username']);
+
+        $user = User::create($request->toArray());
+        Auth::login($user);
+
         return response()->json(['status' => 'ok']);
     }
 

@@ -34,38 +34,7 @@
 
 
     <style>
-        .hidden {
-            display: none !important;
-        }
-        .modal {
-            display: block;
-            position: fixed;
-            z-index: 100000;
-            padding-top: 50px;
-            padding-bottom: 50px;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-            padding: 15px !important;
-            position: relative;
-            background-color: #fefefe;
-            margin: auto;
-            padding: 0;
-            border: 1px solid #888;
-            width: 70%;
-            direction: rtl;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-            -webkit-animation-name: animatetop;
-            -webkit-animation-duration: 0.4s;
-            animation-name: animatetop;
-            animation-duration: 0.4s;
-        }
+        
         .gap10 {
             gap: 10px;
         }

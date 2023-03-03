@@ -94,7 +94,6 @@
                         <div class="col-xs-12" style="border: solid;">
                             
                             @if($errors->any())
-                            <h1>salamdqw</h1>
                                 {{ implode('', $errors->all('<div>:message</div>')) }}
                             @endif
 
