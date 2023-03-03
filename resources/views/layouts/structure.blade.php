@@ -409,7 +409,7 @@
                                 </li>
 
                                 <?php
-                                    $unseenAdviceRequests = \App\models\UserAdviceRequest::unSeen()->count();
+                                    $unseenAdviceRequests = \App\Models\UserAdviceRequest::unSeen()->count();
                                 ?>
                                 
                                 <li class="nav-item">
