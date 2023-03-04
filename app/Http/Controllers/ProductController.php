@@ -154,6 +154,7 @@ class ProductController extends Controller
     {
         $response = zarinpal()
             ->amount(10000) // مبلغ تراکنش
+            ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
             ->request()
             ->description('transaction info') // توضیحات تراکنش
             ->callbackUrl('http://hivadkids.ir/verification') // آدرس برگشت پس از پرداخت
@@ -173,6 +174,7 @@ class ProductController extends Controller
         $status = $request->query('Status'); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
 
         $response = zarinpal()
+            ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
             ->amount(10000)
             ->verification()
             ->authority($authority)
