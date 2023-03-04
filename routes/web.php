@@ -146,6 +146,10 @@ Route::get('msgs', [HomeController::class, 'msgs'])->name('msgs');
 
 Route::get('panel', [HomeController::class, 'panel'])->name('panel');
 
+Route::any('verification', [ProductController::class, 'verification']);
+
+Route::any('payment', [ProductController::class, 'payment']);
+
 Route::group(['middleware' => ['shareWithAllViews']], function() {
 
     Route::view('/', 'home');

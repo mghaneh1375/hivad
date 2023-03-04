@@ -149,4 +149,41 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function payment()
+    {
+        $response = zarinpal()
+            ->amount(10000) // مبلغ تراکنش
+            ->request()
+            ->description('transaction info') // توضیحات تراکنش
+            ->callbackUrl('http://hivadkids.ir/verification') // آدرس برگشت پس از پرداخت
+            ->mobile('09038180329')
+            ->send();
+
+        if (!$response->success()) {
+            return $response->error()->message();
+        }
+
+        return $response->redirect();
+    }
+
+    public function verification(Request $request)
+    {
+        $authority = $request->query('Authority'); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
+        $status = $request->query('Status'); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
+
+        $response = zarinpal()
+            ->amount(10000)
+            ->verification()
+            ->authority($authority)
+            ->send();
+
+        if (!$response->success()) {
+            return $response->error()->message();
+        }
+
+        // پرداخت موفقیت آمیز بود
+        // دریافت شماره پیگیری تراکنش و انجام امور مربوط به دیتابیس
+        return $response->referenceId();
+    }
 }
