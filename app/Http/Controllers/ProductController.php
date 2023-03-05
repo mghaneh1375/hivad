@@ -171,7 +171,11 @@ class ProductController extends Controller
     public function verification(Request $request)
     {
         $authority = $request->query('Authority'); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
-        $status = $request->query('Status'); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
+        $status = $request->query('Status', null); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
+
+        if($status != null && strtolower($status) == "nok") {
+            dd("ناموفق");
+        }
 
         $response = zarinpal()
             ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
