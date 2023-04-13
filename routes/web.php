@@ -162,11 +162,11 @@ Route::middleware(['adminAccess'])->group(function() {
 });
 
 
-Route::any('verification', [ProductController::class, 'verification']);
-
-Route::get('failed/{err}/{transaction?}', [ProductController::class, 'failed']);
-
 Route::group(['middleware' => ['shareWithAllViews']], function() {
+
+    Route::any('verification', [ProductController::class, 'verification']);
+
+    Route::get('failed/{err}/{transaction?}', [ProductController::class, 'failed']);
 
     Route::view('/', 'home')->name('home');
 
