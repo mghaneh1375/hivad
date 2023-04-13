@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activation;
-use App\models\Category;
+use App\Models\Category;
 use App\Models\Msg;
 use App\Models\User;
 use Carbon\Carbon;

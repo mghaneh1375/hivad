@@ -256,6 +256,6 @@ class ProductController extends Controller
 
         $product = $transaction->product->title;
 
-        return view('success', ['transaction' => $transaction, 'product' => $product]);
+        return view('fail', ['amount' => $transaction, 'product' => $product]);
     }
 }

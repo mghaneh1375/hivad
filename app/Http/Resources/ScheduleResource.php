@@ -56,6 +56,7 @@ class ScheduleResource extends JsonResource
 
         return [
             'day' => Controller::translate_day($this->day),
+            'num_day' => Controller::translate_num_day($this->day),
             'start' => $this->start,
             'end' => $this->end,
             'peoples' => PeopleWorkResource::collection($all_peoples)->toArray($request)

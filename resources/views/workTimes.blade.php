@@ -74,7 +74,7 @@
                         @endforeach
                         
                         @if($can_booking)
-                            <button onclick="request('{{ $people['name'] }}', {{ json_encode($people['times']) }}, {{ json_encode($people['ids']) }})">درخواست مشاوره</button>
+                            <button onclick="request('{{ $day['num_day'] }}', '{{ $people['name'] }}', {{ json_encode($people['times']) }}, {{ json_encode($people['ids']) }})">درخواست مشاوره</button>
                         @endif
                     </center>
                 @endforeach
@@ -90,18 +90,29 @@
 
             <h1>درخواست وقت دهی برای <span id="doctor"></span></h1>
             
-            <div style="margin-top: 10px">
-                <input style="padding: 6px; width: 250px" id="name" placeholder="نام و نام خانوادگی" type="text" />
-            </div>
+            @if(Auth::check())
+                <div style="margin-top: 10px">
+                    <input style="padding: 6px; width: 250px" id="name" value="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" placeholder="نام و نام خانوادگی" type="text" />
+                </div>
+                
+                <div style="margin-top: 10px">
+                    <input style="padding: 6px; width: 250px" id="phone" value="{{ Auth::user()->phone }}" placeholder="شماره همراه" type="tel" />
+                </div>
+            @else
+                <div style="margin-top: 10px">
+                    <input style="padding: 6px; width: 250px" id="name" placeholder="نام و نام خانوادگی" type="text" />
+                </div>
+                
+                <div style="margin-top: 10px">
+                    <input style="padding: 6px; width: 250px" id="phone" placeholder="شماره همراه" type="tel" />
+                </div>
+            @endif
             
-            <div style="margin-top: 10px">
-                <input style="padding: 6px; width: 250px" id="phone" placeholder="شماره همراه" type="tel" />
-            </div>
 
             <div style="margin-top: 10px">
                 <label style="font-size: 14px;" for="date">تاریخ موردنظر</label>
                 <select style="height: 40px" id="date">
-                    <option value="curr">این هفته</option>
+                    <option id="currWeek" value="curr">این هفته</option>
                     <option value="next">هفته بعد</option>
                     <option value="next2">دو هفته بعد</option>
                     <option value="next3">سه هفته بعد</option>
@@ -127,7 +138,20 @@
 @section('customJS')
     <script>
 
-        function request(doctor, times, ids) {
+        let today = parseInt('{{ $today }}');
+
+        function request(day, doctor, times, ids) {
+
+            console.log(today + " " + day);
+
+            if(today >= day) {
+                $("#currWeek").remove();
+            }
+            else {
+                if($("#currWeek").length === 0) {
+                    $("#date").prepend('<option selected id="currWeek" value="curr">این هفته</option>');
+                }
+            }
             
             if(times.length > 1) {
                 
@@ -143,7 +167,7 @@
                 $("#times").empty().append(html).removeClass('hidden');
             }
             else {
-                $("#times").empty().addClass('hidden');
+                $("#times").empty().append("<select id='wanted_time'><option selected value='" + ids[0] + "'></option></select>").addClass('hidden');
             }
 
             $("#doctor").empty().append(doctor);

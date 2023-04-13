@@ -88,6 +88,27 @@ class Controller extends BaseController
 
     }
 
+    public static function translate_num_day($day) {
+
+        switch($day) {
+            case "sat":
+                return 0;
+            case "sun":
+                return 1;
+            case "mon":
+                return 2;
+            case "tue":
+                return 3;
+            case "wed":
+                return 4;
+            case "thr":
+                return 5;
+            default:
+                return 6;
+        }
+
+    }
+
     protected static $errors = [
         'img.required' => 'لطفا تصویر را آپلود نمایید',
         'priority.required' => 'لطفا اولویت را وارد نمایید',
@@ -122,6 +143,11 @@ class Controller extends BaseController
     public static function MiladyToShamsi2($ts){
         include_once 'jdate.php';
         return jdate('l d F سال Y', "", $ts);
+    }
+    
+    public static function getToday(){
+        include_once 'jdate.php';
+        return jdate('D', "", time());
     }
 
 }

@@ -31,9 +31,35 @@ class ScheduleController extends Controller
      */
     public function show(Request $request)
     {
+        $today = self::getToday();
+        switch($today) {
+            case 'ش':
+                $date = 0;
+                break;
+            case 'ی':
+                $date = 1;
+                break;
+            case 'د':
+                $date = 2;
+                break;
+            case 'س':
+                $date = 3;
+                break;
+            case 'چ':
+                $date = 4;
+                break;
+            case 'پ':
+                $date = 5;
+                break;
+            case 'ج':
+                $date = 5;
+                break;
+        }
+
         return view('workTimes', [
             'days' => ScheduleResource::collection(Schedule::open()->get())->toArray($request),
-            'can_booking' => Config::first()->online_booking
+            'can_booking' => Config::first()->online_booking,
+            'today' => 0
         ]);
     }
 
