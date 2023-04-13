@@ -33,8 +33,12 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('vides', function (Blueprint $table) {
-            //
+        Schema::table('video', function (Blueprint $table) {
+            $table->dropForeign(['cat_id']);
+        });
+        
+        Schema::table('gallery', function (Blueprint $table) {
+            $table->dropForeign(['cat_id']);
         });
     }
 };
