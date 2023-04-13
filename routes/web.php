@@ -258,6 +258,8 @@ Route::group(['middleware' => ['shareWithAllViews']], function() {
         Route::any('payment/{product}', [ProductController::class, 'payment'])->name('payment');
 
         Route::get('success/{transaction}', [ProductController::class, 'success'])->name('success');
+        
+        Route::get('failed', [ProductController::class, 'failed'])->name('failed');
 
     });
 

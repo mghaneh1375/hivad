@@ -170,7 +170,7 @@ class ProductController extends Controller
 
         $t = Transaction::where('user_id', $userId)->where('product_id', $product->id)->complete()->first();
         if($t != null) {
-            return Redirect::route('failed', ['err' => 'duplicate']);
+            return Redirect::route('failed');
         }
         
         $response = zarinpal()
@@ -186,8 +186,6 @@ class ProductController extends Controller
             return $response->error()->message();
         }
 
-        dd($response->authority);
-
         $t = random_int(100000, 999999);
         while(Transaction::where('tracking_code', $t)->count() > 0)
             $t = random_int(100000, 999999);
@@ -197,7 +195,7 @@ class ProductController extends Controller
             'product_id' => $product->id,
             'amount' => $product->price * 10,
             'tracking_code' => $t,
-            'additional_id' => $response['authority']
+            'additional_id' => $response->authority()
         ]);
 
 
@@ -206,15 +204,20 @@ class ProductController extends Controller
 
     public function verification(Request $request)
     {
-        $authority = $request->query('Authority'); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
+
+        $authority = $request->query('Authority', null); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
+        
+        if($authority == null)
+            return abort(401);
+
+        $t = Transaction::where('additional_id', $authority)->first();
+        if($t == null)
+            return abort(401);
+
         $status = $request->query('Status', null); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
 
         if($status != null && strtolower($status) == "ok") {
             
-            $t = Transaction::orderBy('id', 'desc')->first();
-            if($t == null)
-                return abort(401);
-
             $response = zarinpal()
                 ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
                 ->amount($t->amount)
@@ -223,7 +226,11 @@ class ProductController extends Controller
                 ->send();
 
             if (!$response->success()) {
-                return $response->error()->message();
+                $t->status = Transaction::CANCELLED;
+                $t->save();
+                return view('fail', [
+                    'transaction' => $t, 'msg' => $response->error()->message()
+                ]);
             }
 
             $t->status = Transaction::COMPLETE;
@@ -237,7 +244,9 @@ class ProductController extends Controller
             );
         }
 
-        return Redirect::route('');
+        $t->status = Transaction::CANCELLED;
+        $t->save();
+        return view('fail', ['transaction' => $t]);
 
     }
 
@@ -253,13 +262,7 @@ class ProductController extends Controller
         return view('success', ['transaction' => $transaction, 'product' => $product]);
     }
     
-    public function failed($err, Transaction $transaction = null) {
-        
-        if($transaction != null && $transaction->status == Transaction::COMPLETE)
-            return abort(401);
-
-        $product = $transaction->product->title;
-
-        return view('fail', ['amount' => $transaction, 'product' => $product]);
+    public function failed() {
+        return view('fail');
     }
 }
