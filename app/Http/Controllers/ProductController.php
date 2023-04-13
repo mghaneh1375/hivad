@@ -214,7 +214,16 @@ class ProductController extends Controller
         if($t == null)
             return abort(401);
 
+        Auth::loginUsingId($t->user_id);
         $status = $request->query('Status', null); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
+
+        $t->status = Transaction::COMPLETE;
+        $t->ref_num = $authority;
+        $t->save();
+
+        return Redirect::route('success', 
+            ['transaction' => $t]
+        );
 
         if($status != null && strtolower($status) == "ok") {
             
@@ -236,8 +245,6 @@ class ProductController extends Controller
             $t->status = Transaction::COMPLETE;
             $t->ref_num = $response->referenceId();
             $t->save();
-
-            Auth::loginUsingId($t->user_id);
 
             return Redirect::route('success', 
                 ['transaction' => $t]

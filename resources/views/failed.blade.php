@@ -26,10 +26,6 @@
             width: 100%;
         }
 
-        .box .content p:nth-child(1) {
-            margin-top: 30px;
-        }
-
         .box .content p {
             font-size: 15px;
             line-height: 30px;
@@ -38,6 +34,7 @@
         .box h2 {
             color: red;
             font-size: 20px;
+            margin-bottom: 30px;
         }
 
         .box a {
