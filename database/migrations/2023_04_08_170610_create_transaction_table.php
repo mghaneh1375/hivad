@@ -22,14 +22,13 @@ return new class extends Migration
             $table->unsignedInteger('amount');
             $table->unsignedInteger('tracking_code');
             $table->unsignedInteger('off')->nullable();
-            $table->unsignedInteger('additional_id')->nullable();
+            $table->string('additional_id');
 
             $table->enum('status', ['init', 'cancelled', 'complete'])->default('init');
             $table->string('ref_num')->nullable();
 
             $table->index('user_id');
             $table->index('product_id');
-            $table->unique(['user_id', 'product_id']);
 
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade')
                 ->onUpdate('cascade');
