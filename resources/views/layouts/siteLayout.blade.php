@@ -48,6 +48,7 @@
             var menuName = @yield('menuName');
             var prefix = @yield('prefix');
             var menuId = @yield('menuId');
+
             var refId = undefined;
 
             @yield('setRefId')
