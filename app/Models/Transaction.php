@@ -17,7 +17,7 @@ class Transaction extends Model
 	protected $fillable = [
 		'user_id', 'product_id', 'status', 
         'amount', 'additional_id', 'off',
-        'tracking_code'
+        'tracking_code', 'ref_num'
 	];
 
     public function scopeComplete($query)

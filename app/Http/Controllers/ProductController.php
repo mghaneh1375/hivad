@@ -172,6 +172,21 @@ class ProductController extends Controller
         if($t != null) {
             return Redirect::route('failed', ['err' => 'duplicate']);
         }
+        
+        $response = zarinpal()
+            ->amount($product->price * 10) // مبلغ تراکنش
+            ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
+            ->request()
+            ->description('') // توضیحات تراکنش
+            ->callbackUrl('http://hivadkids.ir/verification') // آدرس برگشت پس از پرداخت
+            ->mobile('09038180329')
+            ->send();
+
+        if (!$response->success()) {
+            return $response->error()->message();
+        }
+
+        dd($response['authority']);
 
         $t = random_int(100000, 999999);
         while(Transaction::where('tracking_code', $t)->count() > 0)
@@ -181,23 +196,10 @@ class ProductController extends Controller
             'user_id' => $userId,
             'product_id' => $product->id,
             'amount' => $product->price * 10,
-            'tracking_code' => $t
+            'tracking_code' => $t,
+            'additional_id' => $response['authority']
         ]);
-        
-        $response = zarinpal()
-            ->amount($product->price * 10) // مبلغ تراکنش
-            ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
-            ->request()
-            ->description($t->id) // توضیحات تراکنش
-            ->callbackUrl('http://hivadkids.ir/verification') // آدرس برگشت پس از پرداخت
-            ->mobile('09038180329')
-            ->send();
 
-        dd($response);
-
-        if (!$response->success()) {
-            return $response->error()->message();
-        }
 
         return $response->redirect();
     }
