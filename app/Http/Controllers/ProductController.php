@@ -186,7 +186,7 @@ class ProductController extends Controller
             return $response->error()->message();
         }
 
-        dd($response['authority']);
+        dd($response->authority);
 
         $t = random_int(100000, 999999);
         while(Transaction::where('tracking_code', $t)->count() > 0)
