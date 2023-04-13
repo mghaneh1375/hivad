@@ -26,13 +26,19 @@
             width: 100%;
         }
 
+        .box .content p {
+            font-size: 15px;
+        }
+
         .box h2 {
             color: red;
+            font-size: 20px;
         }
 
         .box a {
             margin-right: calc(100% - 170px);
             text-decoration: none;
+            font-size: 15px;
         }
 
     </style>
