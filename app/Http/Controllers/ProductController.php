@@ -228,7 +228,7 @@ class ProductController extends Controller
             if (!$response->success()) {
                 $t->status = Transaction::CANCELLED;
                 $t->save();
-                return view('fail', [
+                return view('failed', [
                     'transaction' => $t, 'msg' => $response->error()->message()
                 ]);
             }
@@ -246,7 +246,7 @@ class ProductController extends Controller
 
         $t->status = Transaction::CANCELLED;
         $t->save();
-        return view('fail', ['transaction' => $t]);
+        return view('failed', ['transaction' => $t]);
 
     }
 
@@ -263,6 +263,6 @@ class ProductController extends Controller
     }
     
     public function failed() {
-        return view('fail');
+        return view('failed');
     }
 }
