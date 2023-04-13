@@ -177,7 +177,7 @@ class ProductController extends Controller
             ->amount($product->price * 10) // مبلغ تراکنش
             ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
             ->request()
-            ->description('') // توضیحات تراکنش
+            ->description($product->id) // توضیحات تراکنش
             ->callbackUrl('http://hivadkids.ir/verification') // آدرس برگشت پس از پرداخت
             ->mobile('09038180329')
             ->send();
