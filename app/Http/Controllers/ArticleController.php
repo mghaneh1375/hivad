@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ArticleDigest;
+use App\Http\Resources\ArticleResource;
 use App\Http\Resources\SingleGalleryJSON;
 use App\Models\Article;
 use App\Models\Category;
@@ -64,28 +65,20 @@ class ArticleController extends Controller {
         return Redirect::route('articles.index');
     }
     
-    public function list(Request $request)
+    public function list(Category $category, Request $request)
     {
-        $articles = Article::where('category_id', $request->query('albumID'))->visible()->get();
-        dd($articles);
-        return json_encode(
-            [
-                "boxID" => 38888,
-                "isVideo" => false,
-                "isFileGallery" => false,
-                "model" => [
-                    "GalleryList" => SingleGalleryJSON::collection($articles),
-                    "AlbumList" => null,
-                    "BoxCountPerRow" => 3,
-                    "SubBoxHeight" => 250,
-                    "paddingBottom" => 0,
-                    "boxID" => 38888
-                ],
-                "top" => 100,
-                "Pagination" => 3,
-                "ShowMoreLink" => null
-            ]
-        );
+        $articles = Article::where('category_id', $category->id)->visible()->orderBy('priority', 'desc')->get();
+        $articles = ArticleResource::collection($articles);
+
+        $arr = [    
+            "TabRepository" => $articles,
+            "boxCount" => 9,
+            "PopupStyle" => false,
+            "boxTitle" => "مقالات " . $category->title,
+            "BoxCountPerRow" => 3
+        ];
+
+        return json_encode($arr);
     }
 
     public function destroy(Article $article) {

@@ -36,7 +36,7 @@
     }
 
     .sign-in-container label {
-        width: 100px;
+        width: 125px;
         display: block;
         font-size: 16px;
     }
@@ -72,6 +72,64 @@
         -webkit-animation-duration: 0.4s;
         animation-name: animatetop;
         animation-duration: 0.4s;
+    }
+
+    .profile {
+        position: absolute;
+        z-index: 1000;
+        left: 0px;
+        cursor: pointer;
+        top: -44px;
+        width: 199px;
+        color: white;
+        font-size: 16px;
+        height: 59px;
+    }
+
+    #signInSignUpBtn {
+        position: absolute;
+        z-index: 1000;
+        left: 0px;
+        cursor: pointer;
+        top: -44px;
+        width: 199px;
+        color: white;
+        font-size: 16px;
+        height: 59px;
+    }
+
+    .profile-container {
+        background-color: white;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        width: 200px;
+        margin-right: -75px;
+        margin-top: -10px;
+        display: flex;
+        flex-direction: column;
+        padding: 5px 5px 10px 5px;
+    }
+
+    .profile-container > a {
+        font-size: 14px;
+        color: #707070;
+        width: 100%;
+        padding: 6px 3px 6px 3px;
+        border-bottom: 1px solid #c0c0c0;
+        text-decoration: none;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    .profile-container > a:last-child {
+        border: none;
+    }
+
+    .seperator {
+        height: 1px;
+        width: calc(100% - 50px);
+        margin: 30px auto 30px auto;
+        border-bottom: 1px dotted #777;
     }
 
 </style>
@@ -141,26 +199,20 @@
     <div>
         <div id="layout-header-top">
           @if(Auth::check())
-          <p style="position: absolute;
-    z-index: 1000;
-    left: 0px;
-    cursor: pointer;
-    top: -44px;
-    width: 199px;
-    color: white;
-    font-size: 16px;
-    height: 59px;">پروفایل</p>
+            <div  id="profileSection" class="profile">
+                <p id="profileBtn">پروفایل</p>
+                <div id="profile-container" class="profile-container hidden">
+                    <a target="_self" href="{{ route('products.my') }}">محصولات من</a>
+                    <a onclick="$('#editModal').removeClass('hidden')">ویرایش اطلاعات کاربری</a>
+                    @if(Auth::user()->level == App\Models\User::ADMIN_USER_ROLE)
+                        <a href="{{ route('panel') }}">پنل ادمین</a>
+                    @endif
+                    <a target="_self" href="{{ route('logout') }}">خروج</a>
+                </div>
+            </div>
           @else
 
-            <p onclick="$('#signInModal').removeClass('hidden');" style="position: absolute;
-    z-index: 1000;
-    left: 0px;
-    cursor: pointer;
-    top: -44px;
-    width: 199px;
-    color: white;
-    font-size: 16px;
-    height: 59px;">ورود / ثبت نام</p>
+            <p id="signInSignUpBtn" onclick="$('#signInModal').removeClass('hidden');">ورود / ثبت نام</p>
 
             @endif
 
@@ -177,14 +229,14 @@
         <h2>ورود / ثبت نام</h2>
         <div class="sign-in-container">
             <div>
-                <label>نام کاربری</label>
-                <input type="tel" id="username" placeholder="شماره همراه" />
+                <label>شماره همراه</label>
+                <input type="tel" id="username" placeholder="09xxxxxxxxx" />
             </div>
             <div>
                 <label>رمزعبور</label>
                 <input type="password" id="password" placeholder="******" />
             </div>
-            <button>ورود</button>
+            <button id="signInBtn">ورود</button>
             <p>
                 <span>حساب کاربری ندارید؟</span>
                 <a onclick="$('#signInModal').addClass('hidden'); $('#signUpModel').removeClass('hidden')">ثبت نام کنید</a>
@@ -228,7 +280,7 @@
                 <input type="password" id="signuprpassword" placeholder="******" />
             </div>
 
-            <button onclick="register()">ثبت نام</button>
+            <button id="signUpBtn">ثبت نام</button>
             
         </div>
         
@@ -238,68 +290,93 @@
     </div>
 </div>
 
-<script>
 
-    function register() {
+@if(Auth::check())
 
-        let firstname = $("#firstname").val();
-        let lastname = $("#lastname").val();
-        let password = $("#signuppassword").val();
-        let rpassword = $("#signuprpassword").val();
-        let username = $("#signupusername").val();
+    <?php $user = Auth::user(); ?>
+
+    <div id="editModal" class="modal hidden">
+
+        <div class="modal-content">
+            <h2>ویرایش اطلاعات کاربری</h2>
+            <div class="sign-in-container">
+
+                <div>
+                    <label>نام</label>
+                    <input type="text" value="{{ $user->first_name }}" id="editFirstname" placeholder="نام" />
+                </div>
+                
+                <div>
+                    <label>نام خانوادگی</label>
+                    <input type="text" value="{{ $user->last_name }}" id="editLastname" placeholder="نام خانوادگی" />
+                </div>
+
+                <div>
+                    <label>شماره همراه</label>
+                    <input type="tel" value="{{ $user->phone }}" id="editSignupusername" placeholder="شماره همراه" />
+                </div>
+
+                <button id="editBtn">ویرایش اطلاعات</button>
+
+            </div>
+
+            <div class="seperator"></div>
+            <h2>تغییر رمزعبور</h2>
+
+            <div class="sign-in-container">
+
+                <div>
+                    <label>رمزعبور فعلی</label>
+                    <input type="password" id="oldPass" placeholder="******" />
+                </div>
+                
+                <div>
+                    <label>رمزعبور جدید</label>
+                    <input type="password" id="newPass" placeholder="******" />
+                </div>
+                
+                <div>
+                    <label>تکرار رمزعبور جدید</label>
+                    <input type="password" id="confirmNewPass" placeholder="******" />
+                </div>
+
+                <button id="changePassBtn">تغییر رمزعبور</button>
+
+            </div>
+
+            
+            <div class="flex center gap10">
+                <button  style="margin-left: 5px;" onclick="$('#editModal').addClass('hidden');">انصراف</button>
+            </div>
+        </div>
+    </div>
+
+@endif
 
 
-        if(
-            firstname.length === 0 || lastname.length === 0 || password.length === 0 ||
-                rpassword.length === 0 || username.length === 0
-        ) {
-            showErr("لطفا تمام اطلاعات لازم را پر نمایید");
-            return;
-        }
+<div id="activateModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>اعتبارسنجی</h2>
+        <div class="sign-in-container">
 
-        if(password != rpassword) {
-            showErr("رمزعبور و تکرار آن یکسان نیستند");
-            return;
-        }
+            <p>لطفا کد ارسال شده به شماره همراه وارد شده را وارد نمایید</p>
+            <div>
+                <label>کد اعتبارسنجی</label>
+                <input type="text" id="code" onkeypress='justNumber(event)' maxlength="6" placeholder="XXXXX" />
+            </div>
+
+            <button id="activateBtn">تکمیل فرآیند ثبت نام</button>
+
+            <p id="reminderText">ارسال مجدد کد اعتبارسنجی تا <span>&nbsp;</span><span id="reminder"></span> ثانیه دیگر</p>
+            <button id="resendBtn" class="hidden">ارسال مجدد کد اعتبارسنجی</button>
+            
+        </div>
+        
+        <div class="flex center gap10">
+            <button  style="margin-left: 5px;" onclick="$('#activateModal').addClass('hidden'); if(isInUpdateMode) $('#editModal').removeClass('hidden'); else  $('#signUpModel').removeClass('hidden'); ">بازگشت</button>
+        </div>
+    </div>
+</div>
 
 
-
-        $.ajax({
-            type: 'post',
-            url: '{{ route('signUp') }}',
-            data: {
-                first_name: firstname,
-                last_name: lastname,
-                username: username,
-                password: password,
-                rpassword: rpassword
-            },
-            headers: {
-                'Accept': 'application/json'
-            },
-            success: function(res) {
-
-                if(res.status === 'ok') {
-                    showSuccess();
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
-                }
-                else {
-                    showErr(res.msg);
-                }
-
-            }
-        });
-
-    }
-
-    function showSuccess() {
-        alert('عملیات موردنظر با موفقیت انجام شد.');
-    }
-
-    function showErr(msg) {
-        alert(msg);
-    }
-
-</script>
+<script src='{{ asset('assets/js/signup.js?v=1.2') }}' defer></script>

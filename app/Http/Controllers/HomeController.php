@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activation;
+use App\models\Category;
 use App\Models\Msg;
 use App\Models\User;
+use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +27,10 @@ class HomeController extends RenderController {
         return json_encode($this->shop_json_file());
     }
     
+    public function my_products_get_json_file(Request $request) {
+        return json_encode($this->my_products_json_file($request));
+    }
+    
     public function article_get_json_file() {
         return json_encode($this->article_json_file());
     }
@@ -34,6 +41,10 @@ class HomeController extends RenderController {
     
     public function people_get_json_file() {
         return json_encode($this->people_json_file());
+    }
+
+    public function spec_articles_get_json_file(Category $category) {
+        return json_encode($this->spec_articles_json_file($category));
     }
 
     public function galleries_get_json_file() {
@@ -195,34 +206,6 @@ class HomeController extends RenderController {
 
     public function removeMsg(Msg $msg) {
         $msg->delete();
-        return response()->json(['status' => 'ok']);
-    }
-
-    public function signUp(Request $request) {
-    
-        $request->validate([
-            'username' => 'required|regex:/(09)[0-9]{9}/|unique:users,phone',
-            'first_name' => 'required|string|min:2',
-            'last_name' => 'required|string|min:2',
-            'password' => 'required|string|min:6',
-            'rpassword' => 'required|string|min:6'
-        ]);
-
-        if($request['password'] != $request['rpassword']) {
-            return response()->json([
-                'status' => 'nok',
-                'msg' => 'رمز و تکرار آن یکسان نیست'
-            ]);
-        }
-
-        $request['password'] = Hash::make($request['password']);
-        $request['phone'] = $request['username'];
-        unset($request['rpassword']);
-        unset($request['username']);
-
-        $user = User::create($request->toArray());
-        Auth::login($user);
-
         return response()->json(['status' => 'ok']);
     }
 

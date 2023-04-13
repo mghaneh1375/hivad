@@ -14,23 +14,18 @@ class CategoryJSON extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            "AlbumID" => $this->id,
-            "AlbumName" => $this->title,
-            "AlbumDescription" => null,
-            "ImageCount" => $this->numOfGalleries,
-            "tumbDir1" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
-            "tumbDir2" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
-            "tumbDir3" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
-            "DateTime" => "2018-02-04T14 =>30 =>00",
-            "ImageHeight" => 570,
-            "ImageWidth" => 970,
-            "IsSlideShow" => false,
+       return [
+            "DateTime" => '',
+            "HrefLink" => null,
+            "NewsGroupName" =>"اخبار",
+            "NewsID" => $this->id,
+            "NewsPicture" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
+            "NewsTitr" => $this->title,
             "Priority" => $this->priority,
-            "ParentAlbumID" => null,
-            "IsVideo" => false,
-            "ImageQuality" => 50,
-            "WebsiteID" => 762
+            "PublishDate" => null,
+            "ShortNews" => '',
+            "Tags" => '',
+            "VisiteCount" => $this->numOfGalleries
         ];
     }
 }

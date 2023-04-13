@@ -1,7 +1,8 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
+use App\Models\Transaction;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -35,6 +36,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable{
 
 	use Notifiable;
+
+    const USER_ROLE = "user";
+    const ADMIN_USER_ROLE = "admin";
+
+    const ACTIVE_STATUS = "active";
+    const BLOCKED_STATUS = "blocked";
 
 	/**
 	 * The attributes that are mass assignable.
@@ -82,4 +89,8 @@ class User extends Authenticatable{
 	public static function whereId($value) {
 		return User::find($value);
 	}
+	
+    public function transactions() {
+        return $this->hasMany(Transaction::class);
+    }
 }

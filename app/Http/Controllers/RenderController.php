@@ -8,6 +8,7 @@ use App\Http\Resources\NewsJSON;
 use App\Http\Resources\SliderBarJSON;
 use App\Http\Resources\CategoryJSON;
 use App\Http\Resources\FieldResource;
+use App\Http\Resources\MyProductJSON;
 use App\Http\Resources\ProductJSON;
 use App\Http\Resources\SliderCafe;
 use App\Models\Cafe;
@@ -20,6 +21,7 @@ use App\Models\News;
 use App\Models\Product;
 use App\Models\SlideBar;
 use App\Models\Video;
+use Illuminate\Http\Request;
 
 class RenderController extends Controller
 {
@@ -68,6 +70,15 @@ class RenderController extends Controller
         return ProductJSON::collection(Product::visible()->orderBy('priority', 'asc')->get());
     }
 
+    
+    public function get_my_products(Request $request)
+    {
+        $myProducts = 
+            $request->user()->transactions()->complete()->with('product')->get();
+
+        return MyProductJSON::collection($myProducts);
+    }
+
     public function get_introduce()
     {
         return IntroduceJSON::collection(Introduce::visible()->orderBy('priority', 'asc')->get());
@@ -109,7 +120,8 @@ class RenderController extends Controller
             array_push($wantedCats, $cat);
         }
 
-        return [CategoryJSON::collection($wantedCats), implode(',', $ids)];
+        // return [CategoryJSON::collection($wantedCats), implode(',', $ids)];
+        return CategoryJSON::collection($wantedCats);
     }
     
     public function get_video_categories()
@@ -1001,6 +1013,69 @@ class RenderController extends Controller
         ];
     }
 
+    public function render_my_products_json_file(Request $request)
+    {
+        return [
+            [
+                "BoxID" => 38931,
+                "MenuID" => 29270,
+                "BoxTitle" => "محصولات من",
+                "BoxDescription" => "",
+                "Priority" => 1,
+                "Width" => null,
+                "Height" => null,
+                "BoxCount" => 20,
+                "MaduleID" => null,
+                "SubBoxHeight" => null,
+                "BoxCountPerRow" => 20,
+                "FormID" => null,
+                "FormReportID" => null,
+                "BoxGroupID" => 4,
+                "BoxGroupName" => "news",
+                "BoxPersianName" => "محصولات من",
+                "Pagination" => 3,
+                "SortType" => 1,
+                "Content" => null,
+                "MediaID" => null,
+                "HasProductTabs" => null,
+                "ProductSlides" => null,
+                "RowIDList" => "783",
+                "BoxStyle" => "",
+                "PopupStyle" => false,
+                "BoxTemp" => null,
+                "ShowMoreLink" => null,
+                "ContainerTabs" => null,
+                "WebsiteDisplay" => true,
+                "MobileDisplay" => true,
+                "Background" => null,
+                "ParallaxStyle" => null,
+                "DisableBoxBack" => null,
+                "BackTitleColor" => null,
+                "BlurEffectBack" => null,
+                "BlackEffectBack" => null,
+                "ButtonList" => [],
+                "Platform7Maduleid" => null,
+                "GroupMaduleBox" => null,
+                "IsAmazzingoffer" => false
+            ],
+            [
+                "BoxID" => 38931,
+                "Content" => [
+                    "model" => [
+                        "News" => $this->get_my_products($request),
+                        "PopupStyle" => false,
+                    ],
+                    "boxID" => 38931,
+                    "newsCount" => 9,
+                    "top" => 20,
+                    "Pagination" => 3,
+                    "ShowMoreLink" => null,
+                    "paginationData" => "[\"step\" =>1,\"top\" =>20,\"paginationCount\" =>8,\"advCount\" =>9,\"GridTableInfo\" =>null,\"ElementList\" =>null,\"HasFilter\" =>false]",
+                    "skip" => 0
+                ],
+            ],
+        ];
+    }
     
     public function render_shop_json_file()
     {
@@ -1145,20 +1220,21 @@ class RenderController extends Controller
 
         return [
             [
-                "BoxID" => 38888,
-                "MenuID" => 87665,
+                "BoxID" => 38931,
+                "MenuID" => 29270,
                 "BoxTitle" => "مقالات",
                 "BoxDescription" => "",
                 "Priority" => 1,
-                "Height" => 280,
-                "BoxCount" => 100,
+                "Width" => null,
+                "Height" => null,
+                "BoxCount" => 20,
                 "MaduleID" => null,
                 "SubBoxHeight" => null,
-                "BoxCountPerRow" => 3,
+                "BoxCountPerRow" => 20,
                 "FormID" => null,
                 "FormReportID" => null,
-                "BoxGroupID" => 3,
-                "BoxGroupName" => "gallery",
+                "BoxGroupID" => 4,
+                "BoxGroupName" => "news",
                 "BoxPersianName" => "مقالات",
                 "Pagination" => 3,
                 "SortType" => 1,
@@ -1166,7 +1242,7 @@ class RenderController extends Controller
                 "MediaID" => null,
                 "HasProductTabs" => null,
                 "ProductSlides" => null,
-                "RowIDList" => $cats[1],
+                "RowIDList" => "783",
                 "BoxStyle" => "",
                 "PopupStyle" => false,
                 "BoxTemp" => null,
@@ -1178,8 +1254,6 @@ class RenderController extends Controller
                 "ParallaxStyle" => null,
                 "DisableBoxBack" => null,
                 "BackTitleColor" => null,
-                "DisableBoxBackgroundColor" => null,
-                "BoxBackgroundColor" => null,
                 "BlurEffectBack" => null,
                 "BlackEffectBack" => null,
                 "ButtonList" => [],
@@ -1188,23 +1262,20 @@ class RenderController extends Controller
                 "IsAmazzingoffer" => false
             ],
             [
-                "BoxID" => 38888,
+                "BoxID" => 38931,
                 "Content" => [
-                    "boxID" => 38888,
-                    "isVideo" => false,
-                    "isFileGallery" => false,
                     "model" => [
-                        "GalleryList" => null,
-                        "AlbumList" => $cats[0],
-                        "BoxCountPerRow" => 3,
-                        "SubBoxHeight" => 116,
-                        "paddingBottom" => 0,
-                        "boxID" => 38888
+                        "News" => $cats,
+                        "PopupStyle" => false,
                     ],
-                    "top" => 100,
+                    "boxID" => 38931,
+                    "newsCount" => 9,
+                    "top" => 20,
                     "Pagination" => 3,
-                    "ShowMoreLink" => null
-                ]
+                    "ShowMoreLink" => null,
+                    "paginationData" => "[\"step\" =>1,\"top\" =>20,\"paginationCount\" =>8,\"advCount\" =>9,\"GridTableInfo\" =>null,\"ElementList\" =>null,\"HasFilter\" =>false]",
+                    "skip" => 0
+                ],
             ],
         ];
     }
@@ -1465,6 +1536,13 @@ class RenderController extends Controller
         return ["madules" => [$shop_section[0]], "jsonContentList" => [$shop_section[1]]];
     }
 
+    
+    public function my_products_json_file(Request $request)
+    {
+        $my_products_section = $this->render_my_products_json_file($request);
+        return ["madules" => [$my_products_section[0]], "jsonContentList" => [$my_products_section[1]]];
+    }
+
 
     public function article_json_file()
     {
@@ -1516,6 +1594,51 @@ class RenderController extends Controller
             ]
         ];
     }
+    
+    public function render_sepc_articles($category) {
+        return [
+            [
+                [
+                    "BoxID" => 39690,
+                    "MenuID" => 29412,
+                    "BoxTitle" => "",
+                    "BoxDescription" => null,
+                    "Priority" => 5,
+                    "Width" => null,
+                    "Height" => null,
+                    "BoxCount" => 1,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 15,
+                    "BoxGroupName" => "HtmlCode",
+                    "BoxPersianName" => "مقالات " . $category->title,
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => null,
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "ButtonList" => []
+                ]
+            ],
+            [
+                [
+                    "BoxID" => 39690,
+                    "Content" => "<section data-updatecontent=\"true\" data-formid=\"null\" data-pagination=\"2\" data-href=\"/Home/GetArticleList/" . $category->id . "\" data-boxid=\"38865\" data-boxstyle=\"services\" data-popupstyle=\"false\" data-boxcount=\"9\" data-boxtemp=\"null\" data-tmplname=\"tabs\" class=\"resizable ui-state-active animated\" ><h4> مقالات " . $category->title . "</h4></section>"
+                ]
+            ]
+        ];
+    }
 
     public function galleries_json_file()
     {
@@ -1551,6 +1674,11 @@ class RenderController extends Controller
     
     public function people_json_file() {
         $cafe_section = $this->render_people();
+        return ["madules" => $cafe_section[0], "jsonContentList" => $cafe_section[1]];
+    }
+    
+    public function spec_articles_json_file($category) {
+        $cafe_section = $this->render_sepc_articles($category);
         return ["madules" => $cafe_section[0], "jsonContentList" => $cafe_section[1]];
     }
 }

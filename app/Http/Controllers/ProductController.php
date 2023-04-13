@@ -3,13 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductAdminDigest;
+use App\Http\Resources\TransactionResource;
 use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class ProductController extends Controller
 {
+
+    public function report(Request $request)
+    {
+        $items = 
+            Transaction::complete()->with(['user', 'product'])->orderBy('id', 'desc')->get();
+
+        return view('admin.report', [
+            'items' => TransactionResource::collection($items)->toArray($request)
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -150,13 +164,31 @@ class ProductController extends Controller
         //
     }
 
-    public function payment()
+    public function payment(Request $request, Product $product)
     {
+        $userId = $request->user()->id;
+
+        $t = Transaction::where('user_id', $userId)->where('product_id', $product->id)->complete()->first();
+        if($t != null) {
+            return Redirect::route('failed', ['err' => 'duplicate']);
+        }
+
+        $t = random_int(100000, 999999);
+        while(Transaction::where('tracking_code', $t)->count() > 0)
+            $t = random_int(100000, 999999);
+
+        $t = Transaction::create([
+            'user_id' => $userId,
+            'product_id' => $product->id,
+            'amount' => $product->price * 10,
+            'tracking_code' => $t
+        ]);
+        
         $response = zarinpal()
-            ->amount(10000) // مبلغ تراکنش
+            ->amount($product->price * 10) // مبلغ تراکنش
             ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
             ->request()
-            ->description('transaction info') // توضیحات تراکنش
+            ->description($t->id) // توضیحات تراکنش
             ->callbackUrl('http://hivadkids.ir/verification') // آدرس برگشت پس از پرداخت
             ->mobile('09038180329')
             ->send();
@@ -173,23 +205,57 @@ class ProductController extends Controller
         $authority = $request->query('Authority'); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
         $status = $request->query('Status', null); // دریافت کوئری استرینگ ارسال شده توسط زرین پال
 
-        if($status != null && strtolower($status) == "nok") {
-            dd("ناموفق");
+        if($status != null && strtolower($status) == "ok") {
+            
+            $t = Transaction::orderBy('id', 'desc')->first();
+            if($t == null)
+                return abort(401);
+
+            $response = zarinpal()
+                ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
+                ->amount($t->amount)
+                ->verification()
+                ->authority($authority)
+                ->send();
+
+            if (!$response->success()) {
+                return $response->error()->message();
+            }
+
+            $t->status = Transaction::COMPLETE;
+            $t->ref_num = $response->referenceId();
+            $t->save();
+
+            Auth::loginUsingId($t->user_id);
+
+            return Redirect::route('success', 
+                ['transaction' => $t]
+            );
         }
 
-        $response = zarinpal()
-            ->merchantId('c9b8f4e9-94d2-4d46-97bb-483452991e01')
-            ->amount(10000)
-            ->verification()
-            ->authority($authority)
-            ->send();
+        return Redirect::route('');
 
-        if (!$response->success()) {
-            return $response->error()->message();
-        }
+    }
 
-        // پرداخت موفقیت آمیز بود
-        // دریافت شماره پیگیری تراکنش و انجام امور مربوط به دیتابیس
-        return $response->referenceId();
+    public function success(Request $request, Transaction $transaction) {
+        
+        $userId = $request->user()->id;
+
+        if($transaction->user_id != $userId || $transaction->status != Transaction::COMPLETE)
+            return abort(401);
+
+        $product = $transaction->product->title;
+
+        return view('success', ['transaction' => $transaction, 'product' => $product]);
+    }
+    
+    public function failed($err, Transaction $transaction = null) {
+        
+        if($transaction != null && $transaction->status == Transaction::COMPLETE)
+            return abort(401);
+
+        $product = $transaction->product->title;
+
+        return view('success', ['transaction' => $transaction, 'product' => $product]);
     }
 }
