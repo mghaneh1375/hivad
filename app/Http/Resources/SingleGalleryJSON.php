@@ -17,20 +17,18 @@ class SingleGalleryJSON extends JsonResource
         $arr = explode('.', $this->image);
 
         return [
-            "MediaID" => $this->image,
-            "AlbumID" => $this->cat_id,
-            "BoxID" => null,
-            "IsImage" => true,
+            
+            "TabID" => 5960,
+            "BoxID" => 38865,
+            "LinkUrl" => null,
+            "TempName" => "PageContent",
+            "MenuID" => 29264,
+            "Title" => $this->title,
+            "Titr" => $this->digest,
+            "Picture" => $this->image,
             "Priority" => $this->priority,
-            "Type" => "." . $arr[1],
-            "Display" => true,
-            "Description" => null,
-            "Image" => $this->image,
-            "Text" => '<p>' . $this->title . '</p>' . '<div>' . $this->digest . '</div><a>مشاهده بیشتر</a>',
-            "DateTime" => "2020-01-01T12 =>14 =>00",
-            "WebsiteID" => 762,
-            "BaseWebsiteID" => null,
-            "BaseMediaID" => null
+            "Icon" => null,
+            "BaseWebsiteID" => null
         ];
     }
 }

@@ -1566,6 +1566,53 @@ class RenderController extends Controller
         ];
     }
 
+    
+    public function render_sepc_category($category) {
+
+        return [
+            [
+                [
+                    "BoxID" => 39690,
+                    "MenuID" => 29412,
+                    "BoxTitle" => "",
+                    "BoxDescription" => null,
+                    "Priority" => 5,
+                    "Width" => null,
+                    "Height" => null,
+                    "BoxCount" => 1,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 15,
+                    "BoxGroupName" => "HtmlCode",
+                    "BoxPersianName" => "مقالات " . $category->title,
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => null,
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "ButtonList" => []
+                ]
+            ],
+            [
+                [
+                    "BoxID" => 39690,
+                    "Content" => "<section data-updatecontent=\"true\" data-formid=\"null\" data-pagination=\"2\" data-href=\"/Home/GetGalleryList/" . $category->id . "\" data-boxid=\"38865\" data-boxstyle=\"services\" data-popupstyle=\"false\" data-boxcount=\"9\" data-boxtemp=\"null\" data-tmplname=\"tabs\" class=\"resizable ui-state-active animated\" ><h4> مقالات " . $category->title . "</h4></section>"
+                ]
+            ]
+        ];
+    }
+
     public function galleries_json_file()
     {
         $galleries_section = $this->render_total_articles('gallery');
@@ -1607,4 +1654,10 @@ class RenderController extends Controller
         $cafe_section = $this->render_sepc_articles($category);
         return ["madules" => $cafe_section[0], "jsonContentList" => $cafe_section[1]];
     }
+    
+    public function spec_category_json_file($category) {
+        $cafe_section = $this->render_sepc_category($category);
+        return ["madules" => $cafe_section[0], "jsonContentList" => $cafe_section[1]];
+    }
+
 }

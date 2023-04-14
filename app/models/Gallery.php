@@ -39,4 +39,9 @@ class Gallery extends Model
     {
         return $query->where('is_imp', true)->where('visibility', true);
     }
+    
+    public function scopeVisible($query)
+    {
+        return $query->where('visibility', true);
+    }
 }

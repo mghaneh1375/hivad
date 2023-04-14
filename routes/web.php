@@ -49,6 +49,8 @@ Route::get('people-get_json_file', [HomeController::class, 'people_get_json_file
 
 Route::get('spec-articles-get_json_file/{category}', [HomeController::class, 'spec_articles_get_json_file'])->name('spec_articles_get_json_file');
 
+Route::get('spec-category-get_json_file/{category}', [HomeController::class, 'spec_category_get_json_file'])->name('spec_category_get_json_file');
+
 Route::get('news-get_json_file', [HomeController::class, 'news_get_json_file'])->name('news_get_json_file');
 
 Route::get('shop-get_json_file', [HomeController::class, 'shop_get_json_file'])->name('shop-get_json_file');
@@ -229,6 +231,10 @@ Route::group(['middleware' => ['shareWithAllViews']], function() {
     Route::get('spec-articles/{category}', function(Category $category) {
         return view('spec-articles', compact('category'));
     });
+    
+    Route::get('spec-category/{category}', function(Category $category) {
+        return view('spec-category', compact('category'));
+    });
 
     Route::get('spec-article/{article}', function(Article $article) {
         return view('spec-article', compact('article'));
@@ -239,7 +245,7 @@ Route::group(['middleware' => ['shareWithAllViews']], function() {
 
     Route::view('adviceRequest', 'advice_request')->name('adviceRequest');
 
-    Route::get('/Home/GetGalleryList', [GalleryController::class, 'list']);
+    Route::get('/Home/GetGalleryList/{category}', [GalleryController::class, 'list']);
 
     Route::get('/Home/GetArticleList/{category}', [ArticleController::class, 'list']);
 
