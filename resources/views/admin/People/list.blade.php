@@ -30,8 +30,8 @@
                             </div>
 
                             @foreach ($peoples as $item)
-                                <div class="column col-xs-12 col-lg-4 myContainer" id="item_{{ $item->id }}">
-                                    <img src="{{asset('Content/images/shortcutTab/' . $item->image)}}" alt="{{ $item->alt }}" style="width:100%; height: 100%">
+                                <div class="column col-xs-12 col-lg-3 myContainer" id="item_{{ $item->id }}">
+                                    <img src="{{asset('Content/images/shortcutTab/' . $item->image)}}" alt="{{ $item->alt }}" style="max-width:100%; max-height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $item->id }}">
                                             <p>{{ $item->name }}</p>

@@ -386,162 +386,147 @@
                 <div class="left-custom-menu-adp-wrap">
                     <ul class="nav navbar-nav left-sidebar-menu-pro">
 
-                        {{-- @if(\Illuminate\Support\Facades\Auth::check()) --}}
-                            {{-- <li class="nav-item">
-                                <a href="{{route('home')}}" aria-expanded="false"><i></i> <span class="mini-dn">خانه</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                            </li> --}}
+                        <li class="nav-item"><a data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i></i> <span class="mini-dn">تنظیمات سیستمی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('manageIntroduce')}}" class="dropdown-item">معرفی مجموعه</a>
+                                <a href="{{route('manageCafe')}}" class="dropdown-item">معرفی کافه</a>
+                                <a href="{{route('manageSlideShow')}}" class="dropdown-item">مدیریت اسلایدبار</a>
+                                <a href="{{route('manageGallery')}}" class="dropdown-item">مدیریت گالری</a>
+                                <a href="{{route('manageConfig')}}" class="dropdown-item">مدیریت صفحه نخست</a>
+                                <a href="{{route('manageVideo')}}" class="dropdown-item">مدیریت ویدیوها</a>
+                                <a href="{{route('managePeople')}}" class="dropdown-item">مدیریت افراد متخصص</a>
+                                <a href="{{route('manageCategory')}}" class="dropdown-item">مدیریت دسته ها</a>
+                            </div>
+                        </li>
 
-                            {{-- @if(\Illuminate\Support\Facades\Auth::user()->level == getValueInfo('adminLevel')) --}}
+                        <?php
+                            $unseenAdviceRequests = \App\Models\UserAdviceRequest::unSeen()->count();
+                        ?>
+                        
+                        <li class="nav-item">
+                            @if($unseenAdviceRequests > 0)
+                                <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @else
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @endif
+                            <i></i> 
+                            <span class="mini-dn">مدیریت وقت گیری</span> 
+                            @if($unseenAdviceRequests > 0)
+                                <span style="align-self: center" class="newCounter">{{ $unseenAdviceRequests }}</span>
+                            @endif
+                            <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span>
+                            </a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('schedule.index')}}" class="dropdown-item">مدیریت برنامه هفتگی</a>
+                                <a href="{{route('user_advice_requests', ['seen' => 'false'])}}" class="dropdown-item">مدیریت درخواست های دیده نشده</a>
+                                <a href="{{route('user_advice_requests')}}" class="dropdown-item">مدیریت کل درخواست ها</a>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i></i> <span class="mini-dn">محصولات</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('manageProducts')}}" class="dropdown-item">مدیریت محصولات</a>
+                                <a href="{{route('product.report')}}" class="dropdown-item">گزارشگیری فروش</a>
+                            </div>
+                        </li>
 
-                                <li class="nav-item"><a data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i></i> <span class="mini-dn">تنظیمات سیستمی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                        <a href="{{route('manageIntroduce')}}" class="dropdown-item">معرفی مجموعه</a>
-                                        <a href="{{route('manageCafe')}}" class="dropdown-item">معرفی کافه</a>
-                                        <a href="{{route('manageSlideShow')}}" class="dropdown-item">مدیریت اسلایدبار</a>
-                                        <a href="{{route('manageGallery')}}" class="dropdown-item">مدیریت گالری</a>
-                                        <a href="{{route('manageConfig')}}" class="dropdown-item">مدیریت صفحه نخست</a>
-                                        <a href="{{route('manageVideo')}}" class="dropdown-item">مدیریت ویدیوها</a>
-                                        <a href="{{route('managePeople')}}" class="dropdown-item">مدیریت افراد متخصص</a>
-                                        {{-- <a href="{{route('manageArticles')}}" class="dropdown-item">مدیریت مقالات</a> --}}
-                                        <a href="{{route('manageNews')}}" class="dropdown-item">مدیریت اخبار</a>
-                                        <a href="{{route('manageCategory')}}" class="dropdown-item">مدیریت دسته ها</a>
-                                    </div>
-                                </li>
+                        <?php
+                            $unseenSurveyCount = \App\Models\UserForm::survey()->unSeen()->count();
+                        ?>
 
-                                <?php
-                                    $unseenAdviceRequests = \App\Models\UserAdviceRequest::unSeen()->count();
-                                ?>
-                                
-                                <li class="nav-item">
-                                    @if($unseenAdviceRequests > 0)
-	                                    <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
-				                    @else
-	                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				                    @endif
-                                    <i></i> 
-                                    <span class="mini-dn">مدیریت وقت گیری</span> 
-                                    @if($unseenAdviceRequests > 0)
-                                        <span style="align-self: center" class="newCounter">{{ $unseenAdviceRequests }}</span>
-                                    @endif
-                                    <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span>
-                                    </a>
-                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                        <a href="{{route('schedule.index')}}" class="dropdown-item">مدیریت برنامه هفتگی</a>
-                                        <a href="{{route('user_advice_requests', ['seen' => 'false'])}}" class="dropdown-item">مدیریت درخواست های دیده نشده</a>
-                                        <a href="{{route('user_advice_requests')}}" class="dropdown-item">مدیریت کل درخواست ها</a>
-                                    </div>
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i></i> <span class="mini-dn">محصولات</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                        <a href="{{route('manageProducts')}}" class="dropdown-item">مدیریت محصولات</a>
-                                        <a href="{{route('product.report')}}" class="dropdown-item">گزارشگیری فروش</a>
-                                    </div>
-                                </li>
+                        <li class="nav-item">
+                            @if($unseenSurveyCount > 0)
+                                <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @else
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @endif
+                            <i></i> 
+                            <span class="mini-dn">نظرسنجی</span> 
+                            @if($unseenSurveyCount > 0)
+                                <span style="align-self: center" class="newCounter">{{ $unseenSurveyCount }}</span>
+                            @endif
+                            <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span>
+                            </a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('survey.questions.list')}}" class="dropdown-item">مدیریت سوالات</a>
+                                <a href="{{route('survey.forms', ['seen' => 'false'])}}" class="dropdown-item">مدیریت فرم های دیده نشده</a>
+                                <a href="{{route('survey.forms')}}" class="dropdown-item">مدیریت فرم ها</a>
+                            </div>
+                        </li>
+                        
+                        <?php
+                            $unseenAdviceCount = \App\Models\UserForm::advice()->unSeen()->count();
+                        ?>
 
-                                <?php
-                                    $unseenSurveyCount = \App\Models\UserForm::survey()->unSeen()->count();
-                                ?>
-
-                                <li class="nav-item">
-                                    @if($unseenSurveyCount > 0)
-	                                    <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
-				                    @else
-	                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				                    @endif
-                                    <i></i> 
-                                    <span class="mini-dn">نظرسنجی</span> 
-                                    @if($unseenSurveyCount > 0)
-                                        <span style="align-self: center" class="newCounter">{{ $unseenSurveyCount }}</span>
-                                    @endif
-                                    <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span>
-                                    </a>
-                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                        <a href="{{route('survey.questions.list')}}" class="dropdown-item">مدیریت سوالات</a>
-                                        <a href="{{route('survey.forms', ['seen' => 'false'])}}" class="dropdown-item">مدیریت فرم های دیده نشده</a>
-                                        <a href="{{route('survey.forms')}}" class="dropdown-item">مدیریت فرم ها</a>
-                                    </div>
-                                </li>
-                                
-                                <?php
-                                    $unseenAdviceCount = \App\Models\UserForm::advice()->unSeen()->count();
-                                ?>
-
-                                <li class="nav-item">
-                                    @if($unseenAdviceCount > 0)
-	                                    <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
-				                    @else
-	                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				                    @endif
-                                    <i></i> 
-                                    <span class="mini-dn">فرم درخواست مشاوره</span> 
-                                    @if($unseenAdviceCount > 0)
-                                        <span style="align-self: center" class="newCounter">{{ $unseenAdviceCount }}</span>
-                                    @endif
-                                    <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                        <a href="{{route('advice.questions.list')}}" class="dropdown-item">مدیریت سوالات</a>
-                                        <a href="{{route('advice.forms', ['seen' => 'false'])}}" class="dropdown-item">مدیریت فرم های دیده نشده</a>
-                                        <a href="{{route('advice.forms')}}" class="dropdown-item">مدیریت فرم ها</a>
-                                    </div>
-                                </li>
+                        <li class="nav-item">
+                            @if($unseenAdviceCount > 0)
+                                <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @else
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @endif
+                            <i></i> 
+                            <span class="mini-dn">فرم درخواست مشاوره</span> 
+                            @if($unseenAdviceCount > 0)
+                                <span style="align-self: center" class="newCounter">{{ $unseenAdviceCount }}</span>
+                            @endif
+                            <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('advice.questions.list')}}" class="dropdown-item">مدیریت سوالات</a>
+                                <a href="{{route('advice.forms', ['seen' => 'false'])}}" class="dropdown-item">مدیریت فرم های دیده نشده</a>
+                                <a href="{{route('advice.forms')}}" class="dropdown-item">مدیریت فرم ها</a>
+                            </div>
+                        </li>
 
 
-                                <?php
-                                    $unseenMsgCount = \App\Models\Msg::unSeen()->count();
-                                ?>
+                        <?php
+                            $unseenMsgCount = \App\Models\Msg::unSeen()->count();
+                        ?>
 
-                                <li class="nav-item">
-                                    @if($unseenMsgCount > 0)
-	                                    <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
-				                    @else
-	                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				                    @endif
-                                        <i></i> 
-                                        <span class="mini-dn">مدیریت پیام ها</span>
-                                        @if($unseenMsgCount > 0)
-                                            <span style="align-self: center" class="newCounter">{{ $unseenMsgCount }}</span>
-                                        @endif
-                                        <span class="indicator-right-menu mini-dn">
-                                            <i class="fa indicator-mn fa-angle-left"></i>
-                                        </span>
-                                    </a>
+                        <li class="nav-item">
+                            @if($unseenMsgCount > 0)
+                                <a style="display: flex; justify-content: space-between; padding-right: 10px; padding-left: 10px;" class="nav-link dropdown-toggle newCounterContainer" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @else
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @endif
+                                <i></i> 
+                                <span class="mini-dn">مدیریت پیام ها</span>
+                                @if($unseenMsgCount > 0)
+                                    <span style="align-self: center" class="newCounter">{{ $unseenMsgCount }}</span>
+                                @endif
+                                <span class="indicator-right-menu mini-dn">
+                                    <i class="fa indicator-mn fa-angle-left"></i>
+                                </span>
+                            </a>
 
-                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                        <a href="{{route('msgs', ['seen' => 'false'])}}" class="dropdown-item">پیام های خوانده نشده</a>
-                                        <a href="{{route('msgs')}}" class="dropdown-item">کل پیام ها</a>
-                                    </div>
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        <i></i> 
-                                        <span class="mini-dn">مقالات</span>
-                                        <span class="indicator-right-menu mini-dn">
-                                            <i class="fa indicator-mn fa-angle-left"></i>
-                                        </span>
-                                    </a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('msgs', ['seen' => 'false'])}}" class="dropdown-item">پیام های خوانده نشده</a>
+                                <a href="{{route('msgs')}}" class="dropdown-item">کل پیام ها</a>
+                            </div>
+                        </li>
+                        
 
-                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                        <a href="{{route('articles.index')}}" class="dropdown-item">مدیریت مقالات</a>
-                                    </div>
-                                </li>
+                        <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                            <a href="{{route('manageNews')}}" class="dropdown-item">مدیریت اخبار</a>
+                        </div>
 
-                            {{-- @endif --}}
+                        <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                            <a href="{{route('articles.index')}}" class="dropdown-item">مدیریت مقالات</a>
+                        </div>
 
-                            {{-- <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i></i> <span class="mini-dn">پروفایل من</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{route('changePass')}}" class="dropdown-item">تغییر رمزعبور</a>
-                                    <a href="{{route('logout')}}" class="dropdown-item">خروج</a>
-                                </div>
-                            </li> --}}
+                        {{-- <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <i></i> 
+                                <span class="mini-dn">مقالات</span>
+                                <span class="indicator-right-menu mini-dn">
+                                    <i class="fa indicator-mn fa-angle-left"></i>
+                                </span>
+                            </a>
 
-                        {{-- @else
-                            <li class="nav-item">
-                                <a href="{{route('login')}}" aria-expanded="false"><i class="fa big-icon fa-login"></i> <span class="mini-dn">ورود</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                            </li>
-                        @endif --}}
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('articles.index')}}" class="dropdown-item">مدیریت مقالات</a>
+                            </div>
+                        </li> --}}
                     </ul>
                 </div>
             </nav>
