@@ -16,7 +16,7 @@ class ArticleJSON extends JsonResource
     {
         return [
             "DateTime" => '',
-            "HrefLink" => null,
+            "HrefLink" => route('spec-article', ['article' => $this->id]),
             "NewsGroupName" =>"مقالات",
             "NewsID" => $this->id,
             "NewsPicture" => $this->image,

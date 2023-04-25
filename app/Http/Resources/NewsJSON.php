@@ -18,7 +18,7 @@ class NewsJSON extends JsonResource
 
        return [
             "DateTime" => $d,
-            "HrefLink" => null,
+            "HrefLink" => route('show-news', ['news' => $this->id, 'title' => $this->title]),
             "NewsGroupName" =>"اخبار",
             "NewsID" => $this->id,
             "NewsPicture" => $this->image,

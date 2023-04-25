@@ -184,7 +184,7 @@ Route::group(['middleware' => ['shareWithAllViews']], function() {
     Route::get('News/{news}/{title}', function (News $news, $title) {
         $d = date("Y-m-d H:i:s", strtotime($news->created_at));
         return view('single-news', compact('news', 'd'));
-    });
+    })->name('show-news');
 
     Route::get('Product/{product}/{title}', function (Product $product, $title) {
         
