@@ -826,7 +826,7 @@ class RenderController extends Controller
         return [
             [
                 "BoxDescription" => "",
-                "BoxGroupName" => "articles",
+                "BoxGroupName" => "news",
                 "BoxID" =>  38413,
                 "BoxPersianName" => "مقالات",
                 "BoxStyle" => "",
