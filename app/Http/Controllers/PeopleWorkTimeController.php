@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AdminPeopleWorkResource;
 use App\Http\Resources\AdminScheduleResource;
 use App\Http\Resources\PeopleDigest;
-use App\Http\Resources\PeopleResource;
-use App\Http\Resources\PeopleWorkResource;
 use App\Models\People;
 use App\Models\PeopleWorkTime;
 use App\Models\Schedule;

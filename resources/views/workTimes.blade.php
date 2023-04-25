@@ -54,6 +54,7 @@
 @section('menuId')'54423'@stop
 @section('prefix')'workTime-'@stop
 @section('menuName')'ساعات-کاری'@stop
+@section('title')ساعات کاری@stop
 
 @section('customContent')
     <div style="display: flex; flex-direction: column; margin: 30px; gap: 20px">
