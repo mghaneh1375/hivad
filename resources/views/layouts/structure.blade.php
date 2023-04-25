@@ -513,19 +513,6 @@
                         <li class="nav-item"><a href="{{ route('articles.index') }}" role="button"
                                 class="nav-link"><i></i> <span class="mini-dn">مدیریت مقالات</span></a></li>
 
-                        {{-- <li class="nav-item">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <i></i> 
-                                <span class="mini-dn">مقالات</span>
-                                <span class="indicator-right-menu mini-dn">
-                                    <i class="fa indicator-mn fa-angle-left"></i>
-                                </span>
-                            </a>
-
-                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                <a href="{{route('articles.index')}}" class="dropdown-item">مدیریت مقالات</a>
-                            </div>
-                        </li> --}}
                     </ul>
                 </div>
             </nav>

@@ -24,8 +24,8 @@
 
                         <div class="col-xs-12">
                             @foreach($categories as $category)
-                                <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $category->id }}">
-                                    <img src="{{asset('Content/images/GalleryPictures/crop/'.$category->image)}}" alt="{{ $category->alt }}" style="width:100%; height: 100%">
+                                <div style="min-height: 250px" class="column col-xs-12 col-lg-3 myContainer" id="item_{{ $category->id }}">
+                                    <img src="{{asset('Content/images/GalleryPictures/crop/'.$category->image)}}" alt="{{ $category->alt }}" style="max-width:100%; max-height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $category->id }}">
                                             <button class="btn btn-primary" onclick="$('#opBox_{{ $category->id }}').addClass('hidden'); $('#infoBox_{{ $category->id }}').removeClass('hidden')">مشاهده اطلاعات</button>
