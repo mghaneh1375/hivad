@@ -1532,7 +1532,7 @@ class RenderController extends Controller
         }
         
         if($config->show_article) {
-            $news_section = $this->render_news();
+            $news_section = $this->render_articles();
             array_push($modules, $news_section[0]);
             array_push($contents, $news_section[1]);
         }
