@@ -12,6 +12,7 @@ use App\Http\Resources\MyProductJSON;
 use App\Http\Resources\ProductJSON;
 use App\Http\Resources\SliderCafe;
 use App\Http\Resources\VideoCategoryJSON;
+use App\Models\Article;
 use App\Models\Cafe;
 use App\Models\Config;
 use App\Models\Gallery;
@@ -58,6 +59,11 @@ class RenderController extends Controller
     public function get_news()
     {
         return NewsJSON::collection(News::imp()->orderBy('priority', 'asc')->take(8)->get());
+    }
+    
+    public function get_articles()
+    {
+        return NewsJSON::collection(Article::imp()->orderBy('priority', 'asc')->take(8)->get());
     }
 
     public function get_all_news()
@@ -813,6 +819,39 @@ class RenderController extends Controller
         ];
     }
 
+    
+    public function render_articles()
+    {
+        return [
+            [
+                "BoxDescription" => "",
+                "BoxGroupName" => "articles",
+                "BoxID" =>  38931,
+                "BoxPersianName" => "مقالات",
+                "BoxStyle" => "",
+                "BoxTemp" =>  null,
+                "BoxTitle" => "آخرین مقالات",
+                "ButtonList" =>  [],
+                "MenuID" =>  29270,
+                "MobileDisplay" =>  true,
+                "PopupStyle" =>  false,
+                "SortType" =>  1,
+                "WebsiteDisplay" =>  true,
+            ],
+            [
+                "BoxID" => 38931,
+                "Content" => [
+                    "Pagination" => 2,
+                    "ShowMoreLink" => null,
+                    "model" => [
+                        "News" => $this->get_articles(),
+                        "PopupStyle" => false
+                    ]
+                ]
+            ],
+        ];
+    }
+
     public function render_introduce()
     {
 
@@ -1487,6 +1526,12 @@ class RenderController extends Controller
         }
         
         if($config->show_news) {
+            $news_section = $this->render_news();
+            array_push($modules, $news_section[0]);
+            array_push($contents, $news_section[1]);
+        }
+        
+        if($config->show_article) {
             $news_section = $this->render_news();
             array_push($modules, $news_section[0]);
             array_push($contents, $news_section[1]);
