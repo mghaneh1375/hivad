@@ -506,13 +506,12 @@
                         </li>
                         
 
-                        <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                            <a href="{{route('manageNews')}}" class="dropdown-item">مدیریت اخبار</a>
-                        </div>
+                        <li class="nav-item"><a href="{{ route('manageNews') }}" role="button"
+                                class="nav-link"><i></i> <span class="mini-dn">مدیریت اخبار</span></a></li>
 
-                        <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                            <a href="{{route('articles.index')}}" class="dropdown-item">مدیریت مقالات</a>
-                        </div>
+
+                        <li class="nav-item"><a href="{{ route('articles.index') }}" role="button"
+                                class="nav-link"><i></i> <span class="mini-dn">مدیریت مقالات</span></a></li>
 
                         {{-- <li class="nav-item">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
