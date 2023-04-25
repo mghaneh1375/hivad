@@ -21,6 +21,11 @@
             padding: 0 !important;
         }
 
+        .resizable[data-tmplname="news"] {
+            padding-bottom: 0 !important;
+            padding-top: 60px !important;
+        }
+
         .wrapper_Col > #newsWidget > div img {
             max-height: 150px !important;
             width: auto;
