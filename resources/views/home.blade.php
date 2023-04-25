@@ -16,14 +16,14 @@
             top: unset !important;
             display: flex !important;
             flex-direction: column;
-            height: 300px;
+            height: 370px;
             width: 300px;
             padding: 0 !important;
         }
 
         .wrapper_Col > #newsWidget > div img {
-            max-height: 130px !important;
-            width: 100%;
+            max-height: 150px !important;
+            width: auto;
         }
         .wrapper_Col > #newsWidget #newsInfo {
             padding: 10px;
@@ -35,8 +35,7 @@
         }
         .wrapper_Col > #newsWidget #newsInfo .span_loaddingImg {
             display: none;
-        }
-        
+        }        
         
     </style>
 @stop
