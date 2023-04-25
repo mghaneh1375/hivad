@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleJSON;
 use App\Http\Resources\GalleryJSON;
 use App\Http\Resources\IntroduceJSON;
 use App\Http\Resources\NewsJSON;
@@ -63,7 +64,7 @@ class RenderController extends Controller
     
     public function get_articles()
     {
-        return NewsJSON::collection(Article::imp()->orderBy('priority', 'asc')->take(8)->get());
+        return ArticleJSON::collection(Article::imp()->orderBy('priority', 'asc')->take(8)->get());
     }
 
     public function get_all_news()
@@ -842,7 +843,7 @@ class RenderController extends Controller
                 "BoxID" => 38931,
                 "Content" => [
                     "Pagination" => 2,
-                    "ShowMoreLink" => null,
+                    "ShowMoreLink" => route('articles.show'),
                     "model" => [
                         "News" => $this->get_articles(),
                         "PopupStyle" => false
