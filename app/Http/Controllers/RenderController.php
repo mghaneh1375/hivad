@@ -827,7 +827,7 @@ class RenderController extends Controller
             [
                 "BoxDescription" => "",
                 "BoxGroupName" => "articles",
-                "BoxID" =>  38931,
+                "BoxID" =>  38413,
                 "BoxPersianName" => "مقالات",
                 "BoxStyle" => "",
                 "BoxTemp" =>  null,
@@ -840,7 +840,7 @@ class RenderController extends Controller
                 "WebsiteDisplay" =>  true,
             ],
             [
-                "BoxID" => 38931,
+                "BoxID" => 38413,
                 "Content" => [
                     "Pagination" => 2,
                     "ShowMoreLink" => route('articles.show'),
@@ -1533,9 +1533,9 @@ class RenderController extends Controller
         }
         
         if($config->show_article) {
-            $news_section = $this->render_articles();
-            array_push($modules, $news_section[0]);
-            array_push($contents, $news_section[1]);
+            $article_section = $this->render_articles();
+            array_push($modules, $article_section[0]);
+            array_push($contents, $article_section[1]);
         }
 
         if($config->show_about) {
