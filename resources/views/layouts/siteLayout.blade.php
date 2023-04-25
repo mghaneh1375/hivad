@@ -113,7 +113,7 @@
     @include('layouts.progress')
 
     <script src="{{ asset('assets/js/utilities.js') }}"></script>
-    <script src="{{ asset('assets/js/siteLayout.min.js?v=1.3') }}" defer></script>
+    <script src="{{ asset('assets/js/siteLayout.min.js?v=1.4') }}" defer></script>
     <script src="{{ asset('assets/js/js_underDesign.js') }}" defer></script>
     <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
     <script src="{{ asset('assets/js/commonJS.js') }}"></script>
