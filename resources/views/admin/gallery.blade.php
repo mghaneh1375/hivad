@@ -24,8 +24,8 @@
 
                         <div class="col-xs-12">
                             @foreach($galleries as $gallery)
-                                <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $gallery->id }}">
-                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/'.$gallery->image)}}" alt="{{ $gallery->alt }}" style="width:100%; height: 100%">
+                                <div style="min-height: 250px" class="column col-xs-12 col-lg-3 myContainer" id="item_{{ $gallery->id }}">
+                                    <img src="{{asset('Content/images/GalleryPictures/crop/'.$gallery->image)}}" alt="{{ $gallery->alt }}" style="max-width:100%; max-height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $gallery->id }}">
                                             <button class="btn btn-primary" onclick="$('#opBox_{{ $gallery->id }}').addClass('hidden'); $('#infoBox_{{ $gallery->id }}').removeClass('hidden')">مشاهده اطلاعات</button>
