@@ -810,7 +810,7 @@ class RenderController extends Controller
                 "BoxID" => 38931,
                 "Content" => [
                     "Pagination" => 2,
-                    "ShowMoreLink" => null,
+                    "ShowMoreLink" => route('all_news'),
                     "model" => [
                         "News" => $this->get_news(),
                         "PopupStyle" => false
