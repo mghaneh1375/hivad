@@ -26,3 +26,4 @@
 @section('menuId')'87665'@stop
 @section('prefix')'article-'@stop
 @section('menuName')'مقالات'@stop
+@section('title')مقالات@stop

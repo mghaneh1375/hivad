@@ -50,6 +50,10 @@ class HomeController extends RenderController {
     public function spec_category_get_json_file(Category $category) {
         return json_encode($this->spec_category_json_file($category));
     }
+    
+    public function spec_videos_get_json_file(Category $category) {
+        return json_encode($this->spec_video_category_json_file($category));
+    }
 
     public function galleries_get_json_file() {
         return json_encode($this->galleries_json_file());

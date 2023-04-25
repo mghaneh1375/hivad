@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\SingleGalleryJSON;
+use App\Http\Resources\VideoResource;
 use App\Models\Category;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class VideoController extends Controller
     {
         $videos = Video::all();
         foreach($videos as $video) {
-            $video->file = asset('storage/videos/' . $video->file);
+            $video->file = asset('videos/' . $video->file);
         }
         return view('admin.Video.list', ['videos' => $videos, 'categories' => Category::all()]);
     }
@@ -27,8 +27,8 @@ class VideoController extends Controller
         if (file_exists(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $video->image))
             unlink(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $video->image);
 
-        if(file_exists(__DIR__ . '/../../../public/storage/videos/' . $video->file))
-            unlink(__DIR__ . '/../../../public/storage/videos/' . $video->file);
+        if(file_exists(__DIR__ . '/../../../public/Content/images/videos/' . $video->file))
+            unlink(__DIR__ . '/../../../public/Content/images/videos/' . $video->file);
 
         $video->delete();
         return response()->json(["status" => "ok"]);
@@ -38,20 +38,32 @@ class VideoController extends Controller
     public function add() {
         return view('admin.Video.create', ['categories' => Category::all()]);
     }
+    
+    public function editVideo(Video $video) {
+        return view('admin.Video.create', [
+            'categories' => Category::all(),
+            'video' => $video
+        ]);
+    }
 
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = [
             'image' => 'required|image',
             'cat_id' => 'required|exists:category,id',
             'file' => 'required|file|mimes:mp4',
             'priority' => 'required|int|min:1',
             'alt' => 'nullable|string|min:1',
-            'title' => 'nullable|string|min:1',
+            'title' => 'required|string|min:1',
             'description' => 'nullable|string|min:1',
             'is_imp' => 'required|boolean'
-        ]);
+        ];
+
+        if(self::hasAnyExcept(array_keys($validator), $request->keys()))
+            abort(401);
+
+        $request->validate($validator);
 
         $image       = $request->file('image');
         
@@ -64,8 +76,8 @@ class VideoController extends Controller
 
         $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename . '.' . $ext));
 
-        $video_filename = $request->file('file')->storeAs('public/videos', $filename . '.mp4');
-        $video_filename = str_replace('public/videos/', '', $video_filename);
+        $video_filename = $request->file('file')->storeAs('videos', $filename . '.mp4');
+        $video_filename = str_replace('videos/', '', $video_filename);
 
         Video::create([
             'image' => $filename . '.' . $ext,
@@ -80,29 +92,82 @@ class VideoController extends Controller
 
         return Redirect::route('manageVideo');
     }
-
-    public static function list(Request $request)
+    
+    public function update(Request $request, Video $video)
     {
-        $category = Category::whereId($request->query('albumID'))->first();
-        $galleries = Video::whereCatId($category->id)->where('visibility', true)->get();
-        return json_encode(
-            [
-                "boxID" => 38888,
-                "isVideo" => false,
-                "isFileGallery" => false,
-                "model" => [
-                    "GalleryList" => SingleGalleryJSON::collection($galleries),
-                    "AlbumList" => null,
-                    "BoxCountPerRow" => 3,
-                    "SubBoxHeight" => 250,
-                    "paddingBottom" => 0,
-                    "boxID" => 38888
-                ],
-                "top" => 100,
-                "Pagination" => 3,
-                "ShowMoreLink" => null
-            ]
-        );
+        $validator = [
+            'image' => 'nullable|image',
+            'cat_id' => 'required|exists:category,id',
+            'file' => 'nullable|file|mimes:mp4',
+            'priority' => 'required|int|min:1',
+            'alt' => 'nullable|string|min:1',
+            'title' => 'required|string|min:1',
+            'description' => 'nullable|string|min:1',
+            'is_imp' => 'required|boolean'
+        ];
+
+        if(self::hasAnyExcept(array_keys($validator), $request->keys()))
+            abort(401);
+
+        $request->validate($validator, self::$errors);
+
+        $filename    = time();
+
+        if($request->has('image') && $request->file('image') != null) {
+
+            $image       = $request->file('image');
+                
+            $image_resize = Image::make($image->getRealPath());
+            $img = $request->file('image')->getClientOriginalName();
+            $ext = explode('.', $img);
+            $ext = $ext[count($ext) - 1];
+
+            $image_resize->save(public_path('Content/images/GalleryPictures/crop/' . $filename . '.' . $ext));
+               
+            if (file_exists(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $video->image))
+                unlink(__DIR__ . '/../../../public/Content/images/GalleryPictures/crop/' . $video->image);
+
+            $video->image = $filename . '.' . $ext;
+        }
+
+        if($request->has('file') && $request->file('file') != null) {
+
+            $video_filename = $request->file('file')->storeAs('videos', $filename . '.mp4');
+            $video_filename = str_replace('videos/', '', $video_filename);
+
+            if(file_exists(__DIR__ . '/../../../public/Content/images/videos/' . $video->file))
+                unlink(__DIR__ . '/../../../public/Content/images/videos/' . $video->file);
+
+            $video->file = $video_filename;
+        }
+
+        foreach($request->keys() as $key) {
+            
+            if($key == '_token' || $key == "file" || $key == "image")
+                continue;
+
+            $video[$key] = $request[$key];
+        }
+
+        $video->save();
+        return Redirect::route('manageVideo');
+    }
+
+    public static function list(Request $request, Category $category)
+    {
+
+        $galleries = Video::whereCatId($category->id)->visible()->orderBy('priority', 'desc')->get();
+        $articles = VideoResource::collection($galleries);
+
+        $arr = [    
+            "TabRepository" => $articles,
+            "boxCount" => 9,
+            "PopupStyle" => false,
+            "boxTitle" => "مقالات " . $category->title,
+            "BoxCountPerRow" => 3
+        ];
+
+        return json_encode($arr);
     }
 
 }

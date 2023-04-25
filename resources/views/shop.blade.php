@@ -12,3 +12,4 @@
 @section('menuId')'29270'@stop
 @section('prefix')'shop-'@stop
 @section('menuName')'فروشگاه'@stop
+@section('title')محصولات@stop

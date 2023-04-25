@@ -18,7 +18,7 @@
 @stop
 
 @section('menuId')'83465'@stop
-@section('prefix')'spec-articles-'@stop
+@section('prefix')'spec-videos-'@stop
 @section('setRefId') refId = '{{ $category->id }}'; @stop
-@section('menuName')'مقالات'@stop
-@section('title')مقالات {{ $category->title }}@stop
+@section('menuName')'گالری-ویدیو'@stop
+@section('title')گالری ویدیو | {{ $category->title }}@stop

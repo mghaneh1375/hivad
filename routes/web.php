@@ -7,7 +7,6 @@ use App\Http\Controllers\CafeController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConfigController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IntroduceController;
 use App\Http\Controllers\NewsController;
@@ -48,6 +47,8 @@ Route::get('cafe-get_json_file', [HomeController::class, 'cafe_get_json_file'])-
 Route::get('people-get_json_file', [HomeController::class, 'people_get_json_file'])->name('people_get_json_file');
 
 Route::get('spec-articles-get_json_file/{category}', [HomeController::class, 'spec_articles_get_json_file'])->name('spec_articles_get_json_file');
+
+Route::get('spec-videos-get_json_file/{category}', [HomeController::class, 'spec_videos_get_json_file'])->name('spec_videos_get_json_file');
 
 Route::get('spec-category-get_json_file/{category}', [HomeController::class, 'spec_category_get_json_file'])->name('spec_category_get_json_file');
 
@@ -200,10 +201,14 @@ Route::group(['middleware' => ['shareWithAllViews']], function() {
 
     })->name('product');
 
+    Route::get('spec-videos/{category}/{title}', function (Category $category, $title) {
+        return view('spec-videos', ['category' => $category]);
+    })->name('spec-videos');
+
     Route::get('Video/{video}', function (Video $video) {
-        $video->file = asset('storage/videos/' . $video->file);
+        $video->file = asset('Content/images/videos/' . $video->file);
         return view('single-video', ['video' => $video]);
-    });
+    })->name('single-video');
 
     Route::get('Home/GetProductGroupManager', function() {
         $people = PeopleResource::collection(People::visible()->orderBy('priority', 'asc')->get());
@@ -276,6 +281,8 @@ Route::group(['middleware' => ['shareWithAllViews']], function() {
 Route::post('activateAccount', [AuthController::class, 'activate'])->name('activateAccount');
 
 Route::post('signIn', [AuthController::class, 'login'])->name('signIn');
+
+Route::post('forgetPass', [AuthController::class, 'forgetPass'])->name('forgetPass');
 
 Route::post('signUp', [AuthController::class, 'signUp'])->name('signUp');
 

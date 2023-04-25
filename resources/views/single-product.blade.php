@@ -43,6 +43,7 @@
 @section('menuId')'762'@stop
 @section('prefix')'single-news-'@stop
 @section('menuName')'فروشگاه'@stop
+@section('title')محصولات | {{ $product->title }}@stop
 
 @section('customContent')
     <div id="dialogContent">
@@ -85,7 +86,7 @@
                             Your browser does not support the audio element.
                         </audio>
                     @elseif(str_contains($product->file, '.pdf'))
-                        <object data="{{ asset('Content/images/products/crop/' . $product->file) }}" type="application/pdf" width="100%" height="1000px">
+                        <object data="{{ asset('Content/images/products/crop/' . $product->file) }}#toolbar=0" type="application/pdf" width="100%" height="1000px">
                             <p>Unable to display PDF file. <a href="{{ asset('Content/images/products/crop/' . $product->file) }}">Download</a> instead.</p>
                         </object>
                     @else

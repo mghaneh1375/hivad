@@ -14,12 +14,14 @@ class CategoryJSON extends JsonResource
      */
     public function toArray($request)
     {
-       return [
+        return [
             "DateTime" => '',
             "HrefLink" => null,
             "NewsGroupName" =>"اخبار",
             "NewsID" => $this->id,
             "NewsPicture" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
+            "tumbDir1" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
+            "tumbDir2" => asset('/Content/images/GalleryPictures/crop/' . $this->image),
             "NewsTitr" => $this->title,
             "Priority" => $this->priority,
             "PublishDate" => null,

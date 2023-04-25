@@ -151,7 +151,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li data-menuID='87335' data-isprofilemenu='False' data-temp='PageContent'>
                     <a href='/news'>اخبار</a>
                 </li>
                 <li>
@@ -163,7 +163,7 @@
                 <li>
                     <a class='arrow '  data-menuID='29271' data-isprofilemenu='False' data-temp='PageContent'>گالری</a>
                     <ul class=' subSecondNavigation' style='display: none;'>
-                    <li class='' data-menuID='29271'>
+                    <li class='' data-menuID='29272'>
                         <a href='/galleries'>گالری تصاویر</a>
                     </li>
                     <li class='' data-menuID='29408'>
@@ -185,9 +185,10 @@
                     <a onclick="document.location.href = '{{ route('adviceRequest') }}'">درخواست مشاوره</a>
                 </li>
 
-                <li>
+                <li data-menuID='39846'>
                     <a onclick="document.location.href = '{{ route('contactUs') }}'">تماس با ما</a>
                 </li>
+
                 <li data-menuID='29846'>
                     <a data-menuID='29846' class=' '>امکانات</a>
                 </li>
@@ -237,9 +238,14 @@
                 <input type="password" id="password" placeholder="******" />
             </div>
             <button id="signInBtn">ورود</button>
+            
+            <p>
+                <a onclick="$('#signInModal').addClass('hidden'); $('#forgetPassModal').removeClass('hidden')">بازیابی رمزعبور</a>
+            </p>
+
             <p>
                 <span>حساب کاربری ندارید؟</span>
-                <a onclick="$('#signInModal').addClass('hidden'); $('#signUpModel').removeClass('hidden')">ثبت نام کنید</a>
+                <a onclick="$('#signInModal').addClass('hidden'); $('#signUpModal').removeClass('hidden')">ثبت نام کنید</a>
             </p>
         </div>
         
@@ -250,7 +256,7 @@
 </div>
 
 
-<div id="signUpModel" class="modal hidden">
+<div id="signUpModal" class="modal hidden">
     <div class="modal-content">
         <h2>ثبت نام</h2>
         <div class="sign-in-container">
@@ -285,7 +291,28 @@
         </div>
         
         <div class="flex center gap10">
-            <button  style="margin-left: 5px;" onclick="$('#signUpModel').addClass('hidden'); $('#signInModal').removeClass('hidden');">بازگشت</button>
+            <button  style="margin-left: 5px;" onclick="$('#signUpModal').addClass('hidden'); $('#signInModal').removeClass('hidden');">بازگشت</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="forgetPassModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>بازیابی رمزعبور</h2>
+        <div class="sign-in-container">
+
+            <div>
+                <label>شماره همراه</label>
+                <input type="tel" id="forgetPassUsername" placeholder="شماره همراه" />
+            </div>
+
+            <button id="sendCodeBtn">ارسال کد</button>
+            
+        </div>
+        
+        <div class="flex center gap10">
+            <button style="margin-left: 5px;" onclick="$('#forgetPassModal').addClass('hidden'); $('#signInModal').removeClass('hidden');">بازگشت</button>
         </div>
     </div>
 </div>
@@ -373,10 +400,46 @@
         </div>
         
         <div class="flex center gap10">
-            <button  style="margin-left: 5px;" onclick="$('#activateModal').addClass('hidden'); if(isInUpdateMode) $('#editModal').removeClass('hidden'); else  $('#signUpModel').removeClass('hidden'); ">بازگشت</button>
+            <button  style="margin-left: 5px;" onclick="$('#activateModal').addClass('hidden'); if(isInUpdateMode) $('#editModal').removeClass('hidden'); else  $('#signUpModal').removeClass('hidden'); ">بازگشت</button>
         </div>
     </div>
 </div>
 
 
-<script src='{{ asset('assets/js/signup.js?v=1.2') }}' defer></script>
+<div id="changePassModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>تغییر رمزعبور</h2>
+        <div class="sign-in-container">
+
+            <p>لطفا کد ارسال شده به شماره همراه وارد شده را وارد نمایید</p>
+            <div>
+                <label>کد اعتبارسنجی</label>
+                <input type="text" id="code2" onkeypress='justNumber(event)' maxlength="6" placeholder="XXXXX" />
+            </div>
+
+            <div>
+                <label>رمزعبور جدید</label>
+                <input type="password" id="newPass2" placeholder="******" />
+            </div>
+            
+            <div>
+                <label>تکرار رمزعبور جدید</label>
+                <input type="password" id="confirmNewPass2" placeholder="******" />
+            </div>
+
+
+            <button id="doChangePassBtn">تغییر رمزعبور</button>
+
+            <p id="reminderText2">ارسال مجدد کد اعتبارسنجی تا <span>&nbsp;</span><span id="reminder2"></span> ثانیه دیگر</p>
+            <button id="resendBtn2" class="hidden">ارسال مجدد کد اعتبارسنجی</button>
+            
+        </div>
+        
+        <div class="flex center gap10">
+            <button  style="margin-left: 5px;" onclick="$('#changePassModal').addClass('hidden');  $('#forgetPassModal').removeClass('hidden'); ">بازگشت</button>
+        </div>
+    </div>
+</div>
+
+
+<script src='{{ asset('assets/js/signup.js?v=1.3') }}' defer></script>

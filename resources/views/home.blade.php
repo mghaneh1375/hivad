@@ -44,3 +44,4 @@
 @section('menuId')'-1'@stop
 @section('prefix')''@stop
 @section('menuName')'خانه'@stop
+@section('title')هیواد | خانه@stop

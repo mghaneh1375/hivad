@@ -43,6 +43,43 @@ class AuthController extends Controller
         return Redirect::route('home');
     }
 
+    public function forgetPass(Request $request) {
+    
+        $validator = [
+            'phone' => 'required|regex:/(09)[0-9]{9}/|exists:users,phone',
+        ];
+
+        if(self::hasAnyExcept(array_keys($validator), $request->keys()))
+            abort(401);
+
+        $request->validate($validator, self::$errors);
+        
+        $activation = Activation::where('phone', $request["phone"])->first();
+
+        if($activation != null) {
+            if($activation->vc_expired_at < time())
+                $activation->delete();
+            else
+                return response()->json([
+                    "status" => "ok",
+                    "reminder" => time() - $activation->vc_expired_at + 120
+                ]);
+        }
+
+        $rand = self::getVerificationCode();
+
+        $request['verification_code'] = $rand;
+        $request['password'] = '';
+        $request['first_name'] = '';
+        $request['last_name'] = '';
+        $request['vc_expired_at'] = Carbon::now()->addMinutes(2)->timestamp;
+
+        // self::sendSMS($request['phone'], 'کد اعتبارسنجی در سامانه هیواد: '  . $rand . ' به ما سر بزنید: https://hivadkids.ir');
+        Activation::create($request->toArray());
+
+        return response()->json(['status' => 'ok', 'reminder' => 120]);
+    }
+
     public function signUp(Request $request) {
     
         $validator = [
@@ -99,7 +136,9 @@ class AuthController extends Controller
 
         $validator = [
             "verification_code" => 'required|integer',
-            'username' => 'required|regex:/(09)[0-9]{9}/|exists:activation,phone'
+            'username' => 'required|regex:/(09)[0-9]{9}/|exists:activation,phone',
+            'password' => 'nullable|string|min:6',
+            'confirm_password' => 'nullable|string|min:6',
         ];
 
         if(self::hasAnyExcept(array_keys($validator), $request->keys()))
@@ -121,20 +160,41 @@ class AuthController extends Controller
                 "msg" => "کد وارد شده منقضی شده است"
             ]);
 
-        if(
-            ($activation->password == '' && $request->user() == null) ||
-            ($activation->password != '' && $request->user() != null)
-        )
+        if($activation->password != '' && $request->user() != null)
             return abort(401);
 
         if($activation->password == '') {
-            $user = $request->user();
-            $user->phone = $activation->phone;
-            $user->save();
             
-            return response()->json([
-                "status" => "ok"
-            ]);
+            if($request->user() == null) {
+                if(!$request->has('password') || 
+                    !$request->has('confirm_password')
+                )
+                    return abort(401);
+
+                if($request['password'] != $request['confirm_password']) {
+                    return response()->json([
+                        "status" => "nok",
+                        "msg" => "رمز وارد شده و تکرار آن یکسان نیستند"
+                    ]);
+                }
+
+                $user = User::where('phone', $request['username'])->first();
+                $user->password = Hash::make($request['password']);
+                $user->save();
+                
+                return response()->json([
+                    "status" => "ok"
+                ]); 
+            }
+            else {
+                $user = $request->user();
+                $user->phone = $activation->phone;
+                $user->save();
+                
+                return response()->json([
+                    "status" => "ok"
+                ]);
+            }
         }
         
         $user = new User();

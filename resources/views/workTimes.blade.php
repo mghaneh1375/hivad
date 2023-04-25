@@ -142,8 +142,6 @@
 
         function request(day, doctor, times, ids) {
 
-            console.log(today + " " + day);
-
             if(today >= day) {
                 $("#currWeek").remove();
             }

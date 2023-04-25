@@ -11,6 +11,7 @@ use App\Http\Resources\FieldResource;
 use App\Http\Resources\MyProductJSON;
 use App\Http\Resources\ProductJSON;
 use App\Http\Resources\SliderCafe;
+use App\Http\Resources\VideoCategoryJSON;
 use App\Models\Cafe;
 use App\Models\Config;
 use App\Models\Gallery;
@@ -70,7 +71,11 @@ class RenderController extends Controller
         return ProductJSON::collection(Product::visible()->orderBy('priority', 'asc')->get());
     }
 
-    
+    public function get_video_categories()
+    {
+        return VideoCategoryJSON::collection(Category::visible()->has('videos')->orderBy('priority', 'asc')->get());
+    }
+
     public function get_my_products(Request $request)
     {
         $myProducts = 
@@ -120,16 +125,6 @@ class RenderController extends Controller
         return CategoryJSON::collection($wantedCats);
     }
     
-    public function get_video_categories()
-    {
-        $cats = Category::visible()->has('videos')->orderBy('priority', 'asc')->get();
-        $ids = "";
-        foreach ($cats as $cat) {
-            $ids .= "," . $cat->id;
-        }
-
-        return [CategoryJSON::collection($cats), $ids];
-    }
 
     public function render_survey() {
 
@@ -726,62 +721,64 @@ class RenderController extends Controller
     
     public function render_videos()
     {
-        return [
-            [
-                "BoxID" => 38865,
-                "MenuID" => -1,
-                "BoxTitle" => "آخرین ویدیوها",
-                "BoxDescription" => null,
-                "Priority" => 2,
-                "Width" => null,
-                "Height" => 180,
-                "BoxCount" => 9,
-                "MaduleID" => null,
-                "SubBoxHeight" => null,
-                "BoxCountPerRow" => 3,
-                "FormID" => null,
-                "FormReportID" => null,
-                "BoxGroupID" => 1,
-                "BoxGroupName" => "tabs",
-                "BoxPersianName" => "تب ها",
-                "Pagination" => 2,
-                "SortType" => 1,
-                "Content" => null,
-                "MediaID" => null,
-                "HasProductTabs" => null,
-                "ProductSlides" => null,
-                "RowIDList" => null,
-                "BoxStyle" => "services",
-                "PopupStyle" => false,
-                "BoxTemp" => null,
-                "ShowMoreLink" => null,
-                "ContainerTabs" => null,
-                "WebsiteDisplay" => true,
-                "MobileDisplay" => true,
-                "Background" => null,
-                "ParallaxStyle" => null,
-                "DisableBoxBack" => null,
-                "BackTitleColor" => null,
-                "DisableBoxBackgroundColor" => null,
-                "BoxBackgroundColor" => null,
-                "BlurEffectBack" => null,
-                "BlackEffectBack" => null,
-                "ButtonList" => [],
-                "Platform7Maduleid" => null,
-                "GroupMaduleBox" => null,
-                "IsAmazzingoffer" => false
-            ],
-            [
-                "BoxID" => 38865,
-                "Content" => [
-                    "TabRepository" => $this->get_videos(),
-                    "boxCount" => 9,
-                    "PopupStyle" => false,
-                    "boxTitle" => "باکس تایتل 2",
-                    "BoxCountPerRow" => 3
-                ]
-            ],
-        ];
+        
+
+        // return [
+        //     [
+        //         "BoxID" => 38865,
+        //         "MenuID" => -1,
+        //         "BoxTitle" => "آخرین ویدیوها",
+        //         "BoxDescription" => null,
+        //         "Priority" => 2,
+        //         "Width" => null,
+        //         "Height" => 180,
+        //         "BoxCount" => 9,
+        //         "MaduleID" => null,
+        //         "SubBoxHeight" => null,
+        //         "BoxCountPerRow" => 3,
+        //         "FormID" => null,
+        //         "FormReportID" => null,
+        //         "BoxGroupID" => 1,
+        //         "BoxGroupName" => "tabs",
+        //         "BoxPersianName" => "تب ها",
+        //         "Pagination" => 2,
+        //         "SortType" => 1,
+        //         "Content" => null,
+        //         "MediaID" => null,
+        //         "HasProductTabs" => null,
+        //         "ProductSlides" => null,
+        //         "RowIDList" => null,
+        //         "BoxStyle" => "services",
+        //         "PopupStyle" => false,
+        //         "BoxTemp" => null,
+        //         "ShowMoreLink" => null,
+        //         "ContainerTabs" => null,
+        //         "WebsiteDisplay" => true,
+        //         "MobileDisplay" => true,
+        //         "Background" => null,
+        //         "ParallaxStyle" => null,
+        //         "DisableBoxBack" => null,
+        //         "BackTitleColor" => null,
+        //         "DisableBoxBackgroundColor" => null,
+        //         "BoxBackgroundColor" => null,
+        //         "BlurEffectBack" => null,
+        //         "BlackEffectBack" => null,
+        //         "ButtonList" => [],
+        //         "Platform7Maduleid" => null,
+        //         "GroupMaduleBox" => null,
+        //         "IsAmazzingoffer" => false
+        //     ],
+        //     [
+        //         "BoxID" => 38865,
+        //         "Content" => [
+        //             "TabRepository" => $this->get_videos(),
+        //             "boxCount" => 9,
+        //             "PopupStyle" => false,
+        //             "boxTitle" => "باکس تایتل 2",
+        //             "BoxCountPerRow" => 3
+        //         ]
+        //     ],
+        // ];
     }
 
     public function render_news()
@@ -1338,33 +1335,31 @@ class RenderController extends Controller
     public function render_total_videos()
     {
 
-        $cats = $this->get_video_categories();
-        // dd($cats);
-
         return [
             [
-                "BoxID" => 38888,
-                "MenuID" => 29271,
-                "BoxTitle" => "گالری فیلم",
+                "BoxID" => 38931,
+                "MenuID" => 29270,
+                "BoxTitle" => "گالری ویدیو",
                 "BoxDescription" => "",
                 "Priority" => 1,
-                "Height" => 280,
-                "BoxCount" => 100,
+                "Width" => null,
+                "Height" => null,
+                "BoxCount" => 20,
                 "MaduleID" => null,
                 "SubBoxHeight" => null,
-                "BoxCountPerRow" => 3,
+                "BoxCountPerRow" => 20,
                 "FormID" => null,
                 "FormReportID" => null,
-                "BoxGroupID" => 3,
-                "BoxGroupName" => "gallery",
-                "BoxPersianName" => "گالری فیلم",
+                "BoxGroupID" => 4,
+                "BoxGroupName" => "news",
+                "BoxPersianName" => "گالری ویدیو",
                 "Pagination" => 3,
                 "SortType" => 1,
                 "Content" => null,
                 "MediaID" => null,
                 "HasProductTabs" => null,
                 "ProductSlides" => null,
-                "RowIDList" => $cats[1],
+                "RowIDList" => "783",
                 "BoxStyle" => "",
                 "PopupStyle" => false,
                 "BoxTemp" => null,
@@ -1376,8 +1371,6 @@ class RenderController extends Controller
                 "ParallaxStyle" => null,
                 "DisableBoxBack" => null,
                 "BackTitleColor" => null,
-                "DisableBoxBackgroundColor" => null,
-                "BoxBackgroundColor" => null,
                 "BlurEffectBack" => null,
                 "BlackEffectBack" => null,
                 "ButtonList" => [],
@@ -1386,25 +1379,89 @@ class RenderController extends Controller
                 "IsAmazzingoffer" => false
             ],
             [
-                "BoxID" => 38888,
+                "BoxID" => 38931,
                 "Content" => [
-                    "boxID" => 38888,
-                    "isVideo" => false,
-                    "isFileGallery" => false,
                     "model" => [
-                        "GalleryList" => null,
-                        "AlbumList" => $cats[0],
-                        "BoxCountPerRow" => 3,
-                        "SubBoxHeight" => 116,
-                        "paddingBottom" => 0,
-                        "boxID" => 38888
+                        "News" => $this->get_video_categories(),
+                        "PopupStyle" => false,
                     ],
-                    "top" => 100,
+                    "boxID" => 38931,
+                    "newsCount" => 9,
+                    "top" => 20,
                     "Pagination" => 3,
-                    "ShowMoreLink" => null
-                ]
+                    "ShowMoreLink" => null,
+                    "paginationData" => "[\"step\" =>1,\"top\" =>20,\"paginationCount\" =>8,\"advCount\" =>9,\"GridTableInfo\" =>null,\"ElementList\" =>null,\"HasFilter\" =>false]",
+                    "skip" => 0
+                ],
             ],
         ];
+
+        // $cats = $this->get_video_categories();
+
+        // return [
+        //     [
+        //         "BoxID" => 38888,
+        //         "MenuID" => 29271,
+        //         "BoxTitle" => "گالری فیلم",
+        //         "BoxDescription" => "",
+        //         "Priority" => 1,
+        //         "Height" => 280,
+        //         "BoxCount" => 100,
+        //         "MaduleID" => null,
+        //         "SubBoxHeight" => null,
+        //         "BoxCountPerRow" => 3,
+        //         "FormID" => null,
+        //         "FormReportID" => null,
+        //         "BoxGroupID" => 3,
+        //         "BoxGroupName" => "gallery",
+        //         "BoxPersianName" => "گالری فیلم",
+        //         "Pagination" => 3,
+        //         "SortType" => 1,
+        //         "Content" => null,
+        //         "MediaID" => null,
+        //         "HasProductTabs" => null,
+        //         "ProductSlides" => null,
+        //         "RowIDList" => $cats[1],
+        //         "BoxStyle" => "",
+        //         "PopupStyle" => false,
+        //         "BoxTemp" => null,
+        //         "ShowMoreLink" => null,
+        //         "ContainerTabs" => null,
+        //         "WebsiteDisplay" => true,
+        //         "MobileDisplay" => true,
+        //         "Background" => null,
+        //         "ParallaxStyle" => null,
+        //         "DisableBoxBack" => null,
+        //         "BackTitleColor" => null,
+        //         "DisableBoxBackgroundColor" => null,
+        //         "BoxBackgroundColor" => null,
+        //         "BlurEffectBack" => null,
+        //         "BlackEffectBack" => null,
+        //         "ButtonList" => [],
+        //         "Platform7Maduleid" => null,
+        //         "GroupMaduleBox" => null,
+        //         "IsAmazzingoffer" => false
+        //     ],
+        //     [
+        //         "BoxID" => 38888,
+        //         "Content" => [
+        //             "boxID" => 38888,
+        //             "isVideo" => false,
+        //             "isFileGallery" => false,
+        //             "model" => [
+        //                 "GalleryList" => null,
+        //                 "AlbumList" => $cats[0],
+        //                 "BoxCountPerRow" => 3,
+        //                 "SubBoxHeight" => 116,
+        //                 "paddingBottom" => 0,
+        //                 "boxID" => 38888
+        //             ],
+        //             "top" => 100,
+        //             "Pagination" => 3,
+        //             "ShowMoreLink" => null
+        //         ]
+        //     ],
+        // ];
     }
 
     public function json_file()
@@ -1613,6 +1670,54 @@ class RenderController extends Controller
         ];
     }
 
+    
+    public function render_sepc_video_category($category) {
+
+        return [
+            [
+                [
+                    "BoxID" => 39690,
+                    "MenuID" => 29412,
+                    "BoxTitle" => "",
+                    "BoxDescription" => null,
+                    "Priority" => 5,
+                    "Width" => null,
+                    "Height" => null,
+                    "BoxCount" => 1,
+                    "SubBoxHeight" => null,
+                    "BoxCountPerRow" => 1,
+                    "FormID" => null,
+                    "FormReportID" => null,
+                    "BoxGroupID" => 15,
+                    "BoxGroupName" => "HtmlCode",
+                    "BoxPersianName" => "ویدیوهای " . $category->title,
+                    "Pagination" => 2,
+                    "SortType" => 1,
+                    "Content" => null,
+                    "MediaID" => null,
+                    "HasProductTabs" => null,
+                    "ProductSlides" => null,
+                    "RowIDList" => null,
+                    "BoxStyle" => null,
+                    "PopupStyle" => false,
+                    "BoxTemp" => null,
+                    "ShowMoreLink" => null,
+                    "ContainerTabs" => null,
+                    "WebsiteDisplay" => true,
+                    "MobileDisplay" => true,
+                    "ButtonList" => []
+                ]
+            ],
+            [
+                [
+                    "BoxID" => 39690,
+                    "Content" => "<section data-updatecontent=\"true\" data-formid=\"null\" data-pagination=\"2\" data-href=\"/Home/GetGalleryList/" . $category->id . "?isVideo=1\" data-boxid=\"38865\" data-boxstyle=\"services\" data-popupstyle=\"false\" data-boxcount=\"9\" data-boxtemp=\"null\" data-tmplname=\"tabs\" class=\"resizable ui-state-active animated\" ><h4> ویدیوهای " . $category->title . "</h4></section>"
+                ]
+            ]
+        ];
+    }
+
+
     public function galleries_json_file()
     {
         $galleries_section = $this->render_total_articles('gallery');
@@ -1657,6 +1762,11 @@ class RenderController extends Controller
     
     public function spec_category_json_file($category) {
         $cafe_section = $this->render_sepc_category($category);
+        return ["madules" => $cafe_section[0], "jsonContentList" => $cafe_section[1]];
+    }
+    
+    public function spec_video_category_json_file($category) {
+        $cafe_section = $this->render_sepc_video_category($category);
         return ["madules" => $cafe_section[0], "jsonContentList" => $cafe_section[1]];
     }
 

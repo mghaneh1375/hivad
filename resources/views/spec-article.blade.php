@@ -42,7 +42,8 @@
 
 @section('menuId')'762'@stop
 @section('prefix')'single-news-'@stop
-@section('menuName')'فروشگاه'@stop
+@section('menuName')'مقالات'@stop
+@section('title'){{ 'مقالات | ' . $article->title }}@stop
 
 @section('customContent')
     <div id="dialogContent">
@@ -51,7 +52,7 @@
             <div>
                 <span id="newsInfo">
                     <a><h3>{{$article->title}}</h3></a>
-                    {!! $article->digest !!}
+                    {!! $article->description !!}
                 </span>
 
                 <a class="img_link_wrapper">
@@ -72,22 +73,22 @@
                     str_contains($article->file, '.mpeg') ||
                     str_contains($article->file, '.avi') ||
                     str_contains($article->file, '.mkv'))
-                    <video src="{{ asset('storage/articles/' . $article->file) }}" width="100%" controls>        
+                    <video src="{{ asset('Content/images/articles/' . $article->file) }}" width="100%" controls>        
                         Your browser does not support the video tag.
                     </video>
                 @elseif(str_contains($article->file, '.ogg') || 
                     str_contains($article->file, '.wav') || 
                     str_contains($article->file, '.mp3'))
                     <audio controls>
-                        <source src="{{ asset('storage/articles/' . $article->file) }}">
+                        <source src="{{ asset('Content/images/articles/' . $article->file) }}">
                         Your browser does not support the audio element.
                     </audio>
                 @elseif(str_contains($article->file, '.pdf'))
-                    <object data="{{ asset('storage/articles/' . $article->file) }}" type="application/pdf" width="100%" height="1000px">
-                        <p>Unable to display PDF file. <a href="{{ asset('storage/articles/' . $article->file) }}">Download</a> instead.</p>
+                    <object data="{{ asset('Content/images/articles/' . $article->file) }}" type="application/pdf" width="100%" height="1000px">
+                        <p>Unable to display PDF file. <a href="{{ asset('Content/images/articles/' . $article->file) }}">Download</a> instead.</p>
                     </object>
                 @else
-                    <a download href="{{ asset('storage/articles/' . $article->file) }}">دانلود فایل محصول</a>
+                    <a download href="{{ asset('Content/images/articles/' . $article->file) }}">دانلود فایل محصول</a>
                 @endif
             </div>
         </div>

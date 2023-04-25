@@ -18,7 +18,11 @@
         <div class="sparkline8-list shadow-reset mg-tb-30">
             <div class="sparkline8-hd">
                 <div class="main-sparkline8-hd">
-                    <h1>افزودن فیلم</h1>
+                    @if(isset($video))
+                        <h1>ویرایش فیلم {{ $video->title }}</h1>
+                    @else
+                        <h1>افزودن فیلم</h1>
+                    @endif
                 </div>
             </div>
 
@@ -26,58 +30,91 @@
 
                 <div id="mainContainer" class="page-content" style="margin-top: 5%; margin: 50px; direction: rtl">
 
+            
+                    @if($errors->any())
+                        {!! implode('', $errors->all('<div>:message</div>')) !!}
+                    @endif
+
                     <div class="row">
 
                         <div class="col-xs-12" style="border: solid;">
                             
                             <div style="margin-top: 10px;">
-                                <form action="{{route('api.addVideo')}}" method="post" 
+                                <form id="myForm" action="{{isset($video) ? route('api.updateVideo', ['video' => $video->id]) : route('api.addVideo')}}" method="post" 
                                  enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                                    <input type="hidden" name="kind" value="save">
 
                                     <div class="flex flex-col center gap10" style="margin: 10px">
                                         
                                         <div>
                                             <label for="title">عنوان</label>
-                                            <input type="text" name="title" id="title"/>
+                                            <input value="{{ isset($video) ? $video->title : '' }}" type="text" name="title" id="title"/>
                                         </div>
 
                                         <div>
                                             <label for="catId">دسته</label>
                                             <select name="cat_id" id="catId">
                                                 @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    <option {{ isset($video) && $video->cat_id == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
 
+                                        @if(isset($video))
+                                            <p>تصویر پیش نمایش کنونی</p>
+                                            <img width="200px" src={{ asset('Content/images/GalleryPictures/crop/' . $video->image) }} />
+                                        @endif
+
                                         <div>
-                                            <label for="imgInp">فایل تصویر preview</label>
-                                            <input type="file" name="image" required id="imgInp">
+                                            
+                                            @if(isset($video))
+                                                <label for="imgInp"> فایل تصویر پیش نمایش جدید برای تغییر</label>
+                                            @else
+                                                <label for="imgInp">فایل تصویر پیش نمایش</label>
+                                            @endif
+
+                                            <input type="file" name="image" {{ isset($video) ? '' : 'required' }} id="imgInp">
                                         </div>
                                         
+                                        @if(isset($video))
+                                            <p>ویدیو کنونی</p>
+                                            <video width='300px' controls='' src='{{ asset('Content/images/videos/' . $video->file) }}'>
+                                                    Your browser does not support the video tag.
+                                            </video>
+                                        @endif
+
                                         <div>
-                                            <label for="file">فایل ویدیو</label>
-                                            <input type="file" name="file" required id="file">
+                                            
+                                            @if(isset($video))
+                                                <label for="file">فایل ویدیو جدید برای تغییر</label>
+                                            @else
+                                                <label for="file">فایل ویدیو</label>
+                                            @endif
+
+                                            <input type="file" name="file" {{ isset($video) ? '' : 'required' }} id="file">
                                         </div>
                                         
 
                                         <div>
                                             <label for="priority">اولویت</label>
-                                            <input type="number" required name="priority" id="priority" />
+                                            <input value="{{ isset($video) ? $video->priority : '' }}" type="number" required name="priority" id="priority" />
                                         </div>
                                         <div>
                                             <label for="alt">تگ alt</label>
-                                            <input type="text" placeholder="این فیلد اختیاری است" name="alt" id="alt" />
+                                            <input value="{{ isset($video) ? $video->alt : '' }}" type="text" placeholder="این فیلد اختیاری است" name="alt" id="alt" />
                                         </div>
                                             
                                         
                                         <div>
                                             <label for="isImp">نمایش در صفحه نخست؟</label>
                                             <select name="is_imp" id="isImp">
-                                                <option value="0">خیر</option>
-                                                <option value="1">بله</option>
+                                                @if(isset($video) && !$video->is_imp)
+                                                    <option value="0">خیر</option>
+                                                    <option value="1">بله</option>
+                                                @else
+                                                    <option value="0">خیر</option>
+                                                    <option selected value="1">بله</option>
+                                                @endif
                                             </select>
                                         </div>
 
@@ -97,7 +134,7 @@
 
                                     <div class="flex center gap10">
                                         <span onclick="document.location.href = '{{ route('manageVideo') }}'" class="btn btn-danger">بازگشت</span>
-                                        <input type="submit" value="ذخیره" class="btn green">
+                                        <span id="saveBtn" class="btn green">ذخیره</span>
                                     </div>
 
                                 </form>

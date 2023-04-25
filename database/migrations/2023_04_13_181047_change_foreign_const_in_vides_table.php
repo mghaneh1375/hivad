@@ -14,6 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
+
         Schema::table('video', function (Blueprint $table) {
             $table->foreign('cat_id')->references('id')->on('category')->onUpdate('cascade')->onDelete('cascade');
         });

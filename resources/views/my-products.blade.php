@@ -11,4 +11,5 @@
 
 @section('menuId')'29270'@stop
 @section('prefix')'my-products-'@stop
-@section('menuName')'محصولات من'@stop
+@section('menuName')'محصولات_من'@stop
+@section('title')محصولات من@stop

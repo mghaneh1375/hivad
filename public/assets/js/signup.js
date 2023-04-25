@@ -19,6 +19,14 @@ $(document).ready(function () {
         edit();
     });
 
+    $("#doChangePassBtn").on("click", function () {
+        activate2();
+    });
+
+    $("#sendCodeBtn").on("click", function () {
+        sendCode();
+    });
+
     $("#changePassBtn").on("click", function () {
         changePass();
     });
@@ -62,8 +70,56 @@ $(document).ready(function () {
         }, 1000);
     }
 
+    function activateTimer2() {
+        timer = setInterval(() => {
+            reminder--;
+            if (reminder <= 0) {
+                clearInterval(timer);
+                $("#resendBtn2").removeClass("hidden");
+                $("#reminderText2").addClass("hidden");
+            }
+            printReminder2();
+        }, 1000);
+    }
+
     function printReminder() {
         $("#reminder").text(reminder);
+    }
+
+    function printReminder2() {
+        $("#reminder2").text(reminder);
+    }
+
+    function sendCode() {
+        phone = $("#forgetPassUsername").val();
+
+        if (phone.length === 0) {
+            showErr("لطفا شماره همراه و رمزعبور خود را وارد نمایید");
+            return;
+        }
+
+        $("#loading").removeClass("hidden");
+
+        $.ajax({
+            type: "post",
+            url: FORGETPASS_ROUTE,
+            data: {
+                phone: phone,
+            },
+            success: function (res) {
+                $("#loading").addClass("hidden");
+
+                if (res.status === "ok") {
+                    reminder = res.reminder;
+                    printReminder2();
+                    $("#forgetPassModal").addClass("hidden");
+                    $("#changePassModal").removeClass("hidden");
+                    activateTimer2();
+                } else {
+                    showErr(res.msg);
+                }
+            },
+        });
     }
 
     function signIn() {
@@ -128,6 +184,49 @@ $(document).ready(function () {
                             window.location.reload();
                         }, 500);
                     }
+                } else {
+                    showErr(res.msg);
+                }
+            },
+        });
+    }
+
+    function activate2() {
+        let code = $("#code2").val();
+        let newPass = $("#newPass2").val();
+        let confirmNewPass = $("#confirmNewPass2").val();
+
+        if (
+            code.length === 0 ||
+            newPass.length === 0 ||
+            confirmNewPass.length === 0
+        ) {
+            showErr("لطفا تمامی موارد را وارد نمایید");
+            return;
+        }
+
+        if (newPass !== confirmNewPass) {
+            showErr("رمزعبور جدید و تکرار آن یکسان نیستند");
+            return;
+        }
+
+        $("#loading").removeClass("hidden");
+
+        $.ajax({
+            type: "post",
+            url: ACTIVATE_ROUTE,
+            data: {
+                verification_code: code,
+                username: phone,
+                password: newPass,
+                confirm_password: confirmNewPass,
+            },
+            success: function (res) {
+                $("#loading").addClass("hidden");
+
+                if (res.status === "ok") {
+                    showSuccess("رمزعبور شما با موفقیت به روز شد");
+                    $("#changePassModal").addClass("hidden");
                 } else {
                     showErr(res.msg);
                 }

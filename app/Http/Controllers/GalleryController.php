@@ -55,7 +55,7 @@ class GalleryController extends RenderController
 
             return json_encode($arr);
         }
-        else return VideoController::list($request);
+        else return VideoController::list($request, $category);
     }
 
     public function store(Request $request)

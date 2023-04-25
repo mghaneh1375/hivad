@@ -17,6 +17,7 @@
     <script type="text/javascript">
         const ACTIVATE_ROUTE = '{{ route('activateAccount') }}';
         const SIGNUP_ROUTE = '{{ route('signUp') }}';
+        const FORGETPASS_ROUTE = '{{ route('forgetPass') }}';
         const EDIT_ROUTE = '{{ route('edit') }}';
         const CHANGE_PASS_ROUTE = '{{ route('changePass') }}';
         const SIGNIN_ROUTE = '{{ route('signIn') }}';
@@ -29,7 +30,7 @@
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="keywords" content="" />
-        <link rel="shortcut icon" href="/Content/base/dynamic/shopping762/favIcon.jpg?ver=1">
+        <link rel="shortcut icon" href="/assets/images/logo.png">
         <meta name="viewport" content="initial-scale=1 ,width=device-width, user-scalable=yes">
         <meta property="og:locale" content="fa_IR" />
         <meta property="og:type" content="website" />
