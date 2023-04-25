@@ -66,6 +66,11 @@ class RenderController extends Controller
     {
         return ArticleJSON::collection(Article::imp()->orderBy('priority', 'asc')->take(8)->get());
     }
+    
+    public function get_products()
+    {
+        return ProductJSON::collection(Product::imp()->orderBy('priority', 'asc')->take(8)->get());
+    }
 
     public function get_all_news()
     {
@@ -853,6 +858,39 @@ class RenderController extends Controller
         ];
     }
 
+    
+    public function render_products()
+    {
+        return [
+            [
+                "BoxDescription" => "",
+                "BoxGroupName" => "news",
+                "BoxID" =>  32413,
+                "BoxPersianName" => "محصولات",
+                "BoxStyle" => "",
+                "BoxTemp" =>  null,
+                "BoxTitle" => "آخرین محصولات",
+                "ButtonList" =>  [],
+                "MenuID" =>  29270,
+                "MobileDisplay" =>  true,
+                "PopupStyle" =>  false,
+                "SortType" =>  1,
+                "WebsiteDisplay" =>  true,
+            ],
+            [
+                "BoxID" => 32413,
+                "Content" => [
+                    "Pagination" => 2,
+                    "ShowMoreLink" => route('shop'),
+                    "model" => [
+                        "News" => $this->get_products(),
+                        "PopupStyle" => false
+                    ]
+                ]
+            ],
+        ];
+    }
+
     public function render_introduce()
     {
 
@@ -1536,6 +1574,12 @@ class RenderController extends Controller
             $article_section = $this->render_articles();
             array_push($modules, $article_section[0]);
             array_push($contents, $article_section[1]);
+        }
+        
+        if($config->show_products) {
+            $products_section = $this->render_products();
+            array_push($modules, $products_section[0]);
+            array_push($contents, $products_section[1]);
         }
 
         if($config->show_about) {

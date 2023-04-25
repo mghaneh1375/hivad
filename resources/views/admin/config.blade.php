@@ -40,7 +40,7 @@
                                     </select>
                                 </div>
                                 
-                                <div>
+                                {{-- <div>
                                     <label for="showVideos">نمایش ویدیوها</label>
                                     <select id="showVideos">
                                         @if($config->show_videos)
@@ -51,7 +51,7 @@
                                             <option value="true">نمایش</option>
                                         @endif
                                     </select>
-                                </div>
+                                </div> --}}
                                 
                                 <div>
                                     <label for="showGallery">نمایش گالری</label>
@@ -105,7 +105,7 @@
                                     </select>
                                 </div>
 
-                                <div>
+                                {{-- <div>
                                     <label for="showInsta">نمایش پست های اینستاگرام</label>
                                     <select id="showInsta">
                                         @if($config->show_insta)
@@ -116,7 +116,7 @@
                                             <option value="true">نمایش</option>
                                         @endif
                                     </select>
-                                </div>
+                                </div> --}}
 
                                 
                                 <div>

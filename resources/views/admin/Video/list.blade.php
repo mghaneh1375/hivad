@@ -28,8 +28,8 @@
 
                         <div class="col-xs-12">
                             @foreach($videos as $video)
-                                <div style="min-height: 250px" class="column col-xs-12 col-lg-6 myContainer" id="item_{{ $video->id }}">
-                                    <img src="{{URL::asset('Content/images/GalleryPictures/crop/'.$video->image)}}" alt="{{ $video->alt }}" style="width:100%; height: 100%">
+                                <div style="min-height: 250px" class="column col-xs-12 col-lg-3 myContainer" id="item_{{ $video->id }}">
+                                    <img src="{{asset('Content/images/GalleryPictures/crop/'.$video->image)}}" alt="{{ $video->alt }}" style="width:100%; height: 100%">
                                     <div class="overlay">
                                         <div class="opBox" id="opBox_{{ $video->id }}">
                                             <button class="btn btn-default" onclick="play('{{$video->file}}')">پخش</button>

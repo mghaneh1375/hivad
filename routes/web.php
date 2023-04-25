@@ -175,7 +175,7 @@ Route::group(['middleware' => ['shareWithAllViews']], function() {
 
     Route::view('news', 'news')->name('all_news');
 
-    Route::view('shop', 'shop');
+    Route::view('shop', 'shop')->name('shop');
 
     Route::view('cafe', 'cafe');
 
