@@ -286,4 +286,4 @@ Route::post('forgetPass', [AuthController::class, 'forgetPass'])->name('forgetPa
 
 Route::post('signUp', [AuthController::class, 'signUp'])->name('signUp');
 
-Route::post('submitForm', [AuthController::class, 'submitForm']);
+Route::post('submitForm', [HomeController::class, 'submitForm']);
